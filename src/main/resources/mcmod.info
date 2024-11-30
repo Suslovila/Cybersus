@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "cybersus",
+    "name": "Cybersus",
+    "description": "A library-like mod which provides API for body improvement with implants",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["Suslovila (author / coder / texture creator), Romashkq (main texture creator)"],
+    "credits": "Thanks to guys from mcModding site for help!",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
