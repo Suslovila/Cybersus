@@ -213,6 +213,7 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
                 }
                 super.onUnequipped(player, index, implant);
             }
+
         });
     }
 

@@ -79,6 +79,7 @@ public class Cybersus {
 
         if (thaumcraftLoaded) {
             CybersusResearchRegistry.integrateInfusion();
+            CybersusResearchRegistry.integrateCrucibleRecipe();
             CybersusResearchRegistry.integrateResearch();
         }
     }

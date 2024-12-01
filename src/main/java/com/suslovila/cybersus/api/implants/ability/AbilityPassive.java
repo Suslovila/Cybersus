@@ -73,4 +73,15 @@ public abstract class AbilityPassive extends Ability {
     }
 
     public abstract FuelComposite getFuelConsumePerCheck(EntityPlayer player, int index, ItemStack implant);
+
+    @Override
+    public boolean hasFuel(EntityPlayer player, int index, ItemStack implant) {
+        if (isActive(implant)) {
+            return getFuelConsumePerCheck(player, index, implant).hasPlayerEnough(player);
+        }
+        else {
+            return getFuelConsumeOnActivation(player, index, implant).hasPlayerEnough(player);
+
+        }
+    }
 }

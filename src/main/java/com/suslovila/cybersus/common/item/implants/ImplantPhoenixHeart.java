@@ -41,6 +41,9 @@ public class ImplantPhoenixHeart extends ItemCybersusImplant {
 
     static {
         abilities.add(new AbilityPassive("resurrection") {
+
+            public FuelComposite fuelForRessurection = FuelComposite.allRequired(new FuelEssentia(new AspectList().add(Aspect.LIFE, 712).add(Aspect.FIRE, 128).add(Aspect.EXCHANGE, 128)));
+
             @Override
             public FuelComposite getFuelConsumePerCheck(EntityPlayer player, int index, ItemStack implant) {
                 return null;
@@ -105,6 +108,11 @@ public class ImplantPhoenixHeart extends ItemCybersusImplant {
 //                GL11.glPopMatrix();
             }
 
+            @Override
+            public boolean hasFuel(EntityPlayer player, int index, ItemStack implant) {
+
+                return fuelForRessurection.hasPlayerEnough(player);
+            }
         });
     }
 

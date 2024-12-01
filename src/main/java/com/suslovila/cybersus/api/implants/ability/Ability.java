@@ -188,4 +188,7 @@ public abstract class Ability {
     public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
     }
 
+    public boolean hasFuel(EntityPlayer player, int index, ItemStack implant) {
+        return getFuelConsumeOnActivation(player, index, implant).hasPlayerEnough(player);
+    }
 }

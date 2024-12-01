@@ -160,7 +160,7 @@ public class GuiImplants {
             GL11.glPushMatrix();
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
             if(player == null) return;
-            boolean hasPlayerEnough = ability.getFuelConsumeOnActivation(player, currentImplantSlotId, implant).hasPlayerEnough(player);
+            boolean hasPlayerEnough = ability.hasFuel(player, currentImplantSlotId, implant);
             double scaleText = 0.4;
             String hasEnoughMessage = hasPlayerEnough ? "fuel enough" : "not enough fuel";
             GL11.glTranslated(-5 * scaleText * hasEnoughMessage.length() / 2, radius * 0.7, 0.0);
