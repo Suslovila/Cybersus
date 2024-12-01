@@ -14,6 +14,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,6 +65,7 @@ public class PacketAllExtendedPlayerSync
                 if (entity instanceof EntityPlayer) {
                     CybersusPlayerExtendedData clientData = CybersusPlayerExtendedData.get((EntityPlayer) entity);
                     if (clientData != null) {
+                        data.implantStorage.player = new WeakReference<>((EntityPlayer) entity);
                         clientData.implantStorage = data.implantStorage;
                     }
                 }

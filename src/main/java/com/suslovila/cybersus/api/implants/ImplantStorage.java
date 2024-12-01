@@ -6,11 +6,13 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 
+import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.function.BiConsumer;
 
@@ -18,12 +20,23 @@ public class ImplantStorage implements IInventory {
     private final int implantAmount = ImplantType.getTotalSlotAmount();
     private final String name = "implant_storage";
     private final int stackLimit = 1;
+
+    // this fields were taken from botania in order to implement mechanics for taking implants off
+    public WeakReference<EntityPlayer> player;
+    public boolean blockEvents = false;
+
     private final ImplantTypeHolder[] implantsByType = new ImplantTypeHolder[ImplantType.values().length];
+
 
     public ImplantStorage() {
         for (int typeIndex = 0; typeIndex < ImplantType.values().length; typeIndex++) {
             implantsByType[typeIndex] = new ImplantTypeHolder(ImplantType.values()[typeIndex]);
         }
+    }
+
+    public ImplantStorage(EntityPlayer player) {
+        this();
+        this.player = new WeakReference<>(player);
     }
 
     public void forEachImplant(BiConsumer<Integer, ItemStack> lambda) {
@@ -146,6 +159,10 @@ public class ImplantStorage implements IInventory {
                 return null;
             }
             setInventorySlotContents(slotId, null);
+            markDirty();
+            if(!this.blockEvents) {
+                ((ItemImplant) implant.getItem()).onUnequipped(player.get(), slotId, implant);
+            }
             return implant;
         }
         return null;
@@ -158,6 +175,13 @@ public class ImplantStorage implements IInventory {
         }
         ImplantType possibleType = ImplantType.getTypeForSlotWithIndex(slotId);
         if (possibleType == null) return;
+        ItemStack currentImplant = getStackInSlot(slotId);
+        if(currentImplant != null && player != null && player.get() != null) {
+            Item itemType = (currentImplant.getItem());
+            if(!this.blockEvents) {
+                ((ItemImplant) itemType).onUnequipped(player.get(), slotId, currentImplant);
+            }        }
+
         int firstSlot = ImplantType.getFirstSlotIndexOf(possibleType);
         implantsByType[possibleType.ordinal()].implants[slotId - firstSlot] = itemstack;
         if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit()) {

@@ -2,8 +2,8 @@ package com.suslovila.cybersus.common.item;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.common.item.implants.*;
-import com.suslovila.cybersus.common.item.implants.essentiaHeart.ImplantEssentiaHeart;
-import com.suslovila.cybersus.common.item.implants.essentiaHeart.ImplantShadowSkin;
+import com.suslovila.cybersus.common.item.implants.sinHeart.ImplantSinHeart;
+import com.suslovila.cybersus.common.item.implants.ImplantShadowSkin;
 import com.suslovila.cybersus.common.item.implants.witchery.ImplantSleepDiver;
 import com.suslovila.cybersus.common.item.implants.witchery.ImplantTormentor;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -18,7 +18,7 @@ public class ModItems {
     public static ImplantTormentor tormentor;
     public static ImplantSoulBreaker soulBreaker;
 
-    public static ImplantEssentiaHeart implantEssentiaHeart;
+    public static ImplantSinHeart implantSinHeart;
     public static ImplantShadowSkin shadowSkin;
 
     public static ItemRune itemRune;
@@ -53,7 +53,7 @@ public class ModItems {
             motherboardBlank = new ItemMotherboardBlank();
 
             if(Cybersus.forbiddenMagicLoaded) {
-//                implantEssentiaHeart = new ImplantEssentiaHeart();
+                implantSinHeart = new ImplantSinHeart();
             }
             if(Cybersus.witcheryLoaded) {
                 sleepDiver = new ImplantSleepDiver();

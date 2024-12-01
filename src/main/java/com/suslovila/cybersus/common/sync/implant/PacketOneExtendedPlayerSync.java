@@ -12,6 +12,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
+import java.lang.ref.WeakReference;
+
 
 public class PacketOneExtendedPlayerSync
         implements IMessage {
@@ -46,6 +48,7 @@ public class PacketOneExtendedPlayerSync
             if (entity instanceof EntityPlayer) {
                 CybersusPlayerExtendedData data = CybersusPlayerExtendedData.get((EntityPlayer) entity);
                 if (data != null) {
+                    message.implants.player = new WeakReference<>((EntityPlayer) entity);
                     data.implantStorage = (message.implants);
                 }
             }

@@ -135,5 +135,8 @@ public abstract class ItemImplant extends Item {
     }
 
     public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
+        for (Ability ability : getAbilities(player, index, implant)) {
+            ability.onUnequipped(player, index, implant);
+        }
     }
 }

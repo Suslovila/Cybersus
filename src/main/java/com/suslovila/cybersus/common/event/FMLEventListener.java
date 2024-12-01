@@ -1,33 +1,19 @@
 package com.suslovila.cybersus.common.event;
 
-import com.suslovila.cybersus.api.process.WorldProcess;
-import com.suslovila.cybersus.common.item.ItemImplant;
-import com.suslovila.cybersus.common.item.implants.essentiaHeart.ImplantShadowSkin;
-import com.suslovila.cybersus.common.processes.ProcessGravityTrap;
 import com.suslovila.cybersus.common.sync.CybersusPacketHandler;
 import com.suslovila.cybersus.common.sync.implant.PacketOneExtendedPlayerSync;
 import com.suslovila.cybersus.extendedData.CustomWorldData;
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MovementInput;
-import net.minecraft.util.MovementInputFromOptions;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.world.BlockEvent;
 //import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-
-import java.util.*;
 
 
 public class FMLEventListener {

@@ -185,6 +185,7 @@ public abstract class Ability {
 
     }
 
+    public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
+    }
 
-//    public FuelComposite getDefaultFuelConsume(){}
 }

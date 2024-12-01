@@ -2,7 +2,7 @@ package com.suslovila.cybersus.client;
 
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.process.WorldProcess;
-import com.suslovila.cybersus.common.item.implants.essentiaHeart.ImplantShadowSkin;
+import com.suslovila.cybersus.common.item.implants.ImplantShadowSkin;
 import com.suslovila.cybersus.common.processes.ProcessGravityTrap;
 import com.suslovila.cybersus.extendedData.CustomWorldData;
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.suslovila.cybersus.common.item.implants.essentiaHeart.ImplantShadowSkin.PREPARATION_TIMER;
+import static com.suslovila.cybersus.common.item.implants.ImplantShadowSkin.PREPARATION_TIMER;
 
 
 public class ClientProcessHandler {

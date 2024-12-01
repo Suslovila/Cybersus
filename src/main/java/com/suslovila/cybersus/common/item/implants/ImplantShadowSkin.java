@@ -1,4 +1,4 @@
-package com.suslovila.cybersus.common.item.implants.essentiaHeart;
+package com.suslovila.cybersus.common.item.implants;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
@@ -7,31 +7,21 @@ import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityPassive;
 import com.suslovila.cybersus.client.clientProcess.processes.shadowGates.ProcessShadowGates;
-import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.common.item.implants.ItemCybersusImplant;
 import com.suslovila.cybersus.extendedData.CustomWorldData;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
-import com.suslovila.cybersus.utils.SusGraphicHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import org.lwjgl.opengl.GL11;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
@@ -83,16 +73,14 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
             @Override
             public void onAbilityStatusSwitched(EntityPlayer player, int index, ItemStack implant) {
                 KhariumSusNBTHelper.getOrCreateTag(implant).setInteger(PREPARATION_TIMER, 30);
-                ProcessShadowGates processShadowGates = new ProcessShadowGates(player.getEntityId(), 30);
-                if(!isActive(implant)) {
+                if (!isActive(implant)) {
                     player.worldObj.playSoundAtEntity(
                             player,
                             Cybersus.MOD_ID + ":appear_from_shadows",
                             1f,
                             1.4f + player.worldObj.rand.nextFloat() * 0.2f
                     );
-                }
-                else {
+                } else {
                     player.worldObj.playSoundAtEntity(
                             player,
                             Cybersus.MOD_ID + ":hide_in_shadows",
@@ -100,6 +88,7 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
                             1.4f + player.worldObj.rand.nextFloat() * 0.2f
                     );
                 }
+                ProcessShadowGates processShadowGates = new ProcessShadowGates(player.getEntityId(), 30);
                 CustomWorldData.syncProcess(processShadowGates, player.worldObj.provider.dimensionId);
                 if (!isActive(implant)) player.removePotionEffect(Potion.invisibility.id);
 
@@ -153,7 +142,6 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
                             int light = player.worldObj.getBlockLightValue((int) player.posX, (int) player.posY, (int) player.posZ);
                             if (light >= 14) {
                                 sendToCooldown(player, index, implant);
-                                player.removePotionEffect(Potion.invisibility.id);
                                 player.attackEntityFrom(DamageSource.outOfWorld, player.getMaxHealth() / 2);
                                 notifyClient(player, index, implant);
                             }
@@ -168,7 +156,6 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
                 if (isActive(implant) && !isPreparing(implant)) {
                     if (event.source.isFireDamage()) {
                         sendToCooldown(player, index, implant);
-                        player.removePotionEffect(Potion.invisibility.id);
                         player.attackEntityFrom(DamageSource.outOfWorld, player.getMaxHealth() / 2);
                         notifyClient(player, index, implant);
                         return;
@@ -214,7 +201,17 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
             @Override
             public void sendToCooldown(EntityPlayer player, int index, ItemStack implant) {
                 super.sendToCooldown(player, index, implant);
+                player.removePotionEffect(Potion.invisibility.id);
                 KhariumSusNBTHelper.getOrCreateTag(implant).setInteger(PREPARATION_TIMER, 0);
+            }
+
+            @Override
+            public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
+                if (player != null && !player.worldObj.isRemote && isActive(implant)) {
+                    ProcessShadowGates processShadowGates = new ProcessShadowGates(player.getEntityId(), 30);
+                    CustomWorldData.syncProcess(processShadowGates, player.worldObj.provider.dimensionId);
+                }
+                super.onUnequipped(player, index, implant);
             }
         });
     }

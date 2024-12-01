@@ -7,13 +7,17 @@ import com.suslovila.cybersus.api.implants.upgrades.rune.RuneUsingItem;
 import com.suslovila.cybersus.client.gui.CybersusGui;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import org.lwjgl.opengl.GL11;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IAspectContainer;
@@ -56,6 +60,14 @@ public class ItemPortableMultiAspectContainer extends Item implements RuneUsingI
         return new AspectList();
     }
 
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamageForRenderPass(int par1, int renderPass) {
+
+        GL11.glEnable(3042);
+        GL11.glBlendFunc(770, 771);
+            return super.getIconFromDamageForRenderPass(par1, renderPass);
+    }
     @Override
     public void setStoredAspects(ItemStack stack, AspectList aspects) {
         aspects.writeToNBT(KhariumSusNBTHelper.getOrCreateTag(stack));

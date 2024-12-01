@@ -299,11 +299,11 @@ public class GuiImplants {
             GL11.glEnable(GL11.GL_DEPTH_TEST);
             float prevZ = itemRender.zLevel;
             itemRender.zLevel = zLevel;
-            itemRender.renderWithColor = false;
+            itemRender.renderWithColor = true;
             itemRender.renderItemAndEffectIntoGUI(mc.fontRendererObj, mc.renderEngine, item, x, y);
             itemRender.renderItemOverlayIntoGUI(mc.fontRendererObj, mc.renderEngine, item, x, y);
             itemRender.zLevel = prevZ;
-            itemRender.renderWithColor = true;
+//            itemRender.renderWithColor = true;
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glPopAttrib();

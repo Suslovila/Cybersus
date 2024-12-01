@@ -55,11 +55,17 @@ public abstract class AbilityPassive extends Ability {
     }
 
     @Override
+    public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
+        if(isActive(implant)) {
+            sendToCooldown(player, index, implant);
+        }
+    }
+
+    @Override
     public void sendToCooldown(EntityPlayer player, int index, ItemStack implant) {
         super.sendToCooldown(player, index, implant);
         NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(implant);
         tag.setBoolean(IS_ABILITY_ENABLED_NBT, false);
-
     }
 
     public int getFuelConsumePeriod(EntityPlayer player, int index, ItemStack implant) {

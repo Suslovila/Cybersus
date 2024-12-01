@@ -50,5 +50,16 @@ item.single_aspect_holder.name=Одиночное портативное хра�
 item.phoenix_heart.name=Сердце Феникса
 item.sin_heart.name=Сердце греха
 
+
+cybersus.not_infused_heart=Сердце не заряжено
+cybersus.sin_heart_infused.0=Наполнено Завистью
+cybersus.sin_heart_infused.1=Жаждет страсти
+cybersus.sin_heart_infused.2=Преисполнено гордыней
+cybersus.sin_heart_infused.3=Заполнено Ленью
+cybersus.sin_heart_infused.4=Переполнено Обжорством
+cybersus.sin_heart_infused.5=Пылает Яростью
+cybersus.sin_heart_infused.6=Хлещет Жадностью
+item.sin_heart.name=Сердце Греха
+
 #<BR>§nСпешка§r<BR>
 #§lБанках§r

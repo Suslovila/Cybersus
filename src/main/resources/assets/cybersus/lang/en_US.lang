@@ -1,1 +1,65 @@
 itemGroup.cybersus=Cybersus
+tc.aspect.Gravitas=Gravity, attraction, absorption
+tc.aspect.Humilitas=Restraint, Captivity, Control
+tc.aspect.Dimensio=Space, dimension
+tc.aspect.Sanguino=Blood
+
+tc.research_category.cybersus=Magical Prosthetics
+
+ac.tag.GRAVITY_INCREASER=Up and down...
+ac.tag.SHADOW_SKIN=In a black, black city...
+ac.tag.BLANK_HEART=Faster, higher, stronger
+ac.tag.ASPECT_HOLDERS = And what, was it so cool???
+ac.tag.BLANK_MOTHERBOARD=Okay Siri, how to clean the boiler from the flux...
+
+
+ac.tag.PHOENIX_HEART=Risen from the ashes
+
+ac.name.BASIC_INFO=Magic Prosthetics
+ac.name.GRAVITY_INCREASER=Gravity Booster
+ac.name.SHADOW_SKIN=Cover of shadows
+ac.name.BLANK_HEART=Empty heart
+ac.name.ASPECT_HOLDERS=Portable aspect storage
+ac.name.BLANK_MOTHERBOARD=empty motherboard
+ac.name.PHOENIX_HEART=Phoenix heart
+
+ac.tag.BASIC_INFO=honey, please, no more implants <_>
+ac.text.BASIC_INFO.1= The question of increasing the capabilities of the body has always worried mankind, because by nature people do not have claws, sharp teeth or poison. Solving this problem pushed progress forward in the early periods of human development. To do this, people came up with digging sticks, horseradish staves, firearms and much more. But all these solutions do not correct the main drawback of a person as an organism - weak organs.
+ac.text.BASIC_INFO.2=Realizing this, you decided to start studying the issue of strengthening your own body by replacing your "components" with more powerful variants of artificial origin. As a magician, you will surely find a way to combine flesh with steel. Your eyes are burning, but you feel that it is too easy to implement and do all this. It seems that such "upgrades" can hacve side effects...
+ac.text.BASIC_INFO.3=Implants are installed through a special gui. Each implant has "abilities" that can be activated via the corresponding buttons. Abilities are mainly divided into Instant (instant action), Passive (after switching on, they start working on the background), and Distorting (used on creatures. Upon activation, the distortion process begins, after which the action takes place. If at the same time you lose sight of the target or it is blocked by blocks, you are given a certain time specified near the distortion window to return the target to the field of view). Any ability doesn't work for free- it needs fuel. It can be anything - liquid essence, blood from a bloody network, witch infusion, and even some kind of energy from your favorite fellow techies like RF. All details will be given in the description of the ability itself
+ac.text.SHADOW_SKIN.1= The most ancient human fear is the fear of the unknown. And it, in turn, is born where nothing can be seen. You have created an implant that envelops and seals you, pressing you into darkness. Being in dark place, you can go into the shadows, becoming invulnerable to direct attacks and losing the ability to interact with the outside world. However, you are vulnerable to flames and any damage of this type will lead to fatal consequences. Moreover, if you find yourself in a bright enough place, you will literally be squeezed out of the darkness, which you definitely do not want. To activate, the implant requires 64 tenebrae and 2 more tenebrae each tick in the enabled state
+ac.text.ASPECT_HOLDERS.1=For the implants to work, as mentioned earlier, you need fuel, which somehow needs to be carried with you. In the case of blood in the blood network or with infusion, everything is clear - they are always with you. But with essence, problems begin. Therefore, you have created a portable container that is able to hold the essence under enormous pressure. 2 variants have been developed, the first holds only one aspect, but its limit is 1024 units, and the second holds 128 units of essence of the same type, but these types can be up to 8.
+ac.text.ASPECT_HOLDERS.2=To use, press the RMB through the air, a menu will open in front of you. Select the aspect you want to work with, and enter the quantity in the field above. Now, if you just click on any essence storage, the container will try to take the specified amount of the specified aspect, if you sit down when you click, on the contrary, it will try to give this amount from its storage. The current number of aspects is written in the menu above each of them.
+ac.text.BLANK_HEART.1=The first thing that comes to mind is to replace the heart. It is the power supply unit of the whole body, and replacing it with a more powerful one will strengthen the whole body as a whole. But something has to become the core, the battery for the heart itself. As an advanced thaumaturge, you know of one very powerful source of pure energy - the pearl. By plastering it with hollow metal for elasticity, you have received a completely working replacement for your heart
+ac.text.GRAVITY_INCREASER.1= Nature rules of world has always attracted you and immersed you in thought. The primordial-and, oddly enough, weak-interaction is gravitational. Not only is it uncontrollable, but it makes little sense - for a noticeable effect, mutually attractive objects must be extremely huge, like the Earth and the Moon. But magic knows no boundaries, and therefore, for your own selfish purposes, you have created an implant that allows you to create an area of enhanced gravity. <BR>When turned on, it creates a gravitational area in the direction of your gaze, 64 Gravitas and 16 Dimensio are needed to create
+ac.text.BLANK_MOTHERBOARD.1=Your tech friends achieve their goals with the help of pros and cons, zeros and ones. Your path lies through a magic wand and nauseating potions. Nevertheless, why not take some of the ideas from your colleagues? Taking a brain that is not the freshest, "spreading" it over the surface of a random tablet and sticking gold tracks at random, you got quite a calculating detail capable of processing something and ... strangely enough, influencing space-time. The magical waves emitted by the mind of creatures do not disappear without a trace, and can interact with the environment, changing reality.
+
+ac.text.BASIC_INFO.3=Implants are installed through a special gui. Each implant has "abilities" that can be activated via the corresponding buttons. Abilities are mainly divided into Instant (instant action), Passive (after switching on, they start working on the background), and Distorting (used on creatures. Upon activation, the distortion process begins, after which the action takes place. If at the same time you lose sight of the target or it is blocked by blocks, you are given a certain time specified near the distortion window to return the target to the field of view). Any ability doesn't work for free - it needs fuel. It can be anything - liquid essence, blood from a bloody network, witch infusion, and even some kind of energy from your favorite fellow techies like RF. All details will be given in the description of the ability itself
+ac.text.PHOENIX_HEART.1= Legends about a bird reborn in fire have been around since ancient times. You have studied this question and tried to get the ability of this mysterious bird. <BR>When turned on, the implant will save you from death, after which it will go into recharge. For the resurrection, he will take 712 Victus, 128 Ignis and 128 Permutatio. Please note that if you run out of fuel, you will not be resurrected.
+
+
+item.shadow_skin.name=The Cover of Shadows
+item.exploser.name =Brain-exploder
+Exploder item.heart_blank.name =Empty heart shape
+item.gravity_increaser.name =Gravity Booster
+item.motherboard_blank.name =empty motherboard
+item.sleep_diver.name=Dream Module
+item.tormentor.name =Torment Module
+item.multi_aspect_holder.name =Multiple portable aspect container
+essence storage item.single_aspect_holder.name =Single portable aspect container
+Essence Storage item.phoenix_heart.name =Phoenix heart
+item.sin_heart.name =Heart of sin
+
+cybersus.not_infused_heart=Heart not infused
+cybersus.not_infused_heart=Heart is not charged
+cybersus.sin_heart_infused.0=Filled with Envy
+cybersus.sin_heart_infused.1=Craves passion
+cybersus.sin_heart_infused.2=Filled with pride
+cybersus.sin_heart_infused.3=Filled with Laziness
+cybersus.sin_heart_infused.4=Overflowing Gluttony
+.sin_heart_infused.5=Burns with Rage
+cybersus.sin_heart_infused.6=Gushing with Greed
+item.sin_heart.name=Sin Heart
+
+#<BR>§Flashcard§r<BR>
+#§L Banks§r

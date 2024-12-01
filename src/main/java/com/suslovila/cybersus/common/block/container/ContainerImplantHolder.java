@@ -13,14 +13,21 @@ public class ContainerImplantHolder extends DefaultContainer {
 
     private final EntityPlayer player;
 
+    public ImplantStorage implantStorage;
     public ContainerImplantHolder(EntityPlayer player) {
         this.player = player;
 
         CybersusPlayerExtendedData data = CybersusPlayerExtendedData.get(player);
         if (data != null) {
+            implantStorage = data.implantStorage;
             addImplantSlots(data.implantStorage);
         }
         addPlayerInventory();
+    }
+
+    public void putStacksInSlots(ItemStack[] implants) {
+        this.implantStorage.blockEvents = true;
+        super.putStacksInSlots(implants);
     }
 
     private void addImplantSlots(ImplantStorage storage) {

@@ -16,7 +16,7 @@ public class ConfigImlants {
                     type.ordinal(), cfg.getInt(
                         "implant " + type + " slot amount",
                         "Implants",
-                        3,
+                        type.defaultSlotAmount,
                         1, Integer.MAX_VALUE,
                         ""
                     )

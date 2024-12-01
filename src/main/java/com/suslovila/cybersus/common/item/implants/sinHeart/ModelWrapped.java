@@ -1,11 +1,9 @@
-package com.suslovila.cybersus.common.item.implants.essentiaHeart;
+package com.suslovila.cybersus.common.item.implants.sinHeart;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.utils.ModelWrapperDisplayList;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
-import org.lwjgl.opengl.GL11;
 
 public class ModelWrapped {
     ModelWrapperDisplayList model;

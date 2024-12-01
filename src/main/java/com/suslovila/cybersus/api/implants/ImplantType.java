@@ -6,18 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum ImplantType {
-    HEAD,
-    BRAIN,
-    SKELETON,
-    HAND,
-    LEGS,
-    FOOT,
-    HEART,
-    CIRCULATORY_SYSTEM,
-    OCULAR_SYSTEM,
-    NERVOUS_SYSTEM,
-    SKIN,
-    LUNGS;
+    HEAD(1),
+    BRAIN(4),
+    SKELETON(1),
+    HAND(2),
+    LEGS(2),
+    FOOT(2),
+    HEART(1),
+    CIRCULATORY_SYSTEM(1),
+    OCULAR_SYSTEM(2),
+    NERVOUS_SYSTEM(1),
+    SKIN(1),
+    LUNGS(1);
+
+    ImplantType(int defAmount) {
+        defaultSlotAmount = defAmount;
+    }
+    public int defaultSlotAmount;
 
     public static final List<Integer> slotAmounts = new ArrayList<>();
     public static final List<IIcon> iconLocations = new ArrayList<>();

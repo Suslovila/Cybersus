@@ -376,6 +376,12 @@ public abstract class AbilityHack extends Ability {
         return KhariumSusNBTHelper.getOrCreateInteger(tag, TARGET_LOST_TIME_LEFT, 0);
     }
 
-
+    @Override
+    public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
+        super.onUnequipped(player, index, implant);
+        if (isHacking(implant)) {
+            sendToCooldown(player, index, implant);
+        }
+    }
 }
 

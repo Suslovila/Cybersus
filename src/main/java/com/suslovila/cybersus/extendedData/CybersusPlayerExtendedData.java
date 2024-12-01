@@ -19,7 +19,7 @@ public class CybersusPlayerExtendedData implements IExtendedEntityProperties {
 
     public CybersusPlayerExtendedData(EntityPlayer player) {
         this.player = player;
-        this.implantStorage = new ImplantStorage();
+        this.implantStorage = new ImplantStorage(player);
     }
 
     public static CybersusPlayerExtendedData get(EntityPlayer player) {

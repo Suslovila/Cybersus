@@ -1,28 +1,22 @@
-package com.suslovila.cybersus.common.item.implants.essentiaHeart;
+package com.suslovila.cybersus.common.item.implants.sinHeart;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
-import com.suslovila.cybersus.api.fuel.impl.fuel.essentia.FuelEssentia;
 import com.suslovila.cybersus.api.implants.ability.AbilityPassive;
 import com.suslovila.cybersus.client.RenderHelper;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
-import com.suslovila.cybersus.utils.SusVec3;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import org.lwjgl.opengl.GL11;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AbilitySimpleEssentiaFormShift extends AbilityPassive {
+public class AbilitySinHeartFormShift extends AbilityPassive {
     public static final List<ModelWrapped> hornModels = Arrays.asList(
             new ModelWrapped("models/zagredHorns.obj"),
             new ModelWrapped("models/simpleHorns.obj"),
@@ -41,7 +35,7 @@ public class AbilitySimpleEssentiaFormShift extends AbilityPassive {
     );
     Aspect aspect;
 
-    public AbilitySimpleEssentiaFormShift(Aspect aspect) {
+    public AbilitySinHeartFormShift(Aspect aspect) {
         super("essentia_overdrive");
         this.aspect = aspect;
     }
@@ -67,9 +61,16 @@ public class AbilitySimpleEssentiaFormShift extends AbilityPassive {
     @Override
     public void onRenderPlayerSpecialPost(RenderPlayerEvent.Specials.Post event, EntityPlayer player, int index, ItemStack implant, RenderHelper.RenderType type, EventPriority priority) {
 
+
+
         if (event.isCanceled()) return;
         if (!isActive(implant)) return;
-        int hash = getHash(player.getCommandSenderName());
+
+        GL11.glPushAttrib(GL11.GL_BLEND);
+        GL11.glPushAttrib(GL11.GL_LIGHTING);
+        GL11.glPushAttrib(GL11.GL_CULL_FACE);
+
+        int hash = getHash(player.getCommandSenderName() + "v");
         int hash2 = getHash(player.getCommandSenderName() + "a");
         int hornIndex = (hash) % hornModels.size();
         int wingIndex = (hash2) % wingModels.size();
@@ -77,14 +78,14 @@ public class AbilitySimpleEssentiaFormShift extends AbilityPassive {
         if (type == RenderHelper.RenderType.HEAD) {
             GL11.glPushMatrix();
             RenderHelper.Helper.translateToHeadLevel(player);
-            SusGraphicHelper.drawGuideArrows();
+//            SusGraphicHelper.drawGuideArrows();
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glEnable(GL11.GL_CULL_FACE);
             GL11.glDisable(GL11.GL_LIGHTING);
             SusGraphicHelper.pushLight();
             SusGraphicHelper.setMaxBrightness();
-            SusGraphicHelper.bindColor(aspect.getColor(), 0.6f, 1.0f);
+            SusGraphicHelper.bindColor(aspect.getColor(), 0.5f, 1.0f);
             GL11.glTranslated(0.0, 0.135, 0.0);
             GL11.glScaled(0.25, 0.25, 0.25);
             hornModels.get(hornIndex).render();
@@ -102,7 +103,7 @@ public class AbilitySimpleEssentiaFormShift extends AbilityPassive {
             GL11.glDisable(GL11.GL_LIGHTING);
             SusGraphicHelper.pushLight();
             SusGraphicHelper.setMaxBrightness();
-            SusGraphicHelper.bindColor(aspect.getColor(), 0.6f, 1.0f);
+            SusGraphicHelper.bindColor(aspect.getColor(), 0.5f, 1.0f);
             GL11.glTranslated(0.0, 0.135, 0.0);
             GL11.glRotated(180.0, 1.0, 0.0, 0.0);
             GL11.glRotated(90.0, 0.0, 0.0, 1.0);
@@ -116,14 +117,14 @@ public class AbilitySimpleEssentiaFormShift extends AbilityPassive {
             WingTexture wingTexture = wingModels.get(wingIndex);
             SusGraphicHelper.bindTexture(wingTexture.texture);
 //            GL11.glTranslated(wingTexture.xOffset, 0.0, 0.0);
-            SusGraphicHelper.drawGuideArrows();
+//            SusGraphicHelper.drawGuideArrows();
             if (player.isSneaking()) {
                 GL11.glRotatef(-28.64789F, 0.0F, 1.0F, 0.0F);
                 GL11.glTranslated(0.0, 0.0, -2.23);
                 GL11.glTranslated(-0.35, 0.0, 0.0);
             }
             GL11.glTranslated(wingTexture.xOffset, 0.0, 0.0);
-            SusGraphicHelper.drawGuideArrows();
+//            SusGraphicHelper.drawGuideArrows();
             GL11.glRotated(-30.0, 1.0, 0.0, 0.0);
             SusGraphicHelper.drawFromXYAxis(4.0f);
 
@@ -136,14 +137,14 @@ public class AbilitySimpleEssentiaFormShift extends AbilityPassive {
             GL11.glScaled(0.25, 0.25, 0.25);
             SusGraphicHelper.bindTexture(wingTexture.texture);
 //            GL11.glTranslated(wingTexture.xOffset, 0.0, 0.0);
-            SusGraphicHelper.drawGuideArrows();
+//            SusGraphicHelper.drawGuideArrows();
             if (player.isSneaking()) {
                 GL11.glRotatef(28.64789F, 0.0F, 1.0F, 0.0F);
                 GL11.glTranslated(0.0, 0.0, 2.23);
                 GL11.glTranslated(-0.35, 0.0, 0.0);
             }
             GL11.glTranslated(wingTexture.xOffset, 0.0, 0.0);
-            SusGraphicHelper.drawGuideArrows();
+//            SusGraphicHelper.drawGuideArrows();
             GL11.glRotated(30.0, 1.0, 0.0, 0.0);
             SusGraphicHelper.drawFromXYAxis(4.0f);
 
@@ -167,6 +168,10 @@ public class AbilitySimpleEssentiaFormShift extends AbilityPassive {
             SusGraphicHelper.popLight();
             GL11.glPopMatrix();
         }
+
+        GL11.glPopAttrib();
+        GL11.glPopAttrib();
+        GL11.glPopAttrib();
     }
 
     public static int getHash(String input) {

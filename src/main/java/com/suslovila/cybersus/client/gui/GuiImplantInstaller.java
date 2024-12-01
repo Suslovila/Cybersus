@@ -1,6 +1,7 @@
 package com.suslovila.cybersus.client.gui;
 
 
+import baubles.common.container.ContainerPlayerExpanded;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.common.block.container.ContainerImplantHolder;
@@ -22,6 +23,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import java.awt.*;
 
 
 public class GuiImplantInstaller extends GuiContainer {
@@ -71,6 +74,7 @@ public class GuiImplantInstaller extends GuiContainer {
 
     @Override
     public void drawSlot(Slot slotIn) {
+        SusGraphicHelper.bindColor(Color.white.getRGB(), 1.0f, 1.0f);
         int i = slotIn.xDisplayPosition;
         int j = slotIn.yDisplayPosition;
         ItemStack stackInSlot = slotIn.getStack();
@@ -128,7 +132,11 @@ public class GuiImplantInstaller extends GuiContainer {
         zLevel = 0.0f;
     }
 
-
+    public void updateScreen() {
+        try {
+            ((ContainerImplantHolder)this.inventorySlots).implantStorage.blockEvents = false;
+        } catch (Exception e) {}
+    }
 
         public void renderPlayerModel(int x, int y, int scale, float yaw, float pitch, EntityLivingBase playerdrawn) {
             GL11.glEnable(GL11.GL_COLOR_MATERIAL);

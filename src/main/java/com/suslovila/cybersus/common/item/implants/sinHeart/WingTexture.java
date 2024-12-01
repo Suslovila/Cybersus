@@ -1,4 +1,4 @@
-package com.suslovila.cybersus.common.item.implants.essentiaHeart;
+package com.suslovila.cybersus.common.item.implants.sinHeart;
 
 import net.minecraft.util.ResourceLocation;
 
