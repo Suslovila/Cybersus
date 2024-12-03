@@ -4,7 +4,7 @@ import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.common.item.implants.*;
 import com.suslovila.cybersus.common.item.implants.sinHeart.ImplantSinHeart;
 import com.suslovila.cybersus.common.item.implants.ImplantShadowSkin;
-import com.suslovila.cybersus.common.item.implants.witchery.ImplantSleepDiver;
+import com.suslovila.cybersus.common.item.implants.witchery.ImplantSleepModule;
 import com.suslovila.cybersus.common.item.implants.witchery.ImplantTormentor;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -14,7 +14,7 @@ public class ModItems {
     public static ImplantPhoenixHeart phoenixHeart;
     public static ImplantExploder exploser;
 
-    public static ImplantSleepDiver sleepDiver;
+    public static ImplantSleepModule sleepModule;
     public static ImplantTormentor tormentor;
     public static ImplantSoulBreaker soulBreaker;
 
@@ -56,7 +56,7 @@ public class ModItems {
                 implantSinHeart = new ImplantSinHeart();
             }
             if(Cybersus.witcheryLoaded) {
-                sleepDiver = new ImplantSleepDiver();
+                sleepModule = new ImplantSleepModule();
                 tormentor = new ImplantTormentor();
             }
 //            soulBreaker = new ImplantSoulBreaker();

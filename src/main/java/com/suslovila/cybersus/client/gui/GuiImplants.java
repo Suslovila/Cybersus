@@ -141,10 +141,14 @@ public class GuiImplants {
             GL11.glTranslated(0.0, 0.0, 1.0);
 
             GL11.glPushMatrix();
-            bindTexture(ability.texture);
             GL11.glRotated(-90.0, 0.0, 0.0, 1.0);
-            SusGraphicHelper.drawFromCenter(radius * 0.58);
+            ability.renderAbility(event, implant, scale, radius);
             GL11.glPopMatrix();
+
+            SusGraphicHelper.bindColor(Color.white.getRGB(), 1.0f, 1.0f);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glDisable(GL11.GL_CULL_FACE);
 
             GL11.glTranslated(0.0, 0.0, 1.0);
 

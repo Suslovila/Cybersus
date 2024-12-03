@@ -57,7 +57,7 @@ public class CybersusAspect {
         addAspectsToItem(new ItemStack(Items.ender_pearl), new AspectList().add(DIMENSIO, 2));
         addAspectsToItem(new ItemStack(Items.ender_eye), new AspectList().add(DIMENSIO, 2));
 
-        addAspectsToItem(new ItemStack(Items.nether_star), new AspectList().add(HUMILITAS, 10));
+        addAspectsToItem(new ItemStack(Items.nether_star), new AspectList().add(HUMILITAS, 8));
         addAspectsToItem(new ItemStack(ConfigItems.itemEldritchObject, 1, 3), new AspectList().add(HUMILITAS, 16));
 
         if(Cybersus.witcheryLoaded) {

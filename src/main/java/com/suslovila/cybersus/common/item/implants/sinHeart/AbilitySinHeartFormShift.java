@@ -2,6 +2,7 @@ package com.suslovila.cybersus.common.item.implants.sinHeart;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
+import com.suslovila.cybersus.api.fuel.impl.fuel.essentia.FuelEssentia;
 import com.suslovila.cybersus.api.implants.ability.AbilityPassive;
 import com.suslovila.cybersus.client.RenderHelper;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
@@ -9,9 +10,11 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,14 +39,14 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
     Aspect aspect;
 
     public AbilitySinHeartFormShift(Aspect aspect) {
-        super("essentia_overdrive");
+        super("sin_mode");
         this.aspect = aspect;
     }
 
     @Override
     public FuelComposite getFuelConsumeOnActivation(EntityPlayer player, int index, ItemStack implant) {
-//        return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(aspect, 32)));
-        return FuelComposite.EMPTY;
+        return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(aspect, 256)));
+//        return FuelComposite.EMPTY;
     }
 
     @Override
@@ -53,8 +56,8 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
 
     @Override
     public FuelComposite getFuelConsumePerCheck(EntityPlayer player, int index, ItemStack implant) {
-//        return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(aspect, 4)));
-        return FuelComposite.EMPTY;
+        return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(aspect, 16)));
+//        return FuelComposite.EMPTY;
 
     }
 
@@ -172,6 +175,12 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
         GL11.glPopAttrib();
         GL11.glPopAttrib();
         GL11.glPopAttrib();
+    }
+
+    @Override
+    public void renderAbility(RenderGameOverlayEvent.Post event, ItemStack implant, float scale, double radius) {
+        SusGraphicHelper.bindColor(this.aspect.getColor(), 1.0f, 1.0f);
+        super.renderAbility(event, implant, scale, radius);
     }
 
     public static int getHash(String input) {

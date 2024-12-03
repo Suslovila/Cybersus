@@ -6,6 +6,7 @@ import com.suslovila.cybersus.client.RenderHelper;
 import com.suslovila.cybersus.common.sync.CybersusPacketHandler;
 import com.suslovila.cybersus.common.sync.implant.PacketImplantSync;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
+import com.suslovila.cybersus.utils.SusGraphicHelper;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -14,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -21,6 +23,8 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+
+import static com.suslovila.cybersus.utils.SusGraphicHelper.bindTexture;
 
 public abstract class Ability {
     public final String name;
@@ -190,5 +194,10 @@ public abstract class Ability {
 
     public boolean hasFuel(EntityPlayer player, int index, ItemStack implant) {
         return getFuelConsumeOnActivation(player, index, implant).hasPlayerEnough(player);
+    }
+
+    public void renderAbility(RenderGameOverlayEvent.Post event, ItemStack implant, float scale, double radius) {
+        bindTexture(texture);
+        SusGraphicHelper.drawFromCenter(radius * 0.58);
     }
 }
