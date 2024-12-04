@@ -33,7 +33,6 @@ public class ImplantTormentor extends ItemCybersusImplant {
 
     public ImplantTormentor() {
         super(ImplantType.BRAIN);
-
     }
 
     @Override

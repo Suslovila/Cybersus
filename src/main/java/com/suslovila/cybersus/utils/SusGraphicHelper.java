@@ -279,7 +279,7 @@ public class SusGraphicHelper {
     public static void makeSystemOrthToVectorAndHandle(SusVec3 lookVector, double zOffset, Runnable additionalPreparations
     ) {
         glPushMatrix();
-
+        GL11.glPushAttrib(GL_CULL_FACE);
         glDisable(GL_CULL_FACE);
         if (Minecraft.getMinecraft().renderViewEntity instanceof EntityPlayer) {
             if(lookVector.x == 0.0 && lookVector.z == 0.0 && lookVector.y != 0.0) {
@@ -297,11 +297,27 @@ public class SusGraphicHelper {
             additionalPreparations.run();
 
         }
-
+        GL11.glPopAttrib();
         glPopMatrix();
     }
 
+    public static void makeSystemOrthToVector(SusVec3 lookVector, double zOffset
+    ) {
+//        if (Minecraft.getMinecraft().renderViewEntity instanceof EntityPlayer) {
+            if(lookVector.x == 0.0 && lookVector.z == 0.0 && lookVector.y != 0.0) {
+                glRotated(lookVector.y > 0 ? 90.0f : -90.0f, 1.0, 0.0, 0.0);
+            }
+            else {
+                SusVec3 lookVecXZProjection = new SusVec3(lookVector.x, 0.0, lookVector.z);
+                double angleAroundY = (SusVec3.angleBetweenVec3(new SusVec3(0, 0, 1), lookVecXZProjection) * 180.0 / Math.PI) * Math.signum(lookVecXZProjection.x);
+                double angleAroundX = (SusVec3.angleBetweenVec3(lookVecXZProjection, lookVector) * 180.0 / Math.PI) * (-Math.signum(lookVector.y));
+                glRotated(angleAroundY, 0.0, 1.0, 0.0);
+                glRotated(angleAroundX, 1.0, 0.0, 0.0);
+            }
+            glTranslated(0.0f, 0.0f, zOffset);
 
+//        }
+    }
     static Map<String, ResourceLocation> boundTextures = new HashMap<String, ResourceLocation>();
 
     public static void bindTexture(String texture) {

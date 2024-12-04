@@ -1,6 +1,5 @@
 package com.suslovila.cybersus.common.item.implants.sinHeart;
 
-import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
 import com.suslovila.cybersus.api.fuel.impl.fuel.essentia.FuelEssentia;
 import com.suslovila.cybersus.api.implants.ability.AbilityPassive;
@@ -9,7 +8,6 @@ import com.suslovila.cybersus.utils.SusGraphicHelper;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
@@ -20,22 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AbilitySinHeartFormShift extends AbilityPassive {
-    public static final List<ModelWrapped> hornModels = Arrays.asList(
-            new ModelWrapped("models/zagredHorns.obj"),
-            new ModelWrapped("models/simpleHorns.obj"),
-            new ModelWrapped("models/liebeHorns.obj")
-
-//            new ModelWrapped(),
-//            new ModelWrapped(),
-//            new ModelWrapped()
-    );
-
-    public static final List<WingTexture> wingModels = Arrays.asList(
-            new WingTexture(new ResourceLocation(Cybersus.MOD_ID, "textures/wings/liebeWing.png"), 1.5),
-            new WingTexture(new ResourceLocation(Cybersus.MOD_ID, "textures/wings/longWing.png"), 2.5),
-            new WingTexture(new ResourceLocation(Cybersus.MOD_ID, "textures/wings/luciferoWing.png"), 0.0),
-            new WingTexture(new ResourceLocation(Cybersus.MOD_ID, "textures/wings/megikulaWing.png"), 0.5)
-    );
     Aspect aspect;
 
     public AbilitySinHeartFormShift(Aspect aspect) {
@@ -75,8 +57,8 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
 
         int hash = getHash(player.getCommandSenderName() + "v");
         int hash2 = getHash(player.getCommandSenderName() + "a");
-        int hornIndex = (hash) % hornModels.size();
-        int wingIndex = (hash2) % wingModels.size();
+        int hornIndex = (hash) % SinHeartRenderManager.hornModels.size();
+        int wingIndex = (hash2) % SinHeartRenderManager.wingModels.size();
 
         if (type == RenderHelper.RenderType.HEAD) {
             GL11.glPushMatrix();
@@ -91,7 +73,7 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
             SusGraphicHelper.bindColor(aspect.getColor(), 0.5f, 1.0f);
             GL11.glTranslated(0.0, 0.135, 0.0);
             GL11.glScaled(0.25, 0.25, 0.25);
-            hornModels.get(hornIndex).render();
+            SinHeartRenderManager.hornModels.get(hornIndex).render();
 
             SusGraphicHelper.popLight();
             GL11.glPopMatrix();
@@ -117,7 +99,7 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
 
             GL11.glDisable(GL11.GL_CULL_FACE);
             GL11.glScaled(0.25, 0.25, 0.25);
-            WingTexture wingTexture = wingModels.get(wingIndex);
+            WingTexture wingTexture = SinHeartRenderManager.wingModels.get(wingIndex);
             SusGraphicHelper.bindTexture(wingTexture.texture);
 //            GL11.glTranslated(wingTexture.xOffset, 0.0, 0.0);
 //            SusGraphicHelper.drawGuideArrows();
