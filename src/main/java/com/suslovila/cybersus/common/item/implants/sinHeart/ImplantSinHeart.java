@@ -226,16 +226,17 @@ public class ImplantSinHeart extends ItemCybersusImplant {
             public void onPlayerHurtEventIfAttacker(LivingHurtEvent event, EntityPlayer player, int index, ItemStack implant) {
                 if (isActive(implant)) {
                     FoodStats foodStats = player.getFoodStats();
-                    foodStats.setFoodLevel(foodStats.getFoodLevel() + 2 + itemRand.nextInt(2));
+                    foodStats.setFoodLevel(Math.min(20, foodStats.getFoodLevel() + 2 + itemRand.nextInt(2)));
                     player.heal(event.ammount);
                 }
             }
 
             @Override
             public void onPlayerUpdateEvent(LivingEvent.LivingUpdateEvent event, EntityPlayer player, int index, ItemStack implant) {
+                super.onPlayerUpdateEvent(event, player, index, implant);
                 if (isActive(implant) && player.worldObj.getTotalWorldTime() % 20 == 0) {
                     FoodStats foodStats = player.getFoodStats();
-                    foodStats.setFoodLevel(foodStats.getFoodLevel() - 2);
+                    foodStats.setFoodLevel(Math.max(-100, foodStats.getFoodLevel() - 2));
                 }
             }
         });

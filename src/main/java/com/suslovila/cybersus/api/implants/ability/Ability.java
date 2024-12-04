@@ -3,11 +3,14 @@ package com.suslovila.cybersus.api.implants.ability;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
 import com.suslovila.cybersus.client.RenderHelper;
+import com.suslovila.cybersus.common.event.customEvents.PlayerActivatedAbilityEvent;
 import com.suslovila.cybersus.common.sync.CybersusPacketHandler;
 import com.suslovila.cybersus.common.sync.implant.PacketImplantSync;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
 import cpw.mods.fml.common.eventhandler.EventPriority;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -19,6 +22,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -49,6 +53,12 @@ public abstract class Ability {
         this.texture = resourceLocation;
     }
 
+
+    public final void tryToActivateAbility(EntityPlayer player, int index, ItemStack implant) {
+        if (!MinecraftForge.EVENT_BUS.post(new PlayerActivatedAbilityEvent(player, index, implant, this))) {
+            onEnableButtonClicked(player, index, implant);
+        }
+    }
 
     public abstract void onEnableButtonClicked(EntityPlayer player, int index, ItemStack implant);
 
@@ -199,5 +209,9 @@ public abstract class Ability {
     public void renderAbility(RenderGameOverlayEvent.Post event, ItemStack implant, float scale, double radius) {
         bindTexture(texture);
         SusGraphicHelper.drawFromCenter(radius * 0.58);
+    }
+
+    public boolean doesTheAbilityHaveNegativeImpact(Entity entity) {
+        return false;
     }
 }

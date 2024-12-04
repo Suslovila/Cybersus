@@ -73,7 +73,7 @@ public class KeyHandler {
                 ItemImplant implantClass = (ItemImplant) implant.getItem();
                 List<Ability> abilities = implantClass.getAbilities(Minecraft.getMinecraft().thePlayer, GuiImplants.currentImplantSlotId, implant);
                 if (abilities.size() > abilityId) {
-                    abilities.get(abilityId).onEnableButtonClicked(Minecraft.getMinecraft().thePlayer, GuiImplants.currentImplantSlotId, implant);
+                    abilities.get(abilityId).tryToActivateAbility(Minecraft.getMinecraft().thePlayer, GuiImplants.currentImplantSlotId, implant);
                 }
             }
         });

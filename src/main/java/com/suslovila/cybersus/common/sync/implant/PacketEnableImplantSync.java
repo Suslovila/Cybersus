@@ -51,7 +51,7 @@ public class PacketEnableImplantSync
                     ItemImplant implantClass = (ItemImplant) implant.getItem();
                     List<Ability> abilities = implantClass.getAbilities(player, message.slotId, implant);
                     if (abilities.size() > message.abilityId) {
-                        abilities.get(message.abilityId).onEnableButtonClicked(player, message.slotId, implant);
+                        abilities.get(message.abilityId).tryToActivateAbility(player, message.slotId, implant);
                     }
                 }
             }

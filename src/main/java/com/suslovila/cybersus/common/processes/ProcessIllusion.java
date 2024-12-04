@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
@@ -89,22 +90,27 @@ public class ProcessIllusion extends WorldProcess implements ISerializableProces
             // SusGraphicHelper.translateFromPlayerTo(hacker.getPosition(), event.partialTicks);
             SusVec3 vecFromPlayerToHacker = SusGraphicHelper.getRenderPos(hacker, event.partialTicks).subtract(SusGraphicHelper.getRenderPos(victim, event.partialTicks));
             SusVec3 XZProjection = new SusVec3(vecFromPlayerToHacker.x, 0.0, vecFromPlayerToHacker.z);
-//            SusVec3 zVec3 = new SusVec3(0, 0, 1.0);
-//            double angle = (SusVec3.angleBetweenVec3(zVec3, vecFromPlayerToHacker) * 180.0 / Math.PI) * (vecFromPlayerToHacker.x > 0 ? 1 : -1);
-//            System.out.println("the angle is: " + angle);
-//            glRotated(angle, 0.0, 1.0, 0.0);
-            SusGraphicHelper.makeSystemOrthToVector(XZProjection, 0.0);
+            SusVec3 zVec3 = new SusVec3(0, 0, 1.0);
+            double angle = (SusVec3.angleBetweenVec3(zVec3, vecFromPlayerToHacker) * 180.0 / Math.PI) * (vecFromPlayerToHacker.x > 0 ? 1 : -1);
+            System.out.println("the angle is: " + angle);
+            glRotated(angle, 0.0, 1.0, 0.0);
+
+            SusGraphicHelper.drawGuideArrows();
+            glTranslatef(0.0f, (float) (vecFromPlayerToHacker.y), 0.0f);
+            double perCheckAngleDelta = 360.0 / (illusionAmount + 1);
+            for (int i = 0; i < illusionAmount; i++) {
+                glPushMatrix();
+                glRotated(perCheckAngleDelta * (i + 1), 0.0, 1.0, 0.0);
+                // idk why, but for correct work we need to subtract 1.3 :/
+                glTranslated(0.0, 0.0, XZProjection.length());
+                glRotated(90.0, 0.0, 1.0, 0.0);
                 SusGraphicHelper.drawGuideArrows();
-                glTranslatef(0.0f, (float) (vecFromPlayerToHacker.y), 0.0f);
-                double perCheckAngleDelta = 360.0 / (illusionAmount + 1);
-                for (int i = 0; i < illusionAmount; i++) {
-                    glPushMatrix();
-                    glRotated(perCheckAngleDelta * (i + 1), 0.0, 1.0, 0.0);
-                    glTranslated(0.0, 0.0, XZProjection.length());
-                    glRotated(90.0, 0.0, 1.0, 0.0);
-                    SusGraphicHelper.drawGuideArrows();
-                    drawEntityOrthogonalToZAxis(hacker);
-                    glPopMatrix();
+//                hacker.riddenByEntity = new EntityItem();
+                drawEntityOrthogonalToZAxis(hacker);
+                // glDisable(GL_CULL_FACE);
+                // UtilsFX.bindTexture(SusGraphicHelper.whiteBlank);
+                // SusGraphicHelper.cubeModel.renderAll();
+                glPopMatrix();
             }
 
             glPopMatrix();
@@ -120,13 +126,13 @@ public class ProcessIllusion extends WorldProcess implements ISerializableProces
     public void drawEntityOrthogonalToZAxis(
             EntityLivingBase entity
     ) {
-        glPushAttrib(GL_COLOR_MATERIAL);
-        glEnable(GL_COLOR_MATERIAL);
+//        glPushAttrib(GL_COLOR_MATERIAL);
+//        glEnable(GL_COLOR_MATERIAL);
         glPushMatrix();
         RenderHelper.enableStandardItemLighting();
         RenderManager.instance.renderEntityWithPosYaw(entity, 0.0, 0.0, 0.0, 0.0f, 1.0f);
         glPopMatrix();
-        glPopAttrib();
+//        glPopAttrib();
     }
 
     @Override

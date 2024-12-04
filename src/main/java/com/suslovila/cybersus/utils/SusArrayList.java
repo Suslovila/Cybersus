@@ -21,15 +21,17 @@ public class SusArrayList<E> implements Collection<E> {
         elements[currentLength++] = element;
         return true;
     }
+
     public E get(int index) {
         checkIndex(index);
 
         return elements[index];
     }
+
     @Override
     public boolean remove(Object object) {
         Integer index = getIndexOFirst(element -> element.equals(object));
-        if(index != null) {
+        if (index != null) {
             removeAt(index);
         }
         return index != null;
@@ -85,11 +87,13 @@ public class SusArrayList<E> implements Collection<E> {
 
         elements[--currentLength] = null;
     }
+
     private void checkIndex(int index) {
         if (index < 0 || index >= currentLength) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + currentLength);
         }
     }
+
     @Override
     public boolean containsAll(Collection<?> collection) {
         return collection.stream().allMatch(this::contains);
@@ -97,18 +101,28 @@ public class SusArrayList<E> implements Collection<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> collection) {
-        return collection.stream().allMatch(this::add);
+        boolean containsAny = false;
+        for (E element : collection) {
+            containsAny = containsAny || add(element);
+        }
+
+        return containsAny;
     }
 
     @Override
     public boolean removeAll(Collection<?> collection) {
-        return collection.stream().allMatch(this::remove);
+        boolean changed = false;
+        for (Object element : collection) {
+            changed = changed || remove(element);
+        }
+
+        return changed;
     }
 
     @Override
     public boolean retainAll(Collection<?> collection) {
         boolean modified = false;
-        for (int i = 0; i < elements.length; i++) {
+        for (int i = 0; i < currentLength; i++) {
             if (!collection.contains(elements[i])) {
                 remove(i);
                 modified = true;
@@ -118,6 +132,7 @@ public class SusArrayList<E> implements Collection<E> {
     }
 
     public void clear() {
+        Arrays.fill(elements, null);
         currentLength = 0;
     }
 
@@ -152,7 +167,7 @@ public class SusArrayList<E> implements Collection<E> {
     }
 
     private void foreachNotNull(Consumer<E> consumer) {
-        for(int i = 0; i < elements.length; i++) {
+        for (int i = 0; i < elements.length; i++) {
             E element = elements[i];
             if (element != null) {
                 consumer.accept(element);
@@ -161,7 +176,7 @@ public class SusArrayList<E> implements Collection<E> {
     }
 
     private void foreachIndexed(BiConsumer<Integer, E> consumer) {
-        for(int i = 0; i < currentLength; i++) {
+        for (int i = 0; i < currentLength; i++) {
             E element = elements[i];
             consumer.accept(i, element);
         }
@@ -169,15 +184,15 @@ public class SusArrayList<E> implements Collection<E> {
 
     public String toString() {
         Iterator<E> it = iterator();
-        if (! it.hasNext())
+        if (!it.hasNext())
             return "[]";
 
         StringBuilder sb = new StringBuilder();
         sb.append('[');
-        for (;;) {
+        for (; ; ) {
             E e = it.next();
             sb.append(e == this ? "(this Collection)" : e);
-            if (! it.hasNext())
+            if (!it.hasNext())
                 return sb.append(']').toString();
             sb.append(',').append(' ');
         }

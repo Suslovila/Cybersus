@@ -166,31 +166,47 @@ public class CybersusResearchRegistry {
         }
 
         if (Cybersus.witcheryLoaded) {
-            runicMatrixRecipes.put(sleepModuleKey, ThaumcraftApi.addInfusionCraftingRecipe(
-                    sleepModuleKey,
-                    new ItemStack(ModItems.sleepModule, 1, 0),
-                    5,
-                    new AspectList().add(Aspect.MAGIC, 64).add(CybersusAspect.DIMENSIO, 64).add(Aspect.SOUL, 64 + 36).add(Aspect.TRAVEL, 32).add(Aspect.TRAP, 64 + 16),
-                    new ItemStack(ModItems.motherboardBlank),
-                    new ItemStack[]{
-                            Witchery.Items.GENERIC.itemBrewOfSleeping.createStack(), Witchery.Items.GENERIC.itemMellifluousHunger.createStack(), new ItemStack(ConfigItems.itemShard, 1, 6),
-                            new ItemStack(ConfigItems.itemResource, 1, 15), new ItemStack(ConfigItems.itemResource, 1, 16)
+            if (ModItems.sleepModule != null) {
+                AspectList aspects = new AspectList().add(Aspect.MAGIC, 64).add(CybersusAspect.DIMENSIO, 64).add(Aspect.SOUL, 36).add(Aspect.TRAVEL, 32).add(Aspect.TRAP, 16);
+                if (Cybersus.forbiddenMagicLoaded) {
+                    aspects.add(DarkAspects.SLOTH, 64);
+                } else {
+                    aspects.add(Aspect.SOUL, 64).add(Aspect.TRAP, 64);
+                }
+                runicMatrixRecipes.put(sleepModuleKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                        sleepModuleKey,
+                        new ItemStack(ModItems.sleepModule, 1, 0),
+                        5,
+                        aspects,
+                        new ItemStack(ModItems.motherboardBlank),
+                        new ItemStack[]{
+                                Witchery.Items.GENERIC.itemBrewOfSleeping.createStack(), Witchery.Items.GENERIC.itemMellifluousHunger.createStack(), new ItemStack(ConfigItems.itemShard, 1, 6),
+                                new ItemStack(ConfigItems.itemResource, 1, 15), new ItemStack(ConfigItems.itemResource, 1, 16)
 
-                    }
-            ));
+                        }
+                ));
+            }
+            if (ModItems.tormentor != null) {
+                AspectList aspects = new AspectList().add(Aspect.MAGIC, 64).add(CybersusAspect.DIMENSIO, 32).add(Aspect.SOUL, 16).add(Aspect.TRAVEL, 8).add(Aspect.TRAP, 196);
+                if (Cybersus.forbiddenMagicLoaded) {
+                    aspects.add(DarkAspects.WRATH, 128);
+                } else {
+                    aspects.add(Aspect.FIRE, 128).add(Aspect.WEAPON, 128);
+                }
+                runicMatrixRecipes.put(tormentorKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                        tormentorKey,
+                        new ItemStack(ModItems.tormentor),
+                        23,
+                        aspects,
+                        new ItemStack(ModItems.motherboardBlank),
+                        new ItemStack[]{
+                                Witchery.Items.GENERIC.itemBrewSoulTorment.createStack(), Witchery.Items.GENERIC.itemCondensedFear.createStack(), new ItemStack(ConfigItems.itemShard, 1, 6),
+                                new ItemStack(ConfigItems.itemResource, 1, 15), new ItemStack(ConfigItems.itemResource, 1, 16)
 
-            runicMatrixRecipes.put(tormentorKey, ThaumcraftApi.addInfusionCraftingRecipe(
-                    tormentorKey,
-                    new ItemStack(ModItems.tormentor),
-                    23,
-                    new AspectList().add(Aspect.FIRE, 128).add(Aspect.WEAPON, 128).add(Aspect.MAGIC, 64).add(CybersusAspect.DIMENSIO, 32).add(Aspect.SOUL, 16).add(Aspect.TRAVEL, 8).add(Aspect.TRAP, 196),
-                    new ItemStack(ModItems.motherboardBlank),
-                    new ItemStack[]{
-                            Witchery.Items.GENERIC.itemBrewOfSleeping.createStack(), Witchery.Items.GENERIC.itemMellifluousHunger.createStack(), new ItemStack(ConfigItems.itemShard, 1, 6),
-                            new ItemStack(ConfigItems.itemResource, 1, 15), new ItemStack(ConfigItems.itemResource, 1, 16)
+                        }
 
-                    }
-            ));
+                ));
+            }
         }
     }
 
@@ -257,7 +273,7 @@ public class CybersusResearchRegistry {
                 0,
                 3,
                 new ItemStack(ModItems.portableMultiAspectContainer)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(singleAspectHolderKey)), new ResearchPage(runicMatrixRecipes.get(multiAspectHolderKey)), new ResearchPage("2")).setParents(basicInfo)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(singleAspectHolderKey)), new ResearchPage(runicMatrixRecipes.get(multiAspectHolderKey)), new ResearchPage("2")).setParents(basicInfo).setAutoUnlock()
                 .registerResearchItem();
 
         new CybersusResearchItem(
@@ -306,7 +322,8 @@ public class CybersusResearchRegistry {
 //            infusionRecipesForSleepModule[1] = runicMatrixRecipes.get(sleepModuleKey + "2");
 //        }
 
-        if(Cybersus.witcheryLoaded) {
+
+        if (Cybersus.witcheryLoaded) {
             new CybersusResearchItem(
                     sleepModuleKey,
                     cybersusCategory,

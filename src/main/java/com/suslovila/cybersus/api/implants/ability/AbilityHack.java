@@ -1,6 +1,8 @@
 package com.suslovila.cybersus.api.implants.ability;
 
 import com.suslovila.cybersus.Cybersus;
+import com.suslovila.cybersus.common.event.customEvents.OnPlayerHackEntityTick;
+import com.suslovila.cybersus.common.event.customEvents.PlayerTriesToStartHackingEvent;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
 import com.suslovila.cybersus.utils.SusVec3;
@@ -10,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -17,6 +20,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import org.lwjgl.opengl.GL11;
 
@@ -84,6 +88,7 @@ public abstract class AbilityHack extends Ability {
     @Override
     public void onEnableButtonClicked(EntityPlayer player, int index, ItemStack implant) {
         // only server here
+
         NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(implant);
         if (isHacking(implant) && !player.worldObj.isRemote) {
             sendToCooldown(player, index, implant);
@@ -100,13 +105,16 @@ public abstract class AbilityHack extends Ability {
             if (!canHackEntity(player, hitEntity, index, implant) || !player.canEntityBeSeen(hitEntity)) {
                 return;
             }
-            if (getFuelConsumeOnActivation(player, index, implant).tryTakeFuelFromPlayer(player)) {
-                tag.setInteger(HACK_TIME_LEFT_NBT, getRequiredHackTime());
-                KhariumSusNBTHelper.setUUID(tag, HACK_VICTIM_UUID_NBT, hitEntity.getPersistentID());
-                // sync memes
-                tag.setInteger(HACK_VICTIM_ID_NBT, hitEntity.getEntityId());
+            if (player instanceof EntityPlayerMP &&
+                    !MinecraftForge.EVENT_BUS.post(new PlayerTriesToStartHackingEvent((EntityPlayerMP) player, hitEntity, index, implant, this))) {
+                if (getFuelConsumeOnActivation(player, index, implant).tryTakeFuelFromPlayer(player)) {
+                    tag.setInteger(HACK_TIME_LEFT_NBT, getRequiredHackTime());
+                    KhariumSusNBTHelper.setUUID(tag, HACK_VICTIM_UUID_NBT, hitEntity.getPersistentID());
+                    // sync memes
+                    tag.setInteger(HACK_VICTIM_ID_NBT, hitEntity.getEntityId());
 
-                notifyClient(player, index, implant);
+                    notifyClient(player, index, implant);
+                }
             }
         }
     }
@@ -140,6 +148,13 @@ public abstract class AbilityHack extends Ability {
                 if (focusedEntityServer.getEntityId() != tag.getInteger(HACK_VICTIM_ID_NBT)) {
                     tag.setInteger(HACK_VICTIM_ID_NBT, focusedEntityServer.getEntityId());
                     notifyClient(player, index, implant);
+                }
+
+                if (player instanceof EntityPlayerMP &&
+                        MinecraftForge.EVENT_BUS.post(new OnPlayerHackEntityTick((EntityPlayerMP) player, focusedEntityServer, index, implant, this))) {
+                    sendToCooldown(player, index, implant);
+                    notifyClient(player, index, implant);
+                    return;
                 }
             }
             if (!isRelockingTarget(implant)) {

@@ -1,9 +1,13 @@
 package com.suslovila.cybersus.common.event;
 
+import com.suslovila.cybersus.common.event.customEvents.OnPlayerHackEntityTick;
+import com.suslovila.cybersus.common.event.customEvents.PlayerFinalisedHackingEvent;
+import com.suslovila.cybersus.common.event.customEvents.PlayerTriesToStartHackingEvent;
 import com.suslovila.cybersus.common.sync.CybersusPacketHandler;
 import com.suslovila.cybersus.common.sync.implant.PacketOneExtendedPlayerSync;
 import com.suslovila.cybersus.extendedData.CustomWorldData;
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
+import com.suslovila.cybersus.utils.RegionHelper;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
@@ -106,5 +110,22 @@ public class FMLEventListener {
         }
     }
 
-
+    @SubscribeEvent
+    public void isHackerAndVictimInTheSamePrivateEventStart(PlayerTriesToStartHackingEvent event) {
+        if(RegionHelper.cantDamage(event.hacker, event.victim)) {
+            event.setCanceled(true);
+        }
+    }
+    @SubscribeEvent
+    public void isHackerAndVictimInTheSamePrivateEventTick(OnPlayerHackEntityTick event) {
+        if(RegionHelper.cantDamage(event.hacker, event.victim)) {
+            event.setCanceled(true);
+        }
+    }
+    @SubscribeEvent
+    public void isHackerAndVictimInTheSamePrivateEventFinalise(PlayerFinalisedHackingEvent event) {
+        if(RegionHelper.cantDamage(event.hacker, event.victim)) {
+            event.setCanceled(true);
+        }
+    }
 }
