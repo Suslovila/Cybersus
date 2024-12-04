@@ -53,8 +53,10 @@ configurations {
 jar {
 	from configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
 }
+
 dependencies {
-	implementation  fileTree(dir: 'lib', include: ['*.jar'])
+	implementation fileTree(dir: 'lib', include: ['*-deobf.jar'])
+	compileOnly fileTree(dir: 'lib', include: ['*-dev.jar'])
 	annotationProcessor 'org.ow2.asm:asm-debug-all:5.0.3'
 }
 
