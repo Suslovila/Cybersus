@@ -46,7 +46,7 @@ public abstract class AbilityPassive extends Ability {
     @Override
     public void onPlayerUpdateEvent(LivingEvent.LivingUpdateEvent event, EntityPlayer player, int index, ItemStack implant) {
         super.onPlayerUpdateEvent(event, player, index, implant);
-        if (player.worldObj.isRemote || player.ticksExisted % 20 != 0 || !isActive(implant)) return;
+        if (player.worldObj.isRemote || player.ticksExisted % getFuelConsumePeriod(player, index, implant) != 0 || !isActive(implant)) return;
         FuelComposite fuelConsumePerSecond = getFuelConsumePerCheck(player, index, implant);
         if (fuelConsumePerSecond != null && !fuelConsumePerSecond.tryTakeFuelFromPlayer(player)) {
             sendToCooldown(player, index, implant);

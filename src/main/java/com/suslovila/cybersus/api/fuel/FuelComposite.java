@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.suslovila.cybersus.utils.CollectionUtils;
 import net.minecraft.entity.player.EntityPlayer;
 
 // collective class for fuels helping operating with several fuel instances/
@@ -45,11 +46,11 @@ public class FuelComposite {
     }
 
     public static FuelComposite allRequired(IFuel... fuels) {
-        return new FuelComposite(Arrays.asList(fuels));
+        return new FuelComposite(CollectionUtils.arrayListOf(fuels));
     }
 
     public FuelComposite addComplexVariation(FuelComposite... fuelComposites) {
-        FuelVariation fuelVariation = new FuelVariation(Arrays.asList(fuelComposites));
+        FuelVariation fuelVariation = new FuelVariation(CollectionUtils.arrayListOf(fuelComposites));
         this.fuelVariations.add(fuelVariation);
 
         return this;

@@ -20,7 +20,7 @@ import net.minecraft.item.Item;
 
 import java.util.Random;
 
-@Mod(name = Cybersus.NAME, modid = Cybersus.MOD_ID, version = Cybersus.VERSION, dependencies = "after:AWWayofTime;after:Botania;after:witchery;after:Thaumcraft;after:ForbiddenMagic")
+@Mod(name = Cybersus.NAME, modid = Cybersus.MOD_ID, version = Cybersus.VERSION, dependencies = "after:AWWayofTime;after:Botania;after:witchery;after:Thaumcraft;after:ForbiddenMagic;after:TravellersGear")
 public class Cybersus {
     public static final String NAME = "cybersus";
     public static final String MOD_ID = "cybersus";
@@ -31,7 +31,7 @@ public class Cybersus {
     public static boolean bloodMagicLoaded = false;
     public static boolean botaniaLoaded = false;
     public static boolean forbiddenMagicLoaded = false;
-
+    public static boolean travellersGearLoaded = false;
 
     public static Random random = new Random();
 
@@ -59,6 +59,7 @@ public class Cybersus {
         thaumcraftLoaded = Loader.isModLoaded("Thaumcraft");
         bloodMagicLoaded = Loader.isModLoaded("AWWayofTime");
         forbiddenMagicLoaded = Loader.isModLoaded("ForbiddenMagic");
+        travellersGearLoaded = Loader.isModLoaded("TravellersGear");
 
         proxy.preInit(event);
     }

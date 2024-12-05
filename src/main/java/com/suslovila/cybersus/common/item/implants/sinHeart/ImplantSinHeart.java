@@ -6,6 +6,7 @@ import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.upgrades.rune.RuneType;
 import com.suslovila.cybersus.common.item.implants.ItemCybersusImplant;
+import com.suslovila.cybersus.utils.CollectionUtils;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -42,7 +43,7 @@ public class ImplantSinHeart extends ItemCybersusImplant {
     public static List<Aspect> sinAspects;
 
     static {
-        sinAspects = Arrays.asList(DarkAspects.ENVY, DarkAspects.LUST, DarkAspects.PRIDE, DarkAspects.SLOTH, DarkAspects.GLUTTONY, DarkAspects.WRATH, Aspect.GREED);
+        sinAspects = CollectionUtils.arrayListOf(DarkAspects.ENVY, DarkAspects.LUST, DarkAspects.PRIDE, DarkAspects.SLOTH, DarkAspects.GLUTTONY, DarkAspects.WRATH, Aspect.GREED);
     }
     public ImplantSinHeart() {
         super(ImplantType.HEART);

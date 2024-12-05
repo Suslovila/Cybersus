@@ -29,8 +29,9 @@ public class ModItems {
 
     public static ImplantIllusionGenerator illusionGenerator;
 
-    public static ItemPortableMultiAspectContainer portableMultiAspectContainer = new ItemPortableMultiAspectContainer();
-    public static ItemPortableSingleAspectContainer portablesingleAspectContainer = new ItemPortableSingleAspectContainer();
+    public static ItemPortableMultiAspectContainer portableMultiAspectContainer;
+    public static ItemPortableSingleAspectContainer portablesingleAspectContainer;
+    public static ImplantBerserkHeart berserkHeart;
 
 
 
@@ -43,9 +44,13 @@ public class ModItems {
 
     public static void registerImplants() {
         if(Cybersus.thaumcraftLoaded) {
+            portableMultiAspectContainer = new ItemPortableMultiAspectContainer();
+            portablesingleAspectContainer = new ItemPortableSingleAspectContainer();
+
             GameRegistry.registerItem(portableMultiAspectContainer, ItemPortableMultiAspectContainer.name);
             GameRegistry.registerItem(portablesingleAspectContainer, ItemPortableSingleAspectContainer.name);
 
+            berserkHeart = new ImplantBerserkHeart();
             phoenixHeart = new ImplantPhoenixHeart();
             shadowSkin = new ImplantShadowSkin();
             exploser = new ImplantExploder();

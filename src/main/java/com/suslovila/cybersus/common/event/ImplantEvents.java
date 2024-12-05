@@ -2,6 +2,7 @@ package com.suslovila.cybersus.common.event;
 
 import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
+import com.suslovila.cybersus.research.CybersusResearchRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.*;
@@ -13,6 +14,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import org.lwjgl.opengl.GL11;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ImplantEvents {
@@ -185,6 +187,7 @@ public class ImplantEvents {
 
     @SubscribeEvent
     public void onPlayerUpdateEvent(LivingEvent.LivingUpdateEvent event) {
+//        System.out.println(Arrays.toString(CybersusResearchRegistry.aspectContainers.parents));
         if (!(event.entityLiving instanceof EntityPlayer)) return;
         EntityPlayer player = (EntityPlayer) event.entity;
         if (player == null) return;
