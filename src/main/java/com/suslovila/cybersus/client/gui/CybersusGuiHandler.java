@@ -1,7 +1,9 @@
 package com.suslovila.cybersus.client.gui;
 
+import baubles.client.gui.GuiPlayerExpanded;
 import com.suslovila.cybersus.common.block.container.ContainerImplantHolder;
 import com.suslovila.cybersus.common.block.container.ContainerRuneInstaller;
+import com.suslovila.cybersus.common.block.container.envyEye.ContainerBaublesEnvy;
 import com.suslovila.cybersus.common.block.runeInstaller.TileRuneInstaller;
 import com.suslovila.cybersus.common.item.ItemPortableMultiAspectContainer;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -25,6 +27,9 @@ public class CybersusGuiHandler implements IGuiHandler {
                 if (tile instanceof TileRuneInstaller) {
                     return new ContainerRuneInstaller((TileRuneInstaller) tile, player);
                 } else return null;
+            }
+            case BAUBLES_ENVY: {
+                return new ContainerBaublesEnvy(player.inventory, !world.isRemote, player);
             }
             default:
                 return null;
@@ -55,6 +60,11 @@ public class CybersusGuiHandler implements IGuiHandler {
                     return new GuiRuneInstaller((TileRuneInstaller) tile, player);
                 } else return null;
             }
+
+            case BAUBLES_ENVY: {
+                return new GuiPlayerExpanded(player);
+            }
+
         }
     }
 }

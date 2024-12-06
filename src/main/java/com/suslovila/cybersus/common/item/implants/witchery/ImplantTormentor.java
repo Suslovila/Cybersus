@@ -76,7 +76,7 @@ public class ImplantTormentor extends ItemCybersusImplant {
 
             @Override
             public double getLoseDistance(EntityPlayer player, int index, ItemStack implant) {
-                return 30;
+                return 20;
             }
 
             @Override
@@ -107,7 +107,7 @@ public class ImplantTormentor extends ItemCybersusImplant {
 
             @Override
             public int getCooldownTotal(EntityPlayer player, int index, ItemStack implant) {
-                return 120;
+                return 1 * 60 * 20;
             }
 
         });

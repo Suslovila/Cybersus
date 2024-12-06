@@ -53,7 +53,7 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
 
             @Override
             public int getCooldownTotal(EntityPlayer player, int index, ItemStack implant) {
-                return 20;
+                return 20 * 5;
             }
 
 

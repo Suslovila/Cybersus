@@ -1,10 +1,11 @@
-package com.suslovila.cybersus.common.processes;
+package com.suslovila.cybersus.common.processes.illusion;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.process.ClientProcess;
 import com.suslovila.cybersus.api.process.CommonProcess;
 import com.suslovila.cybersus.api.process.ISerializableProcess;
 import com.suslovila.cybersus.api.process.WorldProcess;
+import com.suslovila.cybersus.client.RenderPlayerCustom;
 import com.suslovila.cybersus.client.particles.FXGravity;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
 import com.suslovila.cybersus.utils.SusUtils;
@@ -41,6 +42,11 @@ public class ProcessIllusion extends WorldProcess implements ISerializableProces
     int victimId;
     int hackerId;
 
+    public static RenderPlayerCustom renderPlayerCustom = new RenderPlayerCustom();
+
+    static {
+        renderPlayerCustom.setRenderManager(RenderManager.instance);
+    }
     public ProcessIllusion(EntityPlayer hacker, EntityPlayer victim, int duration) {
         this.duration = duration;
         this.hackerId = hacker.getEntityId();
@@ -103,10 +109,14 @@ public class ProcessIllusion extends WorldProcess implements ISerializableProces
                 glRotated(perCheckAngleDelta * (i + 1), 0.0, 1.0, 0.0);
                 // idk why, but for correct work we need to subtract 1.3 :/
                 glTranslated(0.0, 0.0, XZProjection.length());
-                glRotated(90.0, 0.0, 1.0, 0.0);
+//                glRotated(90.0, 0.0, 1.0, 0.0);
                 SusGraphicHelper.drawGuideArrows();
 //                hacker.riddenByEntity = new EntityItem();
-                drawEntityOrthogonalToZAxis(hacker);
+                drawEntityOrthogonalToZAxis(hacker, false);
+
+                glRotated(-angle, 0.0, 1.0, 0.0);
+                SusVec3 hackerPos = SusGraphicHelper.getRenderPos(hacker, event.partialTicks);
+                renderPlayerCustom.renderLivingLabel(hacker, hacker.getFormattedCommandSenderName().getFormattedText(), hackerPos.x, hackerPos.y, hackerPos.z, 64);
                 // glDisable(GL_CULL_FACE);
                 // UtilsFX.bindTexture(SusGraphicHelper.whiteBlank);
                 // SusGraphicHelper.cubeModel.renderAll();
@@ -124,13 +134,16 @@ public class ProcessIllusion extends WorldProcess implements ISerializableProces
     }
 
     public void drawEntityOrthogonalToZAxis(
-            EntityLivingBase entity
+            EntityLivingBase entity,
+            boolean renderLabel
     ) {
 //        glPushAttrib(GL_COLOR_MATERIAL);
 //        glEnable(GL_COLOR_MATERIAL);
         glPushMatrix();
         RenderHelper.enableStandardItemLighting();
-        RenderManager.instance.renderEntityWithPosYaw(entity, 0.0, 0.0, 0.0, 0.0f, 1.0f);
+        renderPlayerCustom.shouldRenderName = renderLabel;
+        WrappedRenderManager.doRenderEntity(renderPlayerCustom, entity, 0.0, 0.0, 0.0, 0.0f, 1.0f, false);
+//        RenderManager.instance.renderEntityWithPosYaw(entity, 0.0, 0.0, 0.0, 0.0f, 1.0f);
         glPopMatrix();
 //        glPopAttrib();
     }

@@ -4,14 +4,12 @@ import com.suslovila.cybersus.api.fuel.FuelComposite;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
-import com.suslovila.cybersus.api.implants.ability.AbilityInstant;
-import com.suslovila.cybersus.common.processes.ProcessIllusion;
+import com.suslovila.cybersus.common.processes.illusion.ProcessIllusion;
 import com.suslovila.cybersus.extendedData.CustomWorldData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
 
 import java.util.ArrayList;
 import java.util.List;

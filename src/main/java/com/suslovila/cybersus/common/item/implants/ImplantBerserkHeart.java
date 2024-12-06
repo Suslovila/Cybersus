@@ -62,7 +62,6 @@ public class ImplantBerserkHeart extends ItemCybersusImplant {
                                 .add(Aspect.ARMOR, currentRequiredAspectAmount)
                                 .add(Aspect.HEAL, currentRequiredAspectAmount)
                                 .add(Aspect.BEAST, currentRequiredAspectAmount)
-                                .add(CybersusAspect.SANGUINO, currentRequiredAspectAmount)
 
                 ));
                 return fuelComposite;

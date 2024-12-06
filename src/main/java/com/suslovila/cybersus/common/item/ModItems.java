@@ -57,7 +57,7 @@ public class ModItems {
             heartBlank = new ItemHeartBlank();
             gravityIcreaser = new ImplantGravityIcreaser();
             motherboardBlank = new ItemMotherboardBlank();
-            illusionGenerator = new ImplantIllusionGenerator();
+//            illusionGenerator = new ImplantIllusionGenerator();
             if(Cybersus.forbiddenMagicLoaded) {
                 implantSinHeart = new ImplantSinHeart();
             }

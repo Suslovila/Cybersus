@@ -16,6 +16,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 import java.util.Random;
@@ -41,7 +42,10 @@ public class Cybersus {
     public static final CreativeTabs tab = new CreativeTabs(NAME) {
         @Override
         public Item getTabIconItem() {
-            return ModItems.heartBlank;
+            if (Cybersus.thaumcraftLoaded) {
+                return ModItems.heartBlank;
+            }
+            return Items.redstone;
         }
     };
 

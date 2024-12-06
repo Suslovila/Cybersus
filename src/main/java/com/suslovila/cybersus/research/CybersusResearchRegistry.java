@@ -34,7 +34,7 @@ public class CybersusResearchRegistry {
 //    private static final ItemStack essentiaReservoirVoid = ItemStack(ModBlocks.BlockEssentiaReservoirVoid, 1, 0);
 
 
-    public static ResearchItem aspectContainers;
+//    public static ResearchItem aspectContainers;
     private static final String cybersusCategory = Cybersus.MOD_ID;
     private static final String basicInfo = "CYBERSUS_BASIC_INFO";
 
@@ -214,9 +214,9 @@ public class CybersusResearchRegistry {
 
                 ));
             }
-
+        }
             if (ModItems.berserkHeart != null) {
-                AspectList aspects = new AspectList().add(Aspect.MAGIC, 64).add(Aspect.HEAL, 2048).add(Aspect.ARMOR, 2048).add(Aspect.ENERGY, 2048).add(CybersusAspect.SANGUINO, 512);
+                AspectList aspects = new AspectList().add(Aspect.MAGIC, 64).add(Aspect.HEAL, 2048).add(Aspect.ARMOR, 2048).add(Aspect.ENERGY, 2048);
                 if (Cybersus.forbiddenMagicLoaded) {
                     aspects.add(DarkAspects.WRATH, 1024);
                 } else {
@@ -240,7 +240,6 @@ public class CybersusResearchRegistry {
                 ));
             }
 
-        }
     }
 
 
@@ -296,7 +295,8 @@ public class CybersusResearchRegistry {
                 .registerResearchItem();
 
 
-        aspectContainers = new CybersusResearchItem(
+//        aspectContainers =
+                new CybersusResearchItem(
                 aspectHoldersKey,
                 cybersusCategory,
                 new AspectList().add(CybersusAspect.HUMILITAS, 16).add(Aspect.VOID, 16).add(Aspect.MAGIC, 16).add(Aspect.WATER, 32),
@@ -388,9 +388,9 @@ public class CybersusResearchRegistry {
         new CybersusResearchItem(
                 berserkHeartKey,
                 cybersusCategory,
-                new AspectList().add(Aspect.MAGIC, 64).add(Aspect.HEAL, 2048).add(Aspect.ARMOR, 2048).add(Aspect.ENERGY, 2048).add(CybersusAspect.SANGUINO, 512),
-                4,
-                2,
+                new AspectList().add(Aspect.MAGIC, 64).add(Aspect.HEAL, 2048).add(Aspect.ARMOR, 2048).add(Aspect.ENERGY, 2048),
+                1,
+                6,
                 2,
                 new ItemStack(ModItems.berserkHeart)
         ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(berserkHeartKey))).setConcealed()
