@@ -1,5 +1,6 @@
 package com.suslovila.cybersus.common.item.implants;
 
+import baubles.api.BaublesApi;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
 import com.suslovila.cybersus.api.fuel.FuelVariation;
 import com.suslovila.cybersus.api.fuel.impl.FuelEmpty;
@@ -19,7 +20,7 @@ public class ImplantEyeOfEnvy extends ItemCybersusImplant {
     public static final ArrayList<Ability> abilities = new ArrayList<>();
 
     public ImplantEyeOfEnvy() {
-        super(ImplantType.BRAIN);
+        super(ImplantType.OCULAR_SYSTEM);
 
     }
 
@@ -69,8 +70,8 @@ public class ImplantEyeOfEnvy extends ItemCybersusImplant {
 
             @Override
             public void hackEntity(EntityPlayer hacker, Entity victim, int slotIndex, ItemStack implant) {
-//                hacker.worldObj.createExplosion(hacker, victim.posX, victim.posY, victim.posZ, 4.0f, true);
-                if(victim instanceof EntityPlayer) {
+                if (victim instanceof EntityPlayer) {
+                    (hacker).displayGUIChest((BaublesApi.getBaubles((EntityPlayer)victim)));
 
                 }
             }

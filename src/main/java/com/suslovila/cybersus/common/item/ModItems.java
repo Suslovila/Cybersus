@@ -32,6 +32,7 @@ public class ModItems {
     public static ItemPortableMultiAspectContainer portableMultiAspectContainer;
     public static ItemPortableSingleAspectContainer portablesingleAspectContainer;
     public static ImplantBerserkHeart berserkHeart;
+    public static ImplantEyeOfEnvy eyeOfEnvy;
 
 
 
@@ -58,6 +59,7 @@ public class ModItems {
             gravityIcreaser = new ImplantGravityIcreaser();
             motherboardBlank = new ItemMotherboardBlank();
 //            illusionGenerator = new ImplantIllusionGenerator();
+            eyeOfEnvy = new ImplantEyeOfEnvy();
             if(Cybersus.forbiddenMagicLoaded) {
                 implantSinHeart = new ImplantSinHeart();
             }

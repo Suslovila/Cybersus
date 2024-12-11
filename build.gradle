@@ -19,7 +19,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.4"
+version = "1.4.1"
 group= "com.suslovila.cybersus" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "cybersus"
 
@@ -127,3 +127,13 @@ tasks.register('sourceJar', Jar) {
 	archiveClassifier.set('sources')
 }
 build.finalizedBy deobfJar, sourceJar
+
+
+dependencies {
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+	testImplementation 'org.mockito:mockito-core:5.5.0'
+}
+
+test {
+	useJUnitPlatform()
+}
