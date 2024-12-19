@@ -4,6 +4,7 @@ import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.impl.fuel.essentia.IEssentiaHolderItem;
 import com.suslovila.cybersus.api.implants.upgrades.rune.RuneUsingItem;
 import com.suslovila.cybersus.client.gui.CybersusGui;
+import com.suslovila.cybersus.research.CybersusAspect;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -36,11 +37,12 @@ public class ItemCreativeAspectContainer extends Item implements RuneUsingItem, 
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean wtfIsThisVariable) {
+        list.add("Creative mode only");
     }
 
     @Override
     public AspectList getStoredAspects(ItemStack stack) {
-        return new AspectList();
+        return CybersusAspect.getAspectListOfAllMax().copy();
     }
 
     @Override
@@ -54,22 +56,16 @@ public class ItemCreativeAspectContainer extends Item implements RuneUsingItem, 
 
     @Override
     public void setStoredAspects(ItemStack stack, AspectList aspects) {
-        aspects.writeToNBT(KhariumSusNBTHelper.getOrCreateTag(stack));
+
     }
 
     @Override
     public int addAspect(ItemStack stack, Aspect aspect, int amount) {
-        AspectList aspects = getStoredAspects(stack);
-        int emptySpace = getMaxVisCountForEachAspect(stack) - aspects.getAmount(aspect);
-        int toAdd = Math.min(emptySpace, amount);
-        aspects.add(aspect, toAdd);
-        aspects.writeToNBT(KhariumSusNBTHelper.getOrCreateTag(stack));
-
-        return amount - toAdd;
+        return amount;
     }
 
     public int getMaxVisCountForEachAspect(ItemStack stack) {
-        return 128;
+        return Integer.MAX_VALUE;
     }
 
     @Override
@@ -77,81 +73,10 @@ public class ItemCreativeAspectContainer extends Item implements RuneUsingItem, 
         return 5;
     }
 
-    public static Aspect getRequiredAspect(ItemStack stack) {
-        NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(stack);
-        if (!tag.hasKey(REQUIRED_ASPECT_NBT)) return null;
-        return Aspect.getAspect(tag.getString(REQUIRED_ASPECT_NBT));
-    }
-
-    public static int getRequiredAmount(ItemStack stack) {
-        NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(stack);
-        if (!tag.hasKey(REQUIRED_ASPECT_AMOUNT_NBT)) return 0;
-        return tag.getInteger(REQUIRED_ASPECT_AMOUNT_NBT);
-    }
-
     public int getMaxAspectTypesAmount(ItemStack stack) {
-        return 8;
+        return Aspect.aspects.size();
 
     }
-
-    @SubscribeEvent
-    public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
-            ItemStack stack = event.entityPlayer.getHeldItem();
-            if (stack != null && stack.getItem() instanceof ItemCreativeAspectContainer) {
-                event.entityPlayer.openGui(
-                        Cybersus.MOD_ID,
-                        CybersusGui.ITEM_ASPECT_HOLDER.ordinal(),
-                        event.world,
-                        (int) event.entityPlayer.posX,
-                        (int) event.entityPlayer.posY,
-                        (int) event.entityPlayer.posZ
-                );
-            }
-            return;
-        }
-        if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
-            ItemStack stack = event.entityPlayer.getHeldItem();
-            if (stack != null) {
-                TileEntity tile = event.world.getTileEntity(event.x, event.y, event.z);
-                if (tile instanceof IAspectContainer && stack.getItem() instanceof ItemCreativeAspectContainer) {
-                    ItemCreativeAspectContainer itemType = (ItemCreativeAspectContainer) stack.getItem();
-                    IAspectContainer iAspectContainer = (IAspectContainer) tile;
-                    Aspect requiredAspect = itemType.getRequiredAspect(stack);
-                    if (requiredAspect != null) {
-                        int requiredAmount = itemType.getRequiredAmount(stack);
-                        AspectList stored = itemType.getStoredAspects(stack);
-                        if (!event.entityPlayer.isSneaking()) {
-                            boolean hasTileEnough = iAspectContainer.doesContainerContainAmount(requiredAspect, requiredAmount);
-                            int maxAspectAmount = itemType.getMaxAspectTypesAmount(stack);
-                            boolean haveAlreadyAspect = stored.aspects.containsKey(requiredAspect);
-                            boolean hasSpaceForNewAspect = true;
-                            if (!haveAlreadyAspect) {
-                                long currentAspectAmount = stored.aspects.entrySet().stream().filter(aspect -> aspect.getValue() != 0).count();
-                                hasSpaceForNewAspect = currentAspectAmount < maxAspectAmount;
-                            }
-                            if (hasTileEnough && (haveAlreadyAspect || hasSpaceForNewAspect)) {
-                                int overlapped = itemType.addAspect(stack, requiredAspect, requiredAmount);
-                                iAspectContainer.takeFromContainer(requiredAspect, requiredAmount - overlapped);
-                            }
-                        } else {
-                            boolean hasPortableContainerEnough = stored.getAmount(requiredAspect) >= requiredAmount;
-                            boolean hasSpaceForNewAspect = iAspectContainer.doesContainerAccept(requiredAspect);
-
-                            if (hasPortableContainerEnough && hasSpaceForNewAspect) {
-                                int overlapped = iAspectContainer.addToContainer(requiredAspect, requiredAmount);
-                                AspectList result = itemType.getStoredAspects(stack).remove(requiredAspect, requiredAmount - overlapped);
-                                itemType.setStoredAspects(stack, result);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public static final String REQUIRED_ASPECT_NBT = Cybersus.prefixAppender.doAndGet("required_aspects");
-    public static final String REQUIRED_ASPECT_AMOUNT_NBT = Cybersus.prefixAppender.doAndGet("required_amount");
 
 
 }

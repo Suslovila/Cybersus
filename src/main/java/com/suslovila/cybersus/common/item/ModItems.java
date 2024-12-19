@@ -31,6 +31,8 @@ public class ModItems {
 
     public static ItemPortableMultiAspectContainer portableMultiAspectContainer;
     public static ItemPortableSingleAspectContainer portablesingleAspectContainer;
+    public static ItemCreativeAspectContainer portableCreativeAspectContainer;
+
     public static ImplantBerserkHeart berserkHeart;
     public static ImplantEyeOfEnvy eyeOfEnvy;
 
@@ -47,9 +49,11 @@ public class ModItems {
         if(Cybersus.thaumcraftLoaded) {
             portableMultiAspectContainer = new ItemPortableMultiAspectContainer();
             portablesingleAspectContainer = new ItemPortableSingleAspectContainer();
+            portableCreativeAspectContainer = new ItemCreativeAspectContainer();
 
             GameRegistry.registerItem(portableMultiAspectContainer, ItemPortableMultiAspectContainer.name);
             GameRegistry.registerItem(portablesingleAspectContainer, ItemPortableSingleAspectContainer.name);
+            GameRegistry.registerItem(portableCreativeAspectContainer, ItemCreativeAspectContainer.name);
 
             berserkHeart = new ImplantBerserkHeart();
             phoenixHeart = new ImplantPhoenixHeart();
@@ -58,7 +62,7 @@ public class ModItems {
             heartBlank = new ItemHeartBlank();
             gravityIcreaser = new ImplantGravityIcreaser();
             motherboardBlank = new ItemMotherboardBlank();
-//            illusionGenerator = new ImplantIllusionGenerator();
+            illusionGenerator = new ImplantIllusionGenerator();
             eyeOfEnvy = new ImplantEyeOfEnvy();
             if(Cybersus.forbiddenMagicLoaded) {
                 implantSinHeart = new ImplantSinHeart();

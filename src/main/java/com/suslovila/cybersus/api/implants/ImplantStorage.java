@@ -25,7 +25,7 @@ public class ImplantStorage implements IInventory {
     public WeakReference<EntityPlayer> player;
     public boolean blockEvents = false;
 
-    private final ImplantTypeHolder[] implantsByType = new ImplantTypeHolder[ImplantType.values().length];
+    public final ImplantTypeHolder[] implantsByType = new ImplantTypeHolder[ImplantType.values().length];
 
 
     public ImplantStorage() {
@@ -49,7 +49,24 @@ public class ImplantStorage implements IInventory {
             }
         });
     }
-
+    public void forEachImplant(BiConsumer<Integer, ItemStack> lambda, ImplantType type) {
+        ImplantTypeHolder implantTypeHolder = implantsByType[type.ordinal()];
+            for (int indexInType = 0; indexInType < implantTypeHolder.implants.length; indexInType++) {
+                ItemStack implant = implantTypeHolder.implants[indexInType];
+                if (implant != null) {
+                    lambda.accept(ImplantType.getFirstSlotIndexOf(implantTypeHolder.implantType) + indexInType, implant);
+                }
+            }
+    }
+    public void forEachImplant(BiConsumer<Integer, ItemStack> lambda, ItemImplant implantClass) {
+        ImplantTypeHolder holder = implantsByType[implantClass.implantType.ordinal()];
+        for(int indexInType = 0; indexInType < holder.implants.length; indexInType++) {
+            ItemStack implant = holder.implants[indexInType];
+            if (implant != null && implant.getItem() == implantClass) {
+                lambda.accept(ImplantType.getFirstSlotIndexOf(implantClass.implantType) + indexInType, implant);
+            }
+        }
+    }
     public <T> void forEachImplant(TriConsumer<Integer, ItemStack, T> lambda, T element) {
         Arrays.stream(implantsByType).forEach(implantTypeHolder -> {
             for (int indexInType = 0; indexInType < implantTypeHolder.implants.length; indexInType++) {
@@ -60,7 +77,15 @@ public class ImplantStorage implements IInventory {
             }
         });
     }
-
+    public <T> void forEachImplant(TriConsumer<Integer, ItemStack, T> lambda, T element, ItemImplant implantClass) {
+        ImplantTypeHolder holder = implantsByType[implantClass.implantType.ordinal()];
+        for(int indexInType = 0; indexInType < holder.implants.length; indexInType++) {
+            ItemStack implant = holder.implants[indexInType];
+            if (implant != null && implant.getItem() == implantClass) {
+                lambda.accept(ImplantType.getFirstSlotIndexOf(implantClass.implantType) + indexInType, implant, element);
+            }
+        }
+    }
     public static class ImplantTypeHolder {
         public static final String TYPE_INDEX_NBT = "typeIndex";
         public static final String IMPLANTS_NBT = "implants";

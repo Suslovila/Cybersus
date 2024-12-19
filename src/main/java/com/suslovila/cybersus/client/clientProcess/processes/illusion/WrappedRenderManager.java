@@ -1,14 +1,11 @@
-package com.suslovila.cybersus.common.processes.illusion;
+package com.suslovila.cybersus.client.clientProcess.processes.illusion;
 
-import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ReportedException;
-import org.lwjgl.opengl.GL11;
 
 public class WrappedRenderManager {
     public static boolean doRenderEntity(Render render, Entity p_147939_1_, double p_147939_2_, double p_147939_4_, double p_147939_6_, float p_147939_8_, float p_147939_9_, boolean p_147939_10_)

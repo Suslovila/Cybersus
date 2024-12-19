@@ -26,6 +26,17 @@ public class CybersusAspect {
     public static Aspect GRAVITAS;
 
 
+    private static AspectList aspectListOfAllMax = null;
+    public static AspectList getAspectListOfAllMax() {
+        if(aspectListOfAllMax == null) {
+            aspectListOfAllMax = new AspectList();
+            for(String key : Aspect.aspects.keySet()) {
+                Aspect aspect = Aspect.aspects.get(key);
+                aspectListOfAllMax.add(aspect, Integer.MAX_VALUE);
+            }
+        }
+        return aspectListOfAllMax;
+    }
     public static void initAspects() {
         HUMILITAS = new Aspect("Humilitas", 16727457, new Aspect[]{Aspect.TRAP, Aspect.VOID}, new ResourceLocation(Cybersus.MOD_ID, "textures/aspect/humilitas.png"), 1) {
 
