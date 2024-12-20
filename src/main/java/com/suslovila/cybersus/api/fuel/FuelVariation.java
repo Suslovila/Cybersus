@@ -1,7 +1,7 @@
 package com.suslovila.cybersus.api.fuel;
 
 import com.suslovila.cybersus.api.fuel.impl.FuelEmpty;
-import com.suslovila.cybersus.utils.CollectionUtils;
+import com.suslovila.cybersus.utils.SusCollectionUtils;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class FuelVariation {
     public FuelVariation() {
     }
     public boolean tryTakeFuelFromPlayer(EntityPlayer player) {
-        Optional<FuelComposite> firstWhichPlayerHas = CollectionUtils.first(fuelComposites, (fuelComposite -> fuelComposite.hasPlayerEnough(player)));
+        Optional<FuelComposite> firstWhichPlayerHas = SusCollectionUtils.first(fuelComposites, (fuelComposite -> fuelComposite.hasPlayerEnough(player)));
         if(firstWhichPlayerHas.isPresent()) {
             FuelComposite fuelComposite = firstWhichPlayerHas.get();
             fuelComposite.forceTakeFrom(player);
@@ -29,7 +29,7 @@ public class FuelVariation {
     }
 
     public boolean hasPlayerEnough(EntityPlayer player) {
-        Optional<FuelComposite> firstWhichPlayerHas = CollectionUtils.first(fuelComposites, (fuelComposite -> fuelComposite.hasPlayerEnough(player)));
+        Optional<FuelComposite> firstWhichPlayerHas = SusCollectionUtils.first(fuelComposites, (fuelComposite -> fuelComposite.hasPlayerEnough(player)));
         return firstWhichPlayerHas.isPresent();
     }
 

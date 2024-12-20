@@ -1,15 +1,11 @@
 package com.suslovila.cybersus.common.item.implants;
 
-import baubles.api.BaublesApi;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
-import com.suslovila.cybersus.api.fuel.FuelVariation;
-import com.suslovila.cybersus.api.fuel.impl.FuelEmpty;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
 import com.suslovila.cybersus.client.gui.CybersusGui;
-import com.suslovila.cybersus.utils.CollectionUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
