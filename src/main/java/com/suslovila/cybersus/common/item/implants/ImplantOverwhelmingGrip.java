@@ -1,31 +1,26 @@
 package com.suslovila.cybersus.common.item.implants;
 
-import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
 import com.suslovila.cybersus.api.fuel.FuelVariation;
 import com.suslovila.cybersus.api.fuel.impl.FuelEmpty;
-import com.suslovila.cybersus.api.fuel.impl.fuel.essentia.FuelEssentia;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
 import com.suslovila.cybersus.utils.SusCollectionUtils;
-import fox.spiteful.forbidden.DarkAspects;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImplantExploder extends ItemCybersusImplant {
-    public static final String name = "exploser";
+public class ImplantOverwhelmingGrip extends ItemCybersusImplant {
+    public static final String name = "overwhelming_grip";
     public static final ArrayList<Ability> abilities = new ArrayList<>();
 
-    public ImplantExploder() {
+    public ImplantOverwhelmingGrip() {
         super(ImplantType.BRAIN);
 
     }
@@ -36,7 +31,7 @@ public class ImplantExploder extends ItemCybersusImplant {
     }
 
     static {
-        abilities.add(new AbilityHack("explosion") {
+        abilities.add(new AbilityHack("suppress") {
             @Override
             public int getRequiredHackTime() {
                 return 20 * 5;
@@ -44,31 +39,29 @@ public class ImplantExploder extends ItemCybersusImplant {
 
             @Override
             public double getLockDistance(EntityPlayer player, int index, ItemStack implant) {
-                return 30;
+                return 25;
             }
 
             @Override
             public double getLoseDistance(EntityPlayer player, int index, ItemStack implant) {
-                return 60;
+                return 40;
             }
 
             @Override
             public int getTargetTimeLose(EntityPlayer player, int index, ItemStack implant) {
-                return 20 * 3;
+                return 20 * 2;
             }
 
             @Override
             public FuelComposite getFuelConsumeOnActivation(EntityPlayer player, int index, ItemStack implant) {
-                FuelComposite composite = FuelComposite.allRequired();
-                FuelVariation fuelVariation = new FuelVariation();
-                if (Cybersus.forbiddenMagicLoaded) {
-                    fuelVariation.addSimpleVariant(new FuelEssentia(new AspectList().add(DarkAspects.WRATH, 256)));
-                }
-                composite.addRequiredFuel(new FuelEssentia(new AspectList().add(Aspect.WEAPON, 256).add(Aspect.FIRE, 256)));
-                composite.fuelVariations.add(fuelVariation);
+                FuelVariation fuelKit = new FuelVariation(new ArrayList<>());
+//                if(Cybersus.forbiddenMagicLoaded) {
+//                    fuelKit.fuelComposites.add(new FuelComposite(CollectionUtils.arrayListOf(new FuelEssentia(new AspectList().add(DarkAspects.WRATH, 1)))));
+//                }
+//                fuelKit.fuelComposites.add(new FuelComposite(CollectionUtils.arrayListOf(new FuelEssentia(new AspectList().add(Aspect.ENTROPY, 1)))));
 
-
-                return composite;
+                fuelKit.fuelComposites.add(new FuelComposite(SusCollectionUtils.arrayListOf(FuelEmpty.INSTANCE)));
+                return FuelComposite.EMPTY;
             }
 
             @Override

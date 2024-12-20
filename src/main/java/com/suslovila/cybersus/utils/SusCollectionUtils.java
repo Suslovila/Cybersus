@@ -1,10 +1,9 @@
 package com.suslovila.cybersus.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Predicate;
-public class CollectionUtils {
+public class SusCollectionUtils {
         public static <T> Optional<T> first(Iterable<T> iterable, Predicate<T> predicate) {
             for (T element : iterable) {
                 if (predicate.test(element)) {

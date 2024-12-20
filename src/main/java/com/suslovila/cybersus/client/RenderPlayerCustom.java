@@ -1,6 +1,7 @@
 package com.suslovila.cybersus.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -14,9 +15,14 @@ import org.lwjgl.opengl.GL11;
 public class RenderPlayerCustom extends RenderPlayer {
     public boolean shouldRenderName = false;
     @Override
-    protected boolean canRenderName(EntityLivingBase targetEntity)
+    public boolean canRenderName(EntityLivingBase targetEntity)
     {
         return Minecraft.isGuiEnabled() && targetEntity != this.renderManager.livingPlayer && !targetEntity.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer) && targetEntity.riddenByEntity == null && shouldRenderName;
+    }
+
+    public void renderOffsetLivingLabel(EntityLivingBase p_96449_1_, double p_96449_2_, double p_96449_4_, double p_96449_6_, String p_96449_8_, float p_96449_9_, double p_96449_10_)
+    {
+        this.renderOffsetLivingLabel((AbstractClientPlayer)p_96449_1_, p_96449_2_, p_96449_4_, p_96449_6_, p_96449_8_, p_96449_9_, p_96449_10_);
     }
 
     @Override

@@ -7,29 +7,17 @@ import com.suslovila.cybersus.api.fuel.impl.fuel.essentia.FuelEssentia;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityPassive;
-import com.suslovila.cybersus.client.clientProcess.processes.shadowGates.ProcessShadowGates;
-import com.suslovila.cybersus.extendedData.CustomWorldData;
-import com.suslovila.cybersus.research.CybersusAspect;
-import com.suslovila.cybersus.utils.CollectionUtils;
-import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
+import com.suslovila.cybersus.utils.SusCollectionUtils;
 import fox.spiteful.forbidden.DarkAspects;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ImplantBerserkHeart extends ItemCybersusImplant {
@@ -104,7 +92,7 @@ public class ImplantBerserkHeart extends ItemCybersusImplant {
                     if(healthPercentage <= 0.05) {
                         effectsLevel = 4;
                     }
-                    List<Potion> givenPotions = CollectionUtils.arrayListOf(Potion.resistance, Potion.damageBoost, Potion.regeneration);
+                    List<Potion> givenPotions = SusCollectionUtils.arrayListOf(Potion.resistance, Potion.damageBoost, Potion.regeneration);
                     for(Potion potion : givenPotions) {
                         PotionEffect potionEffect = player.getActivePotionEffect(potion);
                         if(potionEffect == null || potionEffect.getAmplifier() < effectsLevel || potionEffect.getDuration() < 2) {

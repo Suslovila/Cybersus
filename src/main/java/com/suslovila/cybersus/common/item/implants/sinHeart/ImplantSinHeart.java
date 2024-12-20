@@ -4,9 +4,8 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
-import com.suslovila.cybersus.api.implants.upgrades.rune.RuneType;
 import com.suslovila.cybersus.common.item.implants.ItemCybersusImplant;
-import com.suslovila.cybersus.utils.CollectionUtils;
+import com.suslovila.cybersus.utils.SusCollectionUtils;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,19 +18,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import org.lwjgl.opengl.GL11;
 import thaumcraft.api.aspects.Aspect;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +38,7 @@ public class ImplantSinHeart extends ItemCybersusImplant {
     public static List<Aspect> sinAspects;
 
     static {
-        sinAspects = CollectionUtils.arrayListOf(DarkAspects.ENVY, DarkAspects.LUST, DarkAspects.PRIDE, DarkAspects.SLOTH, DarkAspects.GLUTTONY, DarkAspects.WRATH, Aspect.GREED);
+        sinAspects = SusCollectionUtils.arrayListOf(DarkAspects.ENVY, DarkAspects.LUST, DarkAspects.PRIDE, DarkAspects.SLOTH, DarkAspects.GLUTTONY, DarkAspects.WRATH, Aspect.GREED);
     }
     public ImplantSinHeart() {
         super(ImplantType.HEART);
