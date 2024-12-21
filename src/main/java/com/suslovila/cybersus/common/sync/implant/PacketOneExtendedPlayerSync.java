@@ -50,6 +50,7 @@ public class PacketOneExtendedPlayerSync
                 if (data != null) {
                     message.implants.player = new WeakReference<>((EntityPlayer) entity);
                     data.implantStorage = (message.implants);
+                    data.implantStorage.markDirty();
                 }
             }
             return null;

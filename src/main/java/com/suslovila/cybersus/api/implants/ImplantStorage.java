@@ -1,9 +1,12 @@
 package com.suslovila.cybersus.api.implants;
 
+import com.suslovila.cybersus.client.gui.GuiImplants;
 import com.suslovila.cybersus.common.item.ItemImplant;
+import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
 import com.suslovila.cybersus.utils.TriConsumer;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -14,7 +17,11 @@ import net.minecraftforge.common.util.Constants;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiConsumer;
+
+import static com.suslovila.cybersus.client.KeyHandler.getIndicesCycledFrom;
+import static com.suslovila.cybersus.client.KeyHandler.setNextImplant;
 
 public class ImplantStorage implements IInventory {
     private final int implantAmount = ImplantType.getTotalSlotAmount();
@@ -288,6 +295,14 @@ public class ImplantStorage implements IInventory {
 
     @Override
     public void markDirty() {
+        EntityPlayer playerIn = player.get();
+        if(playerIn != null && playerIn.worldObj.isRemote) {
+            CybersusPlayerExtendedData data = CybersusPlayerExtendedData.get(playerIn);
+            if (data != null && data.implantStorage.getStackInSlot(GuiImplants.currentImplantSlotId) == null) {
+                List<Integer> indexes = getIndicesCycledFrom(GuiImplants.currentImplantSlotId, ImplantType.getTotalSlotAmount());
+                setNextImplant(data, indexes);
+            }
+        }
     }
 
     public static ImplantStorage readFrom(ByteBuf buf) {

@@ -19,7 +19,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.4.1"
+version = "1.5"
 group= "com.suslovila.cybersus" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "cybersus"
 

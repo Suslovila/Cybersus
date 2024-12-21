@@ -107,7 +107,7 @@ public class KeyHandler {
         }
     }
 
-    private void setNextImplant(CybersusPlayerExtendedData data, List<Integer> indexes) {
+    public static void setNextImplant(CybersusPlayerExtendedData data, List<Integer> indexes) {
         for (int index : indexes) {
             ItemStack implant = data.implantStorage.getStackInSlot(index);
             if (implant != null) {

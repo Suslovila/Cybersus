@@ -138,7 +138,7 @@ public class ProcessIllusion extends WorldProcess implements ISerializableProces
                 glRotated(perCheckAngleDelta * (i + 1), 0.0, 1.0, 0.0);
                 // idk why, but for correct work we need to subtract 1.3 :/
                 glTranslated(0.0, 0.0, XZProjection.length());
-                System.out.println(hacker.rotationYaw);
+//                System.out.println(hacker.rotationYaw);
                 glRotated(-angle, 0.0, 1.0, 0.0);
 //                glRotated(hacker.rotationYaw + (hacker.rotationYaw - hacker.prevRotationYaw) * event.partialTicks, 0.0, 1.0, 0.0);
 //                glRotated(90.0 * -xSign, 0.0, 1.0, 0.0);

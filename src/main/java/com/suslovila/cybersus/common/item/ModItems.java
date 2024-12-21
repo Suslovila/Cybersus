@@ -12,7 +12,7 @@ public class ModItems {
 
 
     public static ImplantPhoenixHeart phoenixHeart;
-    public static ImplantExploder exploser;
+    public static ImplantExploder exploder;
 
     public static ImplantSleepModule sleepModule;
     public static ImplantTormentor tormentor;
@@ -36,6 +36,7 @@ public class ModItems {
     public static ImplantBerserkHeart berserkHeart;
     public static ImplantEyeOfEnvy eyeOfEnvy;
 
+    public static ItemEyeBlank eyeBlank;
 
 
     public static void register() {
@@ -58,12 +59,13 @@ public class ModItems {
             berserkHeart = new ImplantBerserkHeart();
             phoenixHeart = new ImplantPhoenixHeart();
             shadowSkin = new ImplantShadowSkin();
-            exploser = new ImplantExploder();
+            exploder = new ImplantExploder();
             heartBlank = new ItemHeartBlank();
             gravityIcreaser = new ImplantGravityIcreaser();
             motherboardBlank = new ItemMotherboardBlank();
             illusionGenerator = new ImplantIllusionGenerator();
-            eyeOfEnvy = new ImplantEyeOfEnvy();
+//            eyeOfEnvy = new ImplantEyeOfEnvy();
+            eyeBlank = new ItemEyeBlank();
             if(Cybersus.forbiddenMagicLoaded) {
                 implantSinHeart = new ImplantSinHeart();
             }

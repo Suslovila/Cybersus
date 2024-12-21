@@ -4,6 +4,7 @@ import com.mojang.realmsclient.util.Pair;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
+import com.suslovila.cybersus.client.ResourceLocationPreLoad;
 import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
@@ -45,15 +46,15 @@ public class GuiImplants {
     public static int currentImplantSlotId = 0;
     public static boolean shouldRenderGui = true;
 
-    private static final ResourceLocation slotActive = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/implants/abilitySlotActive.png");
-    private static final ResourceLocation slotDeactivated = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/implants/abilitySlotDeactivated.png");
-    private static final ResourceLocation slotInCooldown = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/implants/abilitySlotCooldown.png");
+    private static final ResourceLocationPreLoad slotActive = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/abilitySlotActive.png");
+    private static final ResourceLocationPreLoad slotDeactivated = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/abilitySlotDeactivated.png");
+    private static final ResourceLocationPreLoad slotInCooldown = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/abilitySlotCooldown.png");
 
-    private static final ResourceLocation spinningCircle = new ResourceLocation(Cybersus.MOD_ID, "textures/misc/radial4.png");
+    private static final ResourceLocationPreLoad spinningCircle = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/misc/radial4.png");
 
 
-    private static final ResourceLocation hackHotbar = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/implants/hack_hotbar.png");
-    private static final ResourceLocation hackHotbarActivated = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/implants/hack_hotbar_activated.png");
+    private static final ResourceLocationPreLoad hackHotbar = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/hack_hotbar.png");
+    private static final ResourceLocationPreLoad hackHotbarActivated = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/hack_hotbar_activated.png");
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void renderGui(RenderGameOverlayEvent.Post event) {

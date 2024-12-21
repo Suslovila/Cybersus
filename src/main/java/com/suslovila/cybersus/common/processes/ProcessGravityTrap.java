@@ -2,6 +2,7 @@ package com.suslovila.cybersus.common.processes;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.process.CommonProcess;
+import com.suslovila.cybersus.client.ResourceLocationPreLoad;
 import com.suslovila.cybersus.client.particles.FXGravity;
 import com.suslovila.cybersus.research.CybersusAspect;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
@@ -34,8 +35,8 @@ public class ProcessGravityTrap extends CommonProcess {
         super(vec3, duration);
     }
 
-    public static final ResourceLocation textureInner = new ResourceLocation(Cybersus.MOD_ID, "textures/processes/gravity_trap_inner.png");
-    public static final ResourceLocation textureOuter = new ResourceLocation(Cybersus.MOD_ID, "textures/processes/gravity_trap_outer.png");
+    public static final ResourceLocationPreLoad textureInner = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/processes/gravity_trap_inner.png");
+    public static final ResourceLocationPreLoad textureOuter = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/processes/gravity_trap_outer.png");
 
     public ProcessGravityTrap() {
     }
