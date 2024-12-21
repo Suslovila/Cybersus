@@ -7,10 +7,13 @@ import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
 import com.suslovila.cybersus.client.clientProcess.processes.illusion.ProcessIllusion;
 import com.suslovila.cybersus.extendedData.CustomWorldData;
+import com.suslovila.cybersus.utils.SusGraphicHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import org.lwjgl.opengl.GL11;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
@@ -68,6 +71,16 @@ public class ImplantIllusionGenerator extends ItemCybersusImplant {
             public boolean canHackEntity(EntityPlayer hacker, Entity victim, int slotIndex, ItemStack implant) {
                 return victim instanceof EntityPlayer;
             }
+
+            @Override
+            public void renderAbility(RenderGameOverlayEvent.Post event, ItemStack implant, float scale, double radius) {
+                GL11.glPushAttrib(GL11.GL_BLEND);
+                GL11.glEnable(GL11.GL_BLEND);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                super.renderAbility(event, implant, scale, radius);
+                GL11.glPopAttrib();
+            }
+
         });
     }
 

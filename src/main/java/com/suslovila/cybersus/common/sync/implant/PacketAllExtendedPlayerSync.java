@@ -67,6 +67,7 @@ public class PacketAllExtendedPlayerSync
                     if (clientData != null) {
                         data.implantStorage.player = new WeakReference<>((EntityPlayer) entity);
                         clientData.implantStorage = data.implantStorage;
+                        data.implantStorage.markDirty();
                     }
                 }
             }

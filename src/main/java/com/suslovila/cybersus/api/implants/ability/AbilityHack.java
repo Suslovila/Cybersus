@@ -1,6 +1,7 @@
 package com.suslovila.cybersus.api.implants.ability;
 
 import com.suslovila.cybersus.Cybersus;
+import com.suslovila.cybersus.client.ResourceLocationPreLoad;
 import com.suslovila.cybersus.common.event.customEvents.OnPlayerHackEntityTick;
 import com.suslovila.cybersus.common.event.customEvents.PlayerTriesToStartHackingEvent;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
@@ -33,19 +34,19 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 
 public abstract class AbilityHack extends Ability {
-    public static final String HACK_TIME_LEFT_NBT = Cybersus.prefixAppender.doAndGet("hack");
-    public static final String HACK_VICTIM_UUID_NBT = Cybersus.prefixAppender.doAndGet("victim_uuid");
-    public static final String HACK_VICTIM_ID_NBT = Cybersus.prefixAppender.doAndGet("victim_id");
+    public final String HACK_TIME_LEFT_NBT = Cybersus.prefixAppender.doAndGet(":" + name + ":hack");
+    public final String HACK_VICTIM_UUID_NBT = Cybersus.prefixAppender.doAndGet(":" + name +":victim_uuid");
+    public final String HACK_VICTIM_ID_NBT = Cybersus.prefixAppender.doAndGet(":" + name +":victim_id");
 
-    public static final String TARGET_LOST_TIME_LEFT = Cybersus.prefixAppender.doAndGet("time_until_target_lost");
+    public final String TARGET_LOST_TIME_LEFT = Cybersus.prefixAppender.doAndGet(":" + name +":time_until_target_lost");
 
     public static final ArrayList<ResourceLocation> textureOuterCircles = new ArrayList<>();
-    public static final ResourceLocation textureInnerCircle = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/implants/ffhack_circle_inner.png");
+    public static final ResourceLocationPreLoad textureInnerCircle = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/ffhack_circle_inner.png");
 
     static {
         for (int i = 0; i < 3; i++) {
             int realIndex = i + 1;
-            textureOuterCircles.add(new ResourceLocation(Cybersus.MOD_ID, "textures/gui/implants/fhack_circle_outer_" + realIndex + ".png"));
+            textureOuterCircles.add(new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/fhack_circle_outer_" + realIndex + ".png"));
         }
     }
 

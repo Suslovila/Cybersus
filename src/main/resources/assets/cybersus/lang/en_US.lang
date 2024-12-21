@@ -9,9 +9,11 @@ tc.research_category.cybersus=Magical Prosthetics
 ac.tag.GRAVITY_INCREASER=Up and down...
 ac.tag.SHADOW_SKIN=In a black, black city...
 ac.tag.BLANK_HEART=Faster, higher, stronger
-ac.tag.PORTABLE_ASPECT_HOLDERS = And what, was it so cool???
+ac.tag.PORTABLE_ASPECT_HOLDERS= And what, was it so cool???
 ac.tag.BLANK_MOTHERBOARD=Okay Siri, how to clean the boiler from the flux...
+ac.tag.BLANK_EYE=Give me my anti-clothes module, pls
 
+cybersus.key.category=Implant control
 
 ac.tag.PHOENIX_HEART=Risen from the ashes
 
@@ -26,12 +28,17 @@ ac.name.SIN_HEART=Sin Heart
 ac.name.BERSERK_HEART=Berserk Heart
 ac.name.TORMENTOR=Tormentor
 ac.name.SLEEP_MODULE=Sleep Module
+ac.name.BLANK_EYE=Eye Implantation
+ac.name.ILLUSION_GENERATOR=Illusion Generator
+ac.name.MIND_EXPLODER=Mind-exploder
 
 ac.tag.TORMENTOR=Your soul will know torments!
 ac.tag.SIN_HEART=Everyone has their own demons
 ac.tag.PORTABLE_ASPECT_HOLDERS=Could I do this way ???
 ac.tag.BERSERK_HEART=It wasn't me who was locked up with you, but you who were locked up with me
 ac.tag.SLEEP_MODULE=Close your eyes
+ac.tag.MIND_EXPLODER=hello! My name is John, I'm from "Warpentech" company.
+ac.tag.ILLUSION_GENERATOR=So many targets...
 
 ac.tag.CYBERSUS_BASIC_INFO=honey, please, no more implants <_>
 ac.text.CYBERSUS_BASIC_INFO.1= The question of increasing the capabilities of the body has always worried mankind, because by nature people do not have claws, sharp teeth or poison. Solving this problem pushed progress forward in the early periods of human development. To do this, people came up with digging sticks, horseradish staves, firearms and much more. But all these solutions do not correct the main drawback of a person as an organism - weak organs.
@@ -53,30 +60,35 @@ ac.text.SLEEP_MODULE.1=Potion-making is, of course, an interesting thing, but im
 
 ac.text.CYBERSUS_BASIC_INFO.3=Implants are installed through a special gui. Each implant has "abilities" that can be activated via the corresponding buttons. Abilities are mainly divided into Instant (instant action), Passive (after switching on, they start working on the background), and Distorting (used on creatures. Upon activation, the distortion process begins, after which the action takes place. If at the same time you lose sight of the target or it is blocked by blocks, you are given a certain time specified near the distortion window to return the target to the field of view). Any ability doesn't work for free - it needs fuel. It can be anything - liquid essence, blood from a bloody network, witch infusion, and even some kind of energy from your favorite fellow techies like RF. All details will be given in the description of the ability itself
 ac.text.PHOENIX_HEART.1= Legends about a bird reborn in fire have been around since ancient times. You have studied this question and tried to get the ability of this mysterious bird. <BR>When turned on, the implant will save you from death, after which it will go into recharge. For the resurrection, he will take 712 Victus, 128 Ignis and 128 Permutatio. Please note that if you run out of fuel, you will not be resurrected.
-
+ac.text.BLANK_EYE.1=Eye implantation is, maybe, the most complicated part of all implantation. To make human neurons connect with steel can be a real challenge. However, you have done it (yuo still do not understand how)
+ac.text.MIND_EXPLODER.1=Ability to influence on space-time can be used in different cases... But there is one cruel way to abuse it - influence your target's mind. <BR>Focusing your victim will end up with explosion and fatal mental damaged caused to target. To work, it requires 256 Perditio and (256 Ira or (256 Telum and 256 Ignis))
+ac.text.ILLUSION_GENERATOR.1=Speaking of the distortion of space-time and mind, one of the most obvious ideas that comes to mind is to trick the victim's brain, overflowing it with unnecessary information and forcing it to see something that is not really there, or distort its vision of the world. <BR> When used, the illusion generator will begin to distort the target's mind, and when completed, the victim will temporarily see your illusory copies, confusing her and making it difficult to determine your exact location. <BR> Requires 128 Cognitio and 128 Perdition to use
 
 item.shadow_skin.name=The Cover of Shadows
-item.exploser.name =Brain-exploder
-Exploder item.heart_blank.name =Empty heart shape
-item.gravity_increaser.name =Gravity Booster
-item.motherboard_blank.name =empty motherboard
+item.berserk_heart.name=Berserk Heart
+item.exploser.name=Brain-exploder
+item.heart_blank.name=Empty heart shape
+item.gravity_increaser.name=Gravity Booster
+item.motherboard_blank.name=empty motherboard
 item.sleep_diver.name=Dream Module
-item.tormentor.name =Torment Module
-item.multi_aspect_holder.name =Multiple portable aspect container
-essence storage item.single_aspect_holder.name =Single portable aspect container
-Essence Storage item.phoenix_heart.name =Phoenix heart
-item.sin_heart.name =Heart of sin
+item.tormentor.name=Torment Module
+item.multi_aspect_holder.name=Multiple portable aspect container
+item.single_aspect_holder.name=Single portable aspect container
+item.phoenix_heart.name=Phoenix heart
+item.sin_heart.name=Heart of sin
 
-cybersus.not_infused_heart=Heart not infused
 cybersus.not_infused_heart=Heart is not charged
 cybersus.sin_heart_infused.0=Filled with Envy
 cybersus.sin_heart_infused.1=Craves passion
 cybersus.sin_heart_infused.2=Filled with pride
 cybersus.sin_heart_infused.3=Filled with Laziness
 cybersus.sin_heart_infused.4=Overflowing Gluttony
-.sin_heart_infused.5=Burns with Rage
+cybersus.sin_heart_infused.5=Burns with Rage
 cybersus.sin_heart_infused.6=Gushing with Greed
 item.sin_heart.name=Sin Heart
-
+item.creative_aspect_holder.name=Creative Aspect Holder
+item.blank_eye.name=Blank eye
+item.illusion_generator.name=Illusion Generator
+ite
 #<BR>§Flashcard§r<BR>
 #§L Banks§r

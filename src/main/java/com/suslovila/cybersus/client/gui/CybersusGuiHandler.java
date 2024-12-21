@@ -24,8 +24,6 @@ import net.minecraft.world.World;
 
 import java.util.UUID;
 
-import static com.suslovila.cybersus.api.implants.ability.AbilityHack.HACK_VICTIM_ID_NBT;
-import static com.suslovila.cybersus.api.implants.ability.AbilityHack.HACK_VICTIM_UUID_NBT;
 import static com.suslovila.cybersus.common.item.ModItems.eyeOfEnvy;
 
 public class CybersusGuiHandler implements IGuiHandler {
@@ -53,7 +51,7 @@ public class CybersusGuiHandler implements IGuiHandler {
                                 if (wrappedPlayerIn.value == null) {
                                     AbilityHack hack = (AbilityHack) ImplantEyeOfEnvy.abilities.get(0);
                                     NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(implant);
-                                    UUID victimUUID = KhariumSusNBTHelper.getUUIDOrNull(tag, HACK_VICTIM_UUID_NBT);
+                                    UUID victimUUID = KhariumSusNBTHelper.getUUIDOrNull(tag, hack.HACK_VICTIM_UUID_NBT);
                                     if (!hack.isHacking(implant) && victimUUID != null) {
                                         EntityPlayer victimPlayer = player.worldObj.getPlayerEntityByUUID(victimUUID);
                                         if (victimPlayer != null) {
@@ -67,7 +65,7 @@ public class CybersusGuiHandler implements IGuiHandler {
 
                 );
                 if (wrappedPlayer.value != null) {
-                    return new ContainerPlayer(wrappedPlayer.value.inventory, !wrappedPlayer.value.worldObj.isRemote, wrappedPlayer.value);
+                    return new ContainerBaublesEnvy(player, wrappedPlayer.value);
                 }
 
             }
@@ -112,7 +110,7 @@ public class CybersusGuiHandler implements IGuiHandler {
                                 if (wrappedPlayerIn.value == null) {
                                     AbilityHack hack = (AbilityHack) ImplantEyeOfEnvy.abilities.get(0);
                                     NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(implant);
-                                    Entity focusedEntity = player.worldObj.getEntityByID(tag.getInteger(HACK_VICTIM_ID_NBT));
+                                    Entity focusedEntity = player.worldObj.getEntityByID(tag.getInteger(hack.HACK_VICTIM_ID_NBT));
                                     if (!hack.isHacking(implant) && focusedEntity != null) {
                                         if (focusedEntity instanceof EntityPlayer) {
                                             wrappedPlayerIn.value = (EntityPlayer) focusedEntity;
@@ -125,7 +123,7 @@ public class CybersusGuiHandler implements IGuiHandler {
 
                 );
                 if (wrappedPlayer.value != null) {
-                    return new GuiInventory(wrappedPlayer.value);
+                    return new GuiEnvyEye(player, wrappedPlayer.value);
                 }
 
             }

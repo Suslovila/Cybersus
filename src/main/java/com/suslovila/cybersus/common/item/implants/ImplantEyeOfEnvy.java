@@ -30,6 +30,11 @@ public class ImplantEyeOfEnvy extends ItemCybersusImplant {
     static {
         abilities.add(new AbilityHack("look_into_soul") {
             @Override
+            public boolean canHackEntity(EntityPlayer hacker, Entity victim, int slotIndex, ItemStack implant) {
+                return victim instanceof EntityPlayer;
+            }
+
+            @Override
             public int getRequiredHackTime() {
                 return 30;
             }

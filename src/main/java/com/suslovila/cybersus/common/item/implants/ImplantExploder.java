@@ -9,17 +9,21 @@ import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
 import com.suslovila.cybersus.utils.SusCollectionUtils;
+import com.suslovila.cybersus.utils.SusGraphicHelper;
 import fox.spiteful.forbidden.DarkAspects;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.suslovila.cybersus.utils.SusGraphicHelper.bindTexture;
 
 public class ImplantExploder extends ItemCybersusImplant {
     public static final String name = "exploser";
@@ -36,7 +40,7 @@ public class ImplantExploder extends ItemCybersusImplant {
     }
 
     static {
-        abilities.add(new AbilityHack("explosion") {
+        abilities.add(new AbilityHack("mind_explode") {
             @Override
             public int getRequiredHackTime() {
                 return 20 * 5;
@@ -64,9 +68,9 @@ public class ImplantExploder extends ItemCybersusImplant {
                 if (Cybersus.forbiddenMagicLoaded) {
                     fuelVariation.addSimpleVariant(new FuelEssentia(new AspectList().add(DarkAspects.WRATH, 256)));
                 }
-                composite.addRequiredFuel(new FuelEssentia(new AspectList().add(Aspect.WEAPON, 256).add(Aspect.FIRE, 256)));
+                fuelVariation.addSimpleVariant(new FuelEssentia(new AspectList().add(Aspect.WEAPON, 256).add(Aspect.FIRE, 256)));
                 composite.fuelVariations.add(fuelVariation);
-
+                composite.addRequiredFuel(new FuelEssentia(new AspectList().add(Aspect.ENTROPY, 256)));
 
                 return composite;
             }
@@ -84,6 +88,13 @@ public class ImplantExploder extends ItemCybersusImplant {
                     victim.attackEntityFrom(DamageSource.outOfWorld, livingBase.getMaxHealth() / 2);
                 }
             }
+            @Override
+            public void renderAbility(RenderGameOverlayEvent.Post event, ItemStack implant, float scale, double radius) {
+                SusGraphicHelper.bindColor(Aspect.MIND.getColor(), 1.0f, 1.0f);
+                super.renderAbility(event, implant, scale, radius);
+                SusGraphicHelper.setStandartColors();
+            }
+
         });
     }
 
