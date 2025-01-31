@@ -44,7 +44,7 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
     }
 
     static {
-        abilities.add(new AbilityPassive("shadow_travel") {
+        abilities.add(new AbilityPassive("shadow_travel", true, true) {
             @Override
             public FuelComposite getFuelConsumePerCheck(EntityPlayer player, int index, ItemStack implant) {
                 return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(Aspect.DARKNESS, 2)));
@@ -90,7 +90,10 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
                 }
                 ProcessShadowGates processShadowGates = new ProcessShadowGates(player.getEntityId(), 30);
                 CustomWorldData.syncProcess(processShadowGates, player.worldObj.provider.dimensionId);
-                if (!isActive(implant)) player.removePotionEffect(Potion.invisibility.id);
+                if (!isActive(implant)){
+                    player.removePotionEffect(Potion.invisibility.id);
+                    sendToCooldown(player, index, implant);
+                }
 
                 notifyClient(player, index, implant);
             }
@@ -133,7 +136,7 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
 //
                             player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100, 2));
                             player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 100, 4));
-                            player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 0));
+//                            player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 0));
                             player.addPotionEffect(new PotionEffect(Potion.invisibility.id, 100, 0));
 
                         }

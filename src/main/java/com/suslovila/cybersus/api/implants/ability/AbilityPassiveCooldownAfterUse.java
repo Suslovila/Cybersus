@@ -8,23 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
-public abstract class AbilityPassive extends Ability {
+public abstract class AbilityPassiveCooldownAfterUse extends Ability {
     private final String IS_ABILITY_ENABLED_NBT = Cybersus.prefixAppender.doAndGet(this.name + ":isEnabled");
-    boolean sendToCooldownIfDisabled = false;
-    boolean sendToCooldownIfOutOfFuel = true;
 
-
-    public AbilityPassive(String name) {
+    public AbilityPassiveCooldownAfterUse(String name) {
         super(name);
-    }
-
-    public AbilityPassive(String name,
-                          boolean sendToCooldownIfDisabled,
-                          boolean sendToCooldownIfOutOfFuel
-    ) {
-        super(name);
-        this.sendToCooldownIfDisabled = sendToCooldownIfDisabled;
-        this.sendToCooldownIfOutOfFuel = sendToCooldownIfOutOfFuel;
     }
 
     @Override
@@ -44,11 +32,6 @@ public abstract class AbilityPassive extends Ability {
                 return;
             }
         }
-        else {
-            if(sendToCooldownIfDisabled) {
-                sendToCooldown(player, index, implant);
-            }
-        }
         tag.setBoolean(IS_ABILITY_ENABLED_NBT, !isAlreadyActive);
         onAbilityStatusSwitched(player, index, implant);
     }
@@ -58,29 +41,22 @@ public abstract class AbilityPassive extends Ability {
         return KhariumSusNBTHelper.getOrCreateBoolean(KhariumSusNBTHelper.getOrCreateTag(implant), IS_ABILITY_ENABLED_NBT, false);
     }
 
-    public void onAbilityStatusSwitched(EntityPlayer player, int index, ItemStack implant) {
-    }
+    public void onAbilityStatusSwitched(EntityPlayer player, int index, ItemStack implant) {}
 
     @Override
     public void onPlayerUpdateEvent(LivingEvent.LivingUpdateEvent event, EntityPlayer player, int index, ItemStack implant) {
         super.onPlayerUpdateEvent(event, player, index, implant);
-        if (player.worldObj.isRemote || player.ticksExisted % getFuelConsumePeriod(player, index, implant) != 0 || !isActive(implant))
-            return;
+        if (player.worldObj.isRemote || player.ticksExisted % getFuelConsumePeriod(player, index, implant) != 0 || !isActive(implant)) return;
         FuelComposite fuelConsumePerSecond = getFuelConsumePerCheck(player, index, implant);
         if (fuelConsumePerSecond != null && !fuelConsumePerSecond.tryTakeFuelFromPlayer(player)) {
-            if (sendToCooldownIfOutOfFuel) {
-                sendToCooldown(player, index, implant);
-            } else {
-                NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(implant);
-                tag.setBoolean(IS_ABILITY_ENABLED_NBT, false);
-            }
+            sendToCooldown(player, index, implant);
             notifyClient(player, index, implant);
         }
     }
 
     @Override
     public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
-        if (isActive(implant)) {
+        if(isActive(implant)) {
             sendToCooldown(player, index, implant);
         }
     }
@@ -102,7 +78,8 @@ public abstract class AbilityPassive extends Ability {
     public boolean hasFuel(EntityPlayer player, int index, ItemStack implant) {
         if (isActive(implant)) {
             return getFuelConsumePerCheck(player, index, implant).hasPlayerEnough(player);
-        } else {
+        }
+        else {
             return getFuelConsumeOnActivation(player, index, implant).hasPlayerEnough(player);
 
         }

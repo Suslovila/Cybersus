@@ -58,7 +58,8 @@ public class CybersusResearchRegistry {
     public static void integrateCrucibleRecipe() {
         if (Cybersus.forbiddenMagicLoaded) {
             for (int i = 0; i < ImplantSinHeart.sinAspects.size(); i++) {
-                addCrucibleRecipe(ModItems.implantSinHeart, 1, i, sinHeartKey, new ItemStack(ModItems.implantSinHeart, 1, ImplantSinHeart.sinAspects.size()), (new AspectList()).add(DarkAspects.NETHER, 512).add(ImplantSinHeart.sinAspects.get(i), 2048));
+                CrucibleRecipe recipe = ThaumcraftApi.addCrucibleRecipe(sinHeartKey, new ItemStack(ModItems.implantSinHeart, 1, i), new ItemStack(ModItems.implantSinHeart, 1, ImplantSinHeart.sinAspects.size()), (new AspectList()).add(DarkAspects.NETHER, 512).add(ImplantSinHeart.sinAspects.get(i), 2048));
+                crucibleRecipes.put(sinHeartKey + i, recipe);
             }
         }
     }
@@ -79,7 +80,6 @@ public class CybersusResearchRegistry {
                         new ItemStack(ConfigItems.itemResource, 1, 15),
                         new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigItems.itemResource, 1, 16)}
         ));
-
 
         runicMatrixRecipes.put(shadowSkinKey, ThaumcraftApi.addInfusionCraftingRecipe(
                 shadowSkinKey,
@@ -422,6 +422,8 @@ public class CybersusResearchRegistry {
                     .setParents(blankHeartKey).registerResearchItem();
 
         }
+
+
 //        InfusionRecipe[] infusionRecipesForSleepModule = new InfusionRecipe[Cybersus.forbiddenMagicLoaded ? 2 : 1];
 //        infusionRecipesForSleepModule[0] = runicMatrixRecipes.get(sleepModuleKey + "1");
 //        if(Cybersus.forbiddenMagicLoaded) {

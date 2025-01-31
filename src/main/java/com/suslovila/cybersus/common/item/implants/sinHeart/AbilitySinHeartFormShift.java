@@ -21,7 +21,7 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
     Aspect aspect;
 
     public AbilitySinHeartFormShift(Aspect aspect) {
-        super("sin_mode");
+        super("sin_mode", true, true);
         this.aspect = aspect;
     }
 
@@ -46,8 +46,7 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
     @Override
     public void onRenderPlayerSpecialPost(RenderPlayerEvent.Specials.Post event, EntityPlayer player, int index, ItemStack implant, RenderHelper.RenderType type, EventPriority priority) {
 
-
-
+//        SusGraphicHelper.drawGuideArrows();
         if (event.isCanceled()) return;
         if (!isActive(implant)) return;
 
@@ -62,7 +61,9 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
 
         if (type == RenderHelper.RenderType.HEAD) {
             GL11.glPushMatrix();
-            RenderHelper.Helper.translateToHeadLevel(player);
+            if (player.isSneaking()) {
+                GL11.glTranslated(0.0F, -0.05F, 0.0F);
+            }
 //            SusGraphicHelper.drawGuideArrows();
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -81,7 +82,8 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
 
         if (type == RenderHelper.RenderType.BODY) {
             GL11.glPushMatrix();
-            RenderHelper.Helper.translateToHeadLevel(player);
+            SusGraphicHelper.drawGuideArrows();
+//            RenderHelper.Helper.translateToHeadLevel(player);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glEnable(GL11.GL_CULL_FACE);

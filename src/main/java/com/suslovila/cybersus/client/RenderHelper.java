@@ -19,7 +19,7 @@ public class RenderHelper {
 		}
 
 		public static void translateToHeadLevel(EntityPlayer player) {
-			GL11.glTranslated(0, (player != Minecraft.getMinecraft().thePlayer ? 1.75F : 0F) + player.getEyeHeight() - (player.isSneaking() ? 0.0625 : 0), 0);
+			GL11.glTranslated(0, player.getEyeHeight() - (player.isSneaking() ? 0.0625 : 0), 0);
 		}
 
 	}

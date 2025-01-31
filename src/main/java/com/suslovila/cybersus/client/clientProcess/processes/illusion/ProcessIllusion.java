@@ -35,10 +35,11 @@ public class ProcessIllusion extends WorldProcess implements ISerializableProces
     int victimId;
     int hackerId;
 
-    public static RenderPlayerCustom renderPlayerCustom = new RenderPlayerCustom();
+    public static RenderPlayerCustom renderPlayerCustom;
 
     static {
-        renderPlayerCustom.setRenderManager(RenderManager.instance);
+//        if(renderPlayerCustom)
+//        renderPlayerCustom.setRenderManager(RenderManager.instance);
     }
 
     public ProcessIllusion(EntityPlayer hacker, EntityPlayer victim, int duration) {
@@ -278,6 +279,9 @@ public class ProcessIllusion extends WorldProcess implements ISerializableProces
         duration = byteBuf.readInt();
         illusionAmount = byteBuf.readInt();
         timeLeft = byteBuf.readInt();
+
+         renderPlayerCustom = new RenderPlayerCustom();
+        renderPlayerCustom.setRenderManager(RenderManager.instance);
 
     }
 }

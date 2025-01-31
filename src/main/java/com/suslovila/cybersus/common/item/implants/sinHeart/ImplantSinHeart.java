@@ -232,7 +232,7 @@ public class ImplantSinHeart extends ItemCybersusImplant {
                 super.onPlayerUpdateEvent(event, player, index, implant);
                 if (isActive(implant) && player.worldObj.getTotalWorldTime() % 20 == 0) {
                     FoodStats foodStats = player.getFoodStats();
-                    foodStats.setFoodLevel(Math.max(-100, foodStats.getFoodLevel() - 2));
+                    foodStats.setFoodLevel(Math.max(0, foodStats.getFoodLevel() - 2));
                 }
             }
         });
