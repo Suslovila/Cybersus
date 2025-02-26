@@ -56,24 +56,27 @@ public class ImplantStorage implements IInventory {
             }
         });
     }
+
     public void forEachImplant(BiConsumer<Integer, ItemStack> lambda, ImplantType type) {
         ImplantTypeHolder implantTypeHolder = implantsByType[type.ordinal()];
-            for (int indexInType = 0; indexInType < implantTypeHolder.implants.length; indexInType++) {
-                ItemStack implant = implantTypeHolder.implants[indexInType];
-                if (implant != null) {
-                    lambda.accept(ImplantType.getFirstSlotIndexOf(implantTypeHolder.implantType) + indexInType, implant);
-                }
+        for (int indexInType = 0; indexInType < implantTypeHolder.implants.length; indexInType++) {
+            ItemStack implant = implantTypeHolder.implants[indexInType];
+            if (implant != null) {
+                lambda.accept(ImplantType.getFirstSlotIndexOf(implantTypeHolder.implantType) + indexInType, implant);
             }
+        }
     }
+
     public void forEachImplant(BiConsumer<Integer, ItemStack> lambda, ItemImplant implantClass) {
         ImplantTypeHolder holder = implantsByType[implantClass.implantType.ordinal()];
-        for(int indexInType = 0; indexInType < holder.implants.length; indexInType++) {
+        for (int indexInType = 0; indexInType < holder.implants.length; indexInType++) {
             ItemStack implant = holder.implants[indexInType];
             if (implant != null && implant.getItem() == implantClass) {
                 lambda.accept(ImplantType.getFirstSlotIndexOf(implantClass.implantType) + indexInType, implant);
             }
         }
     }
+
     public <T> void forEachImplant(TriConsumer<Integer, ItemStack, T> lambda, T element) {
         Arrays.stream(implantsByType).forEach(implantTypeHolder -> {
             for (int indexInType = 0; indexInType < implantTypeHolder.implants.length; indexInType++) {
@@ -84,15 +87,17 @@ public class ImplantStorage implements IInventory {
             }
         });
     }
+
     public <T> void forEachImplant(TriConsumer<Integer, ItemStack, T> lambda, T element, ItemImplant implantClass) {
         ImplantTypeHolder holder = implantsByType[implantClass.implantType.ordinal()];
-        for(int indexInType = 0; indexInType < holder.implants.length; indexInType++) {
+        for (int indexInType = 0; indexInType < holder.implants.length; indexInType++) {
             ItemStack implant = holder.implants[indexInType];
             if (implant != null && implant.getItem() == implantClass) {
                 lambda.accept(ImplantType.getFirstSlotIndexOf(implantClass.implantType) + indexInType, implant, element);
             }
         }
     }
+
     public static class ImplantTypeHolder {
         public static final String TYPE_INDEX_NBT = "typeIndex";
         public static final String IMPLANTS_NBT = "implants";
@@ -192,7 +197,7 @@ public class ImplantStorage implements IInventory {
             }
             setInventorySlotContents(slotId, null);
             markDirty();
-            if(!this.blockEvents) {
+            if (!this.blockEvents) {
                 ((ItemImplant) implant.getItem()).onUnequipped(player.get(), slotId, implant);
             }
             return implant;
@@ -208,11 +213,12 @@ public class ImplantStorage implements IInventory {
         ImplantType possibleType = ImplantType.getTypeForSlotWithIndex(slotId);
         if (possibleType == null) return;
         ItemStack currentImplant = getStackInSlot(slotId);
-        if(currentImplant != null && player != null && player.get() != null) {
+        if (currentImplant != null && player != null && player.get() != null) {
             Item itemType = (currentImplant.getItem());
-            if(!this.blockEvents) {
+            if (!this.blockEvents) {
                 ((ItemImplant) itemType).onUnequipped(player.get(), slotId, currentImplant);
-            }        }
+            }
+        }
 
         int firstSlot = ImplantType.getFirstSlotIndexOf(possibleType);
         implantsByType[possibleType.ordinal()].implants[slotId - firstSlot] = itemstack;
@@ -284,7 +290,7 @@ public class ImplantStorage implements IInventory {
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemstack) {
         if (slotIndex >= implantAmount) return false;
         ImplantType typeForSlot = ImplantType.getTypeForSlotWithIndex(slotIndex);
-        if(typeForSlot == null) return false;
+        if (typeForSlot == null) return false;
         return typeForSlot == (itemstack.getItem() instanceof ItemImplant ? ((ItemImplant) itemstack.getItem()).implantType : null);
     }
 
@@ -296,7 +302,7 @@ public class ImplantStorage implements IInventory {
     @Override
     public void markDirty() {
         EntityPlayer playerIn = player.get();
-        if(playerIn != null && playerIn.worldObj.isRemote) {
+        if (playerIn != null && playerIn.worldObj.isRemote) {
             CybersusPlayerExtendedData data = CybersusPlayerExtendedData.get(playerIn);
             if (data != null && data.implantStorage.getStackInSlot(GuiImplants.currentImplantSlotId) == null) {
                 List<Integer> indexes = getIndicesCycledFrom(GuiImplants.currentImplantSlotId, ImplantType.getTotalSlotAmount());

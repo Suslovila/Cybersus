@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImplantIllusionGenerator extends ItemCybersusImplant {
-    public static final String name = "illusion_generator";
     public static final ArrayList<Ability> abilities = new ArrayList<>();
 
     static {

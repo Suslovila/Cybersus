@@ -31,6 +31,7 @@ public class ClientProxy extends CommonProxy {
         FMLCommonHandler.instance().bus().register(ClientImplantEvents.INSTANCE);
         MinecraftForge.EVENT_BUS.register(ClientImplantEvents.INSTANCE);
 
+        TextureStorage.init();
     }
 
     @Override
@@ -38,6 +39,7 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
         ModBlocks.registerRender();
         setupItemRenderers();
+
 
         KeyHandler.register();
 

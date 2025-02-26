@@ -46,7 +46,7 @@ public class ImplantPhoenixHeart extends ItemCybersusImplant {
 
             @Override
             public FuelComposite getFuelConsumePerCheck(EntityPlayer player, int index, ItemStack implant) {
-                return null;
+                return FuelComposite.EMPTY;
             }
 
             @Override
@@ -112,6 +112,18 @@ public class ImplantPhoenixHeart extends ItemCybersusImplant {
             public boolean hasFuel(EntityPlayer player, int index, ItemStack implant) {
 
                 return fuelForRessurection.hasPlayerEnough(player);
+            }
+
+            @Override
+            public String getThaumonomiconText(ItemImplant implantType) {
+                StringBuilder builder = new StringBuilder();
+
+                addAbilityNameInfo(implantType, builder);
+                addAbilityTypeInfo(implantType, builder);
+                addAbilityDescription(implantType, builder);
+                addRequiredFuelForTriggering(implantType, builder, fuelForRessurection);
+
+                return builder.toString();
             }
         });
     }

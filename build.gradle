@@ -19,7 +19,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.5.1"
+version = "1.5.2"
 group= "com.suslovila.cybersus" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "cybersus"
 
@@ -137,3 +137,25 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+
+// Настройка задачи jar (при необходимости можно добавить свои настройки)
+jar {
+	// Например, можно указать имя jar файла
+	archiveBaseName = 'cybersus_main'
+	// Если нужна другая версия, то можно указать archiveVersion
+	// archiveVersion = '1.0.0'
+}
+
+// Задача для копирования jar в нужную директорию
+task copyJar(type: Copy) {
+	dependsOn jar
+	// Используем результирующий jar-файл из задачи jar
+	from jar.archiveFile
+	// Обратите внимание на использование прямых слэшей или двойных обратных слэшей в пути
+	into 'C:/Users/Илья/AppData/Roaming/.minecraft/mods'
+}
+
+// Говорим gradle, чтобы после выполнения задачи build выполнялась задача copyJar
+build.finalizedBy copyJar
+

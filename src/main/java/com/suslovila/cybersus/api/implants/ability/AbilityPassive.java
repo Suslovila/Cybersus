@@ -2,10 +2,12 @@ package com.suslovila.cybersus.api.implants.ability;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
+import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public abstract class AbilityPassive extends Ability {
@@ -43,9 +45,8 @@ public abstract class AbilityPassive extends Ability {
             if (!fuelConsumeOnActivation.tryTakeFuelFromPlayer(player)) {
                 return;
             }
-        }
-        else {
-            if(sendToCooldownIfDisabled) {
+        } else {
+            if (sendToCooldownIfDisabled) {
                 sendToCooldown(player, index, implant);
             }
         }
@@ -82,6 +83,7 @@ public abstract class AbilityPassive extends Ability {
     public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
         if (isActive(implant)) {
             sendToCooldown(player, index, implant);
+//            notifyClient(player, index, implant);
         }
     }
 
@@ -107,4 +109,19 @@ public abstract class AbilityPassive extends Ability {
 
         }
     }
+
+    @Override
+    public String getAbilityTypeName() {
+        return StatCollector.translateToLocal("cybersus.ability_type_passive");
+    }
+
+    @Override
+    public String getThaumonomiconText(ItemImplant implantType) {
+        String baseInfo = super.getThaumonomiconText(implantType);
+        baseInfo += "<BR>\u00A7n" + StatCollector.translateToLocal("cybersus.ability.price_per_tick_key") + ":" + "\u00A7r" + " ";
+        baseInfo += getFuelConsumePerCheck(null, -1, null).toString();
+
+        return baseInfo;
+    }
+
 }

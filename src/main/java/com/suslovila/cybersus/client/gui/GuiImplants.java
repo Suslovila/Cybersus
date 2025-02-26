@@ -5,6 +5,7 @@ import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
 import com.suslovila.cybersus.client.ResourceLocationPreLoad;
+import com.suslovila.cybersus.client.TextureStorage;
 import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
@@ -46,16 +47,7 @@ public class GuiImplants {
     public static int currentImplantSlotId = 0;
     public static boolean shouldRenderGui = true;
 
-    private static final ResourceLocationPreLoad slotActive = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/abilitySlotActive.png");
-    private static final ResourceLocationPreLoad slotDeactivated = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/abilitySlotDeactivated.png");
-    private static final ResourceLocationPreLoad slotInCooldown = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/abilitySlotCooldown.png");
-
-    private static final ResourceLocationPreLoad spinningCircle = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/misc/radial4.png");
-
-
-    private static final ResourceLocationPreLoad hackHotbar = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/hack_hotbar.png");
-    private static final ResourceLocationPreLoad hackHotbarActivated = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/hack_hotbar_activated.png");
-    @SideOnly(Side.CLIENT)
+ @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void renderGui(RenderGameOverlayEvent.Post event) {
         if (event.type == RenderGameOverlayEvent.ElementType.ALL) {
@@ -122,7 +114,7 @@ public class GuiImplants {
         GL11.glRotated(angle, 0.0, 0.0, 1.0);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-        bindTexture(spinningCircle);
+        bindTexture(TextureStorage.spinningCircle);
         SusGraphicHelper.drawFromCenter(radius);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
@@ -135,7 +127,7 @@ public class GuiImplants {
             Ability ability = abilities.get(index);
             GL11.glPushMatrix();
 
-            ResourceLocation slotTexture = ability.isOnCooldown(implant) ? slotInCooldown : (ability.isActive(implant) ? slotActive : slotDeactivated);
+            ResourceLocation slotTexture = ability.isOnCooldown(implant) ? TextureStorage.slotInCooldown : (ability.isActive(implant) ? TextureStorage.slotActive : TextureStorage.slotDeactivated);
             bindTexture(slotTexture);
             SusGraphicHelper.drawFromCenter(radius * 0.7);
 
@@ -217,7 +209,7 @@ public class GuiImplants {
             double scaleHack = 1.25;
             GL11.glPushMatrix();
             GL11.glScaled(scaleHack, scaleHack, 1.0);
-            SusGraphicHelper.bindTexture(hackHotbar);
+            SusGraphicHelper.bindTexture(TextureStorage.hackHotbar);
             drawPartFromLeftSide(16, 64, 1.0f);
 
             float alpha = 0.8f;
@@ -230,7 +222,7 @@ public class GuiImplants {
             GL11.glEnable(GL11.GL_BLEND);
 
             float actualPartialTicks = (abilityHack.isRelockingTarget(implant) ? 0 : event.partialTicks);
-            SusGraphicHelper.bindTexture(hackHotbarActivated);
+            SusGraphicHelper.bindTexture(TextureStorage.hackHotbarActivated);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
             float progress = (abilityHack.getRequiredHackTime() - hackTime + actualPartialTicks) / ((float) abilityHack.getRequiredHackTime() + actualPartialTicks);
             GL11.glTranslated(0.0, 0.0, 1.0);

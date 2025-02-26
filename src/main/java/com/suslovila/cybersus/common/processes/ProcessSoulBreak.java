@@ -35,7 +35,7 @@ public class ProcessSoulBreak extends ClientProcess {
 //        SusVec3 lookVector = new SusVec3(x, y, z).subtract(SusGraphicHelper.getRenderPos(player, event.partialTicks).subtract(0.0, player.eyeHeight, 0.0));
         SusVec3 lookVector = new SusVec3(-player.getLookVec().xCoord, -player.getLookVec().yCoord, -player.getLookVec().zCoord);
         GL11.glPushMatrix();
-        SusGraphicHelper.translateFromPlayerTo(new SusVec3(x, y, z),  event.partialTicks);
+        SusGraphicHelper.translateFromPlayerTo(this.position,  event.partialTicks);
         SusGraphicHelper.makeSystemOrthToVectorAndHandle(lookVector,0.1,  () -> {
             glPushAttrib(GL_BLEND);
             glPushAttrib(GL_LIGHTING);

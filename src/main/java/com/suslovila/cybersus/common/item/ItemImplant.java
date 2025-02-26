@@ -33,7 +33,7 @@ public abstract class ItemImplant extends Item {
 
     /**
      * gets current abilities that are available now
-     *
+     * note that arguments can be null (for example, if fired from thaumonomicon)
      * @return list of abilities
      */
     public abstract List<Ability> getAbilities(EntityPlayer player, int index, ItemStack implant);

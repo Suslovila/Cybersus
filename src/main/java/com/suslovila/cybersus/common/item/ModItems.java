@@ -24,7 +24,7 @@ public class ModItems {
     public static ItemRune itemRune;
 
     public static ItemHeartBlank heartBlank;
-    public static ImplantGravityIcreaser gravityIcreaser;
+    public static ImplantGravityIncreaser gravityIcreaser;
     public static ItemMotherboardBlank motherboardBlank;
 
     public static ImplantIllusionGenerator illusionGenerator;
@@ -37,6 +37,8 @@ public class ModItems {
     public static ImplantEyeOfEnvy eyeOfEnvy;
 
     public static ItemEyeBlank eyeBlank;
+    public static ItemSuppressed itemSuppressed;
+    public static ImplantSuppressor suppressor;
 
 
     public static void register() {
@@ -61,7 +63,7 @@ public class ModItems {
             shadowSkin = new ImplantShadowSkin();
             exploder = new ImplantExploder();
             heartBlank = new ItemHeartBlank();
-            gravityIcreaser = new ImplantGravityIcreaser();
+            gravityIcreaser = new ImplantGravityIncreaser();
             motherboardBlank = new ItemMotherboardBlank();
             illusionGenerator = new ImplantIllusionGenerator();
 //            eyeOfEnvy = new ImplantEyeOfEnvy();
@@ -74,6 +76,9 @@ public class ModItems {
                 tormentor = new ImplantTormentor();
             }
 //            soulBreaker = new ImplantSoulBreaker();
+
+//            itemSuppressed = new ItemSuppressed();
+//            suppressor = new ImplantSuppressor();
         }
     }
 }

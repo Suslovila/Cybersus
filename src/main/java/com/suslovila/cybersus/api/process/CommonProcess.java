@@ -8,9 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 public abstract class CommonProcess extends ClientProcess implements ISaveableProcess {
 
     public CommonProcess(SusVec3 vec3, int duration) {
-        this.x = vec3.x;
-        this.y = vec3.y;
-        this.z = vec3.z;
+        position = vec3;
+
         this.timeLeft = duration;
         this.totalDuration = duration;
     }
@@ -25,9 +24,7 @@ public abstract class CommonProcess extends ClientProcess implements ISaveablePr
 
     @Override
     public void writeTo(NBTTagCompound tagCompound) {
-        tagCompound.setDouble("x", x);
-        tagCompound.setDouble("y", y);
-        tagCompound.setDouble("z", z);
+        position.writeTo(tagCompound);
 
         tagCompound.setInteger("timeLeft", timeLeft);
         tagCompound.setInteger("totalDuration", totalDuration);
@@ -36,9 +33,7 @@ public abstract class CommonProcess extends ClientProcess implements ISaveablePr
 
     @Override
     public void readFrom(NBTTagCompound tagCompound) {
-        x = tagCompound.getDouble("x");
-        y = tagCompound.getDouble("y");
-        z = tagCompound.getDouble("z");
+        position = SusVec3.readFrom(tagCompound);
 
         timeLeft = tagCompound.getInteger("timeLeft");
         totalDuration = tagCompound.getInteger("totalDuration");

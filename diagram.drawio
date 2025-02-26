@@ -1,0 +1,116 @@
+<mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" background="none" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="node11" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Ability&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ onPlayerHurtEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ getFuelConsumeOnActivation(NonExistentClass): NonExistentClass&lt;br/&gt;+ getKharuEmissionOnActivation(NonExistentClass): Int&lt;br/&gt;+ getCooldownTotal(NonExistentClass): Int&lt;br/&gt;+ onPlayerHealEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerAttackEntityEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerDeathEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ sendToCooldown(NonExistentClass): Unit&lt;br/&gt;+ onRenderPlayerEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerSetAttackTargetEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onEnableButtonClicked(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerBeingAttackedEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ isOnCooldown(NonExistentClass): Boolean&lt;br/&gt;+ onRenderHandEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onRenderWorldLastEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ notifyClient(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ isActive(NonExistentClass): Boolean&lt;br/&gt;+ getCooldown(NonExistentClass): NonExistentClass&lt;br/&gt;+ onPlayerUpdateEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ tickCooldown(NonExistentClass): Unit&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; name: String&lt;br/&gt; texture: NonExistentClass&lt;br/&gt; COOLDOWN_NBT: NonExistentClass&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="528" y="1351" width="476" height="593" as="geometry" />
+    </mxCell>
+    <mxCell id="node12" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AbilityHack&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hackEntity(NonExistentClass, NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ sendToCooldown(NonExistentClass): Unit&lt;br/&gt;+ isOnCooldown(NonExistentClass): Boolean&lt;br/&gt;+ isHacking(NonExistentClass): Boolean&lt;br/&gt;+ onPlayerUpdateEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onRenderWorldLastEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onEnableButtonClicked(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ isActive(NonExistentClass): Boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; hackTime: Int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="88" y="2119" width="476" height="257" as="geometry" />
+    </mxCell>
+    <mxCell id="node6" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AbilityInstant&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ onActivated(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onEnableButtonClicked(NonExistentClass, Int, NonExistentClass): Unit&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="52" y="644" width="469" height="94" as="geometry" />
+    </mxCell>
+    <mxCell id="node1" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AbilityPassive&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ isActive(NonExistentClass): NonExistentClass&lt;br/&gt;+ onEnableButtonClicked(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ getFuelConsumePerSecond(NonExistentClass): NonExistentClass&lt;br/&gt;+ switchAbilityStatus(NonExistentClass, Int, NonExistentClass): Boolean&lt;br/&gt;+ onPlayerUpdateEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; IS_ABILITY_ENABLED_NBT: NonExistentClass&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="785" y="2155" width="483" height="185" as="geometry" />
+    </mxCell>
+    <mxCell id="node0" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AbilityTemporary&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ onEnableButtonClicked(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerUpdateEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ activateAbility(NonExistentClass, Int, NonExistentClass): Boolean&lt;br/&gt;+ isActive(NonExistentClass): Boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; effectDuration: Int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="788" y="607" width="476" height="161" as="geometry" />
+    </mxCell>
+    <mxCell id="node13" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Companion&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ readFrom(NonExistentClass): ImplantTypeHolder&lt;br/&gt;+ readFrom(NonExistentClass): ImplantTypeHolder&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="-109" y="2844" width="350" height="94" as="geometry" />
+    </mxCell>
+    <mxCell id="node15" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Companion&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getIcon(ImplantType): NonExistentClass&lt;br/&gt;+ getTypeForSlotWithIndex(Int): ImplantType?&lt;br/&gt;+ getSlotAmount(ImplantType): Int&lt;br/&gt;+ getFirstSlotIndexOf(ImplantType): NonExistentClass&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; typeAmount: Int&lt;br/&gt; slotAmounts: NonExistentClass&lt;br/&gt; firstIndexes: NonExistentClass&lt;br/&gt; slotAmount: NonExistentClass&lt;br/&gt; iconLocations: NonExistentClass&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="81" y="1059" width="370" height="257" as="geometry" />
+    </mxCell>
+    <mxCell id="node16" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Companion&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; HACK_VICTIM_ID_NBT: NonExistentClass&lt;br/&gt; HACK_VICTIM_UUID_NBT: NonExistentClass&lt;br/&gt; HACK_TIME_LEFT_NBT: NonExistentClass&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="307" y="2832" width="318" height="120" as="geometry" />
+    </mxCell>
+    <mxCell id="node17" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Companion&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ readFrom(NonExistentClass): ImplantStorage&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="603" y="2036" width="326" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="node18" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Companion&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; TIME_LEFT_NBT: NonExistentClass&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="895" y="1156" width="262" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="node19" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Companion&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ readFrom(NonExistentClass): NotEnoughFuelNotification&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="105" y="496" width="402" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="node2" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;EssentiaHolderItemWrapper&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ setStoredAspects(NonExistentClass): NonExistentClass&lt;br/&gt;+ add(NonExistentClass, Int): Int&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; storedEssentia: NonExistentClass&lt;br/&gt; itemStackIn: NonExistentClass&lt;br/&gt; maxAmount: NonExistentClass&lt;br/&gt; itemType: NonExistentClass&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="349" y="795" width="395" height="185" as="geometry" />
+    </mxCell>
+    <mxCell id="node9" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;FuelComposite&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ forceTakeFrom(NonExistentClass): Unit&lt;br/&gt;+ tryTakeFuelFromPlayer(NonExistentClass): Boolean&lt;br/&gt;+ takeFrom(NonExistentClass): FuelComposite&lt;br/&gt;+ hasPlayerEnough(NonExistentClass): Boolean&lt;br/&gt;+ getLack(NonExistentClass): FuelComposite&lt;br/&gt;+ addTo(NonExistentClass): FuelComposite&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; empty: Boolean&lt;br/&gt; fuels: List&amp;lt;NonExistentClass&amp;gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="83" y="2511" width="366" height="233" as="geometry" />
+    </mxCell>
+    <mxCell id="node7" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br/&gt;&lt;b&gt;IFuel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hasPlayerEnough(NonExistentClass): Boolean&lt;br/&gt;+ addTo(NonExistentClass): IFuel&lt;br/&gt;+ takeFrom(NonExistentClass): IFuel&lt;br/&gt;+ forceTakeFrom(NonExistentClass): Unit&lt;br/&gt;+ getLack(NonExistentClass): IFuel&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; notEnoughMessages: NonExistentClass&lt;br/&gt; empty: Boolean&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="-199" y="183" width="330" height="209" as="geometry" />
+    </mxCell>
+    <mxCell id="node10" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ImplantStorage&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getStackInSlot(Int): NonExistentClass&lt;br/&gt;+ openChest(): Unit&lt;br/&gt;+ decrStackSize(Int, Int): NonExistentClass&lt;br/&gt;+ getStackInSlotOnClosing(Int): NonExistentClass&lt;br/&gt;+ isUseableByPlayer(NonExistentClass): Boolean&lt;br/&gt;+ writeToNBT(NonExistentClass): Unit&lt;br/&gt;+ writeTo(NonExistentClass): Unit&lt;br/&gt;+ isItemValidForSlot(Int, NonExistentClass): Boolean&lt;br/&gt;+ forEachImplant(Function2&amp;lt;Int, NonExistentClass, Unit&amp;gt;): Unit&lt;br/&gt;+ closeChest(): Unit&lt;br/&gt;+ markDirty(): Unit&lt;br/&gt;+ setInventorySlotContents(Int, NonExistentClass): Unit&lt;br/&gt;+ readFromNBT(NonExistentClass): Unit&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; inventoryStackLimit: Int&lt;br/&gt; sizeInventory: Int&lt;br/&gt; inventoryName: String&lt;br/&gt; implantAmount: Int&lt;br/&gt; implantsByType: ImplantTypeHolder[]&lt;br/&gt; customInventoryName: Boolean&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="-189" y="1399" width="430" height="497" as="geometry" />
+    </mxCell>
+    <mxCell id="node8" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;/i&gt;&lt;br/&gt;&lt;b&gt;ImplantType&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ values(): ImplantType[]&lt;br/&gt;+ valueOf(String): ImplantType&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; entries: EnumEntries&amp;lt;ImplantType&amp;gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="-108" y="831" width="269" height="141" as="geometry" />
+    </mxCell>
+    <mxCell id="node14" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ImplantTypeHolder&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ writeTo(NonExistentClass): Unit&lt;br/&gt;+ writeTo(NonExistentClass): Unit&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; implants: NonExistentClass[]&lt;br/&gt; implantType: NonExistentClass&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="-197" y="2179" width="246" height="148" as="geometry" />
+    </mxCell>
+    <mxCell id="node3" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ItemImplant&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ onPlayerUpdateEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerDeathEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerAttackEntityEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerHurtEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onRenderPlayerEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerBeingAttackedEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerHealEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onPlayerSetAttackTargetEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onRenderWorldLastEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;br/&gt;+ onRenderHandEvent(NonExistentClass, Int, NonExistentClass): Unit&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; abilities: NonExistentClass&lt;br/&gt; implantType: ImplantType&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="488" y="2463" width="476" height="329" as="geometry" />
+    </mxCell>
+    <mxCell id="node5" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;KharuHolderItemWrapper&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ setStoredKharu(Int): NonExistentClass&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; storedKharu: Int&lt;br/&gt; itemStackIn: NonExistentClass&lt;br/&gt; maxAmount: Int&lt;br/&gt; itemType: NonExistentClass&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="3" y="-13" width="286" height="161" as="geometry" />
+    </mxCell>
+    <mxCell id="node4" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;NotEnoughFuelNotification&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ writeTo(NonExistentClass): Unit&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; color: Int&lt;br/&gt; text: String&lt;br/&gt; texture: NonExistentClass&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="176" y="219" width="261" height="148" as="geometry" />
+    </mxCell>
+    <mxCell id="edge5" edge="1" value="" parent="1" source="node16" target="node12" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=circlePlus;startFill=0;endArrow=none;strokeColor=#820000;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="466" y="2487" />
+          <mxPoint x="326" y="2487" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge0" edge="1" value="" parent="1" source="node18" target="node0" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=circlePlus;startFill=0;endArrow=none;strokeColor=#820000;exitX=0.500;exitY=0.001;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge4" edge="1" value="" parent="1" source="node17" target="node10" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=circlePlus;startFill=0;endArrow=none;strokeColor=#820000;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="766" y="2007" />
+          <mxPoint x="26" y="2007" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge6" edge="1" value="" parent="1" source="node15" target="node8" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=circlePlus;startFill=0;endArrow=none;strokeColor=#820000;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="266" y="1027" />
+          <mxPoint x="26" y="1027" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge3" edge="1" value="" parent="1" source="node13" target="node14" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=circlePlus;startFill=0;endArrow=none;strokeColor=#820000;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="66" y="2147" />
+          <mxPoint x="-74" y="2147" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge2" edge="1" value="" parent="1" source="node19" target="node4" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=circlePlus;startFill=0;endArrow=none;strokeColor=#820000;exitX=0.500;exitY=0.001;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge1" edge="1" value="" parent="1" source="node14" target="node10" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=circlePlus;startFill=0;endArrow=none;strokeColor=#820000;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="-74" y="2007" />
+          <mxPoint x="26" y="2007" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel>

@@ -2,6 +2,8 @@ package com.suslovila.cybersus.research;
 
 import com.emoniph.witchery.Witchery;
 import com.suslovila.cybersus.Cybersus;
+import com.suslovila.cybersus.api.implants.ability.Ability;
+import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.common.item.ModItems;
 import com.suslovila.cybersus.common.item.implants.sinHeart.ImplantSinHeart;
 import cpw.mods.fml.common.Mod;
@@ -18,11 +20,13 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.research.ResearchCategories;
+import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class CybersusResearchRegistry {
 
@@ -305,7 +309,7 @@ public class CybersusResearchRegistry {
                 new ResourceLocation(Cybersus.MOD_ID, "textures/misc/cybersus_background.png")
         );
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 basicInfo,
                 cybersusCategory,
                 new AspectList().add(Aspect.MECHANISM, 8).add(Aspect.MAGIC, 4).add(Aspect.ENERGY, 6).add(Aspect.MAN, 4).add(Aspect.ORDER, 4),
@@ -317,7 +321,7 @@ public class CybersusResearchRegistry {
                 .registerResearchItem();
 
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 blankHeartKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MECHANISM, 8).add(Aspect.MAGIC, 4).add(Aspect.ENERGY, 6),
@@ -328,7 +332,7 @@ public class CybersusResearchRegistry {
         ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(blankHeartKey))).setParents(basicInfo, "PRIMPEARL").setParents(aspectHoldersKey).setConcealed()
                 .registerResearchItem();
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 gravityIncreaserKey,
                 cybersusCategory,
                 new AspectList().add(CybersusAspect.GRAVITAS, 1).add(Aspect.MAGIC, 1).add(Aspect.MECHANISM, 1).add(Aspect.TRAP, 1).add(Aspect.ENERGY, 1).add(Aspect.EARTH, 1).add(Aspect.ORDER, 1),
@@ -336,9 +340,11 @@ public class CybersusResearchRegistry {
                 -3,
                 3,
                 new ItemStack(ModItems.gravityIcreaser)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(gravityIncreaserKey))).setParents(aspectHoldersKey).setConcealed()
+        ).setPages(injectSimpleImplantResearchInfo(ModItems.gravityIcreaser, new ResearchPage(runicMatrixRecipes.get(gravityIncreaserKey)))).setParents(aspectHoldersKey).setConcealed()
                 .registerResearchItem();
-        new CybersusResearchItem(
+
+
+        new ResearchImplantItem(
                 shadowSkinKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.DARKNESS, 1).add(Aspect.EXCHANGE, 1).add(Aspect.MECHANISM, 1).add(Aspect.MAGIC, 1).add(Aspect.MAN, 1).add(Aspect.VOID, 1),
@@ -346,12 +352,12 @@ public class CybersusResearchRegistry {
                 -3,
                 3,
                 new ItemStack(ModItems.shadowSkin)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(shadowSkinKey))).setParents(aspectHoldersKey).setConcealed()
+        ).setPages(injectSimpleImplantResearchInfo(ModItems.shadowSkin, new ResearchPage(runicMatrixRecipes.get(shadowSkinKey)))).setParents(aspectHoldersKey).setConcealed()
                 .registerResearchItem();
 
 
 
-//        new CybersusResearchItem(
+//        new ResearchImplantItem(
 //                singleAspectHolderKey,
 //                cybersusCategory,
 //                new AspectList(),
@@ -361,7 +367,7 @@ public class CybersusResearchRegistry {
 //                new ItemStack(ModItems.portableMultiAspectContainer)
 //        ).setParents(aspectHoldersKey).setVirtual().registerResearchItem();
 //
-//        new CybersusResearchItem(
+//        new ResearchImplantItem(
 //                multiAspectHolderKey,
 //                cybersusCategory,
 //                new AspectList(),
@@ -371,7 +377,7 @@ public class CybersusResearchRegistry {
 //                new ItemStack(ModItems.portableMultiAspectContainer)
 //        ).setParents(aspectHoldersKey).setVirtual().registerResearchItem();
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 aspectHoldersKey,
                 cybersusCategory,
                 new AspectList().add(CybersusAspect.HUMILITAS, 16).add(Aspect.VOID, 16).add(Aspect.MAGIC, 16).add(Aspect.WATER, 32),
@@ -382,7 +388,7 @@ public class CybersusResearchRegistry {
         ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(singleAspectHolderKey)), new ResearchPage(runicMatrixRecipes.get(multiAspectHolderKey)), new ResearchPage("2")).setParents(basicInfo).setConcealed()
                 .registerResearchItem();
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 motherboardBlankKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MECHANISM, 1).add(Aspect.MIND, 1).add(Aspect.ENERGY, 1).add(Aspect.ORDER, 1).add(Aspect.EXCHANGE, 1),
@@ -393,7 +399,7 @@ public class CybersusResearchRegistry {
         ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(motherboardBlankKey))).setParents(aspectHoldersKey).setConcealed()
                 .registerResearchItem();
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 phoenixHeartKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MECHANISM, 1).add(Aspect.FIRE, 1).add(Aspect.LIFE, 1).add(Aspect.EXCHANGE, 1).add(Aspect.MAGIC, 1),
@@ -401,7 +407,7 @@ public class CybersusResearchRegistry {
                 6,
                 0,
                 new ItemStack(ModItems.phoenixHeart)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(phoenixHeartKey))).setParents(blankHeartKey).setConcealed()
+        ).setPages(injectSimpleImplantResearchInfo(ModItems.phoenixHeart, new ResearchPage(runicMatrixRecipes.get(phoenixHeartKey)))).setParents(blankHeartKey).setConcealed()
                 .registerResearchItem();
 
         if (Cybersus.forbiddenMagicLoaded) {
@@ -410,7 +416,7 @@ public class CybersusResearchRegistry {
                 sinHeartRecipes[i] = crucibleRecipes.get(sinHeartKey + i);
             }
 
-            new CybersusResearchItem(
+            new ResearchImplantItem(
                     sinHeartKey,
                     cybersusCategory,
                     new AspectList().add(DarkAspects.NETHER, 1).add(Aspect.MAGIC, 1).add(Aspect.EXCHANGE, 1).add(Aspect.SOUL, 1),
@@ -432,7 +438,7 @@ public class CybersusResearchRegistry {
 
 
         if (Cybersus.witcheryLoaded) {
-            new CybersusResearchItem(
+            new ResearchImplantItem(
                     sleepModuleKey,
                     cybersusCategory,
                     new AspectList().add(Aspect.MAGIC, 1).add(CybersusAspect.DIMENSIO, 1).add(Aspect.SOUL, 1).add(Aspect.TRAVEL, 1).add(Aspect.TRAP, 1),
@@ -440,7 +446,7 @@ public class CybersusResearchRegistry {
                     8,
                     2,
                     new ItemStack(ModItems.sleepModule)
-            ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(sleepModuleKey))).setItemTriggers(Witchery.Items.GENERIC.itemBrewOfSleeping.createStack()).setHidden()
+            ).setPages(injectSimpleImplantResearchInfo(ModItems.sleepModule, new ResearchPage(runicMatrixRecipes.get(sleepModuleKey)))).setItemTriggers(Witchery.Items.GENERIC.itemBrewOfSleeping.createStack()).setHidden()
                     .setParents(motherboardBlankKey).registerResearchItem();
 //
 //        InfusionRecipe[] infusionRecipesForTormentor = new InfusionRecipe[Cybersus.forbiddenMagicLoaded ? 2 : 1];
@@ -449,7 +455,7 @@ public class CybersusResearchRegistry {
 //            infusionRecipesForTormentor[1] = runicMatrixRecipes.get(tormentorKey + "2");
 //        }
 
-            new CybersusResearchItem(
+            new ResearchImplantItem(
                     tormentorKey,
                     cybersusCategory,
                     new AspectList().add(Aspect.MAGIC, 1).add(CybersusAspect.DIMENSIO, 1).add(Aspect.SOUL, 1).add(Aspect.TRAVEL, 1).add(Aspect.TRAP, 1).add(Aspect.WEAPON, 1).add(Aspect.FIRE, 1),
@@ -457,14 +463,14 @@ public class CybersusResearchRegistry {
                     6,
                     5,
                     new ItemStack(ModItems.tormentor)
-            ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(tormentorKey))).setItemTriggers(Witchery.Items.GENERIC.itemBrewSoulTorment.createStack()).setHidden()
+            ).setPages(injectSimpleImplantResearchInfo(ModItems.tormentor, new ResearchPage(runicMatrixRecipes.get(tormentorKey)))).setItemTriggers(Witchery.Items.GENERIC.itemBrewSoulTorment.createStack()).setHidden()
                     .setParents(motherboardBlankKey).registerResearchItem();
 
         }
 
 
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 berserkHeartKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MAGIC, 64).add(Aspect.HEAL, 2048).add(Aspect.ARMOR, 2048).add(Aspect.ENERGY, 2048),
@@ -476,7 +482,7 @@ public class CybersusResearchRegistry {
                 .setParents(blankHeartKey).registerResearchItem();
 
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 mindExploder,
                 cybersusCategory,
                 new AspectList().add(Aspect.MAGIC, 256).add(Aspect.SENSES, 2048).add(Aspect.MECHANISM, 1024).add(Aspect.CRYSTAL, 1024),
@@ -484,10 +490,10 @@ public class CybersusResearchRegistry {
                 4,
                 2,
                 new ItemStack(ModItems.exploder)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(mindExploder))).setConcealed()
+        ).setPages(injectSimpleImplantResearchInfo(ModItems.exploder, new ResearchPage(runicMatrixRecipes.get(mindExploder)))).setConcealed()
                 .setParents(motherboardBlankKey).registerResearchItem();
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 blankEye,
                 cybersusCategory,
                 new AspectList().add(Aspect.MAGIC, 256).add(Aspect.ENTROPY, 2048).add(Aspect.MIND, 2048),
@@ -499,7 +505,7 @@ public class CybersusResearchRegistry {
                 .setParents(aspectHoldersKey).registerResearchItem();
 
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 illusionGenerator,
                 cybersusCategory,
                 new AspectList().add(Aspect.MAGIC, 256).add(Aspect.TRAP, 2048).add(Aspect.MIND, 1024).add(Aspect.MAN, 1024),
@@ -507,11 +513,25 @@ public class CybersusResearchRegistry {
                 0,
                 2,
                 new ItemStack(ModItems.illusionGenerator)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(illusionGenerator))).setConcealed()
+        ).setPages(injectSimpleImplantResearchInfo(ModItems.illusionGenerator, new ResearchPage(runicMatrixRecipes.get(illusionGenerator)))).setConcealed()
                 .setParents(blankEye).registerResearchItem();
 
 
     }
 
+
+    private static ResearchPage[] injectSimpleImplantResearchInfo(ItemImplant implant, ResearchPage craftResearchPage) {
+        List<Ability> abilities = implant.getAbilities(null, -1, null);
+
+        ResearchPage[] researchPages = new ResearchPage[2 + abilities.size()];
+        researchPages[0] = new ResearchPage("description");
+        researchPages[1] = craftResearchPage;
+
+        for(int i = 0; i < abilities.size(); i++) {
+            researchPages[i + 2] = new AbilityResearchPage(implant, abilities.get(i));
+        }
+
+        return researchPages;
+    }
 }
 

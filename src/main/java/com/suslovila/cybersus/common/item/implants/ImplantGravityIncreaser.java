@@ -6,7 +6,6 @@ import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
 import com.suslovila.cybersus.api.implants.ability.AbilityInstant;
-import com.suslovila.cybersus.api.implants.ability.AbilityPassive;
 import com.suslovila.cybersus.common.processes.ProcessGravityTrap;
 import com.suslovila.cybersus.extendedData.CustomWorldData;
 import com.suslovila.cybersus.research.CybersusAspect;
@@ -23,10 +22,10 @@ import thaumcraft.api.aspects.AspectList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImplantGravityIcreaser extends ItemCybersusImplant {
+public class ImplantGravityIncreaser extends ItemCybersusImplant {
     public static final ArrayList<Ability> abilities = new ArrayList<>();
 
-    public ImplantGravityIcreaser() {
+    public ImplantGravityIncreaser() {
         super(ImplantType.HAND);
 
     }
@@ -42,7 +41,7 @@ public class ImplantGravityIcreaser extends ItemCybersusImplant {
     }
 
     static {
-        abilities.add(new AbilityInstant("gravity_trap") {
+        abilities.add(new AbilityInstant("massive_gravity_trap") {
 
 
             @Override
@@ -98,7 +97,7 @@ public class ImplantGravityIcreaser extends ItemCybersusImplant {
         });
 
 
-        abilities.add(new AbilityHack("gravity_trap_targeted") {
+        abilities.add(new AbilityHack("targeted_gravity_trap") {
 
 
             @Override
@@ -109,7 +108,7 @@ public class ImplantGravityIcreaser extends ItemCybersusImplant {
             @Override
             public void hackEntity(EntityPlayer hacker, Entity victim, int slotIndex, ItemStack implant) {
 
-                ProcessGravityTrap processGravityTrap = new ProcessGravityTrap(new SusVec3(victim.posX, victim.posY, victim.posZ), 20 * 10, 1.0f);
+                ProcessGravityTrap processGravityTrap = new ProcessGravityTrap(new SusVec3(victim.posX, victim.posY, victim.posZ), 20 * 10, victim.width);
                 processGravityTrap.timeLeft -= processGravityTrap.appearTimeTicks;
                 CustomWorldData.getCustomData(hacker.worldObj).addProcess(processGravityTrap);
                 CustomWorldData.syncProcess(processGravityTrap);

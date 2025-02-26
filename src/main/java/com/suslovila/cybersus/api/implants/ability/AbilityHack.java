@@ -2,6 +2,7 @@ package com.suslovila.cybersus.api.implants.ability;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.client.ResourceLocationPreLoad;
+import com.suslovila.cybersus.client.TextureStorage;
 import com.suslovila.cybersus.common.event.customEvents.OnPlayerHackEntityTick;
 import com.suslovila.cybersus.common.event.customEvents.PlayerTriesToStartHackingEvent;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
@@ -19,6 +20,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,20 +37,13 @@ import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 
 public abstract class AbilityHack extends Ability {
     public final String HACK_TIME_LEFT_NBT = Cybersus.prefixAppender.doAndGet(":" + name + ":hack");
-    public final String HACK_VICTIM_UUID_NBT = Cybersus.prefixAppender.doAndGet(":" + name +":victim_uuid");
-    public final String HACK_VICTIM_ID_NBT = Cybersus.prefixAppender.doAndGet(":" + name +":victim_id");
+    public final String HACK_VICTIM_UUID_NBT = Cybersus.prefixAppender.doAndGet(":" + name + ":victim_uuid");
+    public final String HACK_VICTIM_ID_NBT = Cybersus.prefixAppender.doAndGet(":" + name + ":victim_id");
 
-    public final String TARGET_LOST_TIME_LEFT = Cybersus.prefixAppender.doAndGet(":" + name +":time_until_target_lost");
+    public final String TARGET_LOST_TIME_LEFT = Cybersus.prefixAppender.doAndGet(":" + name + ":time_until_target_lost");
 
-    public static final ArrayList<ResourceLocation> textureOuterCircles = new ArrayList<>();
-    public static final ResourceLocationPreLoad textureInnerCircle = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/ffhack_circle_inner.png");
 
-    static {
-        for (int i = 0; i < 3; i++) {
-            int realIndex = i + 1;
-            textureOuterCircles.add(new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/fhack_circle_outer_" + realIndex + ".png"));
-        }
-    }
+
 
     public AbilityHack(String name) {
         super(name);
@@ -309,7 +304,7 @@ public abstract class AbilityHack extends Ability {
                 final int copyI = i;
                 final int sign = ((i + 1) % 2 == 0) ? 1 : -1;
                 SusGraphicHelper.renderTextureOrth(
-                        textureOuterCircles.get(i),
+                        TextureStorage.textureOuterCircles.get(i),
                         circlesAppearanceProgress,
                         circlesAppearanceProgress,
                         lookVec, 0,
@@ -320,7 +315,7 @@ public abstract class AbilityHack extends Ability {
                 );
             }
             SusGraphicHelper.renderTextureOrth(
-                    textureInnerCircle,
+                    TextureStorage.textureInnerCircle,
                     circlesAppearanceProgress,
                     circlesAppearanceProgress,
                     lookVec, 0,
@@ -399,5 +394,13 @@ public abstract class AbilityHack extends Ability {
             sendToCooldown(player, index, implant);
         }
     }
+
+    @Override
+    public String getAbilityTypeName() {
+        return StatCollector.translateToLocal("cybersus.ability_type_hack");
+
+    }
+
+
 }
 

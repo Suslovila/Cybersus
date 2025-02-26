@@ -9,18 +9,18 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
 
-public class CybersusResearchItem extends ResearchItem {
-    public CybersusResearchItem(String key, String category) {
+public class ResearchImplantItem extends ResearchItem {
+    public ResearchImplantItem(String key, String category) {
         super(key, category);
     }
 
 
-    public CybersusResearchItem(String key, String category, AspectList tags, int col, int row, int complex, ItemStack icon) {
+    public ResearchImplantItem(String key, String category, AspectList tags, int col, int row, int complex, ItemStack icon) {
         super(key, category, tags, col, row, complex, icon);
     }
 
 
-    public CybersusResearchItem(String key, String category, AspectList tags, int col, int row, int complex, ResourceLocation icon) {
+    public ResearchImplantItem(String key, String category, AspectList tags, int col, int row, int complex, ResourceLocation icon) {
         super(key, category, tags, col, row, complex, icon);
     }
 
@@ -40,7 +40,7 @@ public class CybersusResearchItem extends ResearchItem {
     public ResearchItem setPages(ResearchPage... par) {
         for (ResearchPage page : par) {
 
-            if (page.type == ResearchPage.PageType.TEXT) {
+            if (page.type == ResearchPage.PageType.TEXT && !(page instanceof AbilityResearchPage)) {
                 page.text = "ac.text." + this.key + "." + page.text;
             }
             if (page.type == ResearchPage.PageType.INFUSION_CRAFTING)

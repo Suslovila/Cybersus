@@ -3,6 +3,7 @@ package com.suslovila.cybersus.api.fuel;
 import com.suslovila.cybersus.api.fuel.impl.FuelEmpty;
 import com.suslovila.cybersus.utils.SusCollectionUtils;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,14 +14,17 @@ import java.util.Optional;
 public class FuelVariation {
     public static final FuelVariation EMPTY = new FuelVariation(Collections.singletonList(new FuelComposite(Collections.singletonList(FuelEmpty.INSTANCE))));
     public List<FuelComposite> fuelComposites = new ArrayList<>();
+
     public FuelVariation(List<FuelComposite> fuels) {
         this.fuelComposites = fuels;
     }
+
     public FuelVariation() {
     }
+
     public boolean tryTakeFuelFromPlayer(EntityPlayer player) {
         Optional<FuelComposite> firstWhichPlayerHas = SusCollectionUtils.first(fuelComposites, (fuelComposite -> fuelComposite.hasPlayerEnough(player)));
-        if(firstWhichPlayerHas.isPresent()) {
+        if (firstWhichPlayerHas.isPresent()) {
             FuelComposite fuelComposite = firstWhichPlayerHas.get();
             fuelComposite.forceTakeFrom(player);
         }
@@ -38,6 +42,7 @@ public class FuelVariation {
 
         return this;
     }
+
     public FuelVariation addVariant(FuelComposite fuelComposite) {
         fuelComposites.add(fuelComposite);
 
@@ -49,9 +54,13 @@ public class FuelVariation {
         StringBuilder stringBuilder = new StringBuilder();
         int num = 0;
         for (FuelComposite fuel : fuelComposites) {
-            if (!(fuel.fuels.stream().allMatch(IFuel::isEmpty)) && num > 0) stringBuilder.append("or ");
+            if (!(fuel.fuels.stream().allMatch(IFuel::isEmpty)) && num > 0)
+                stringBuilder.append(StatCollector.translateToLocal("cybersus.or")).append(" ");
 
             stringBuilder.append(fuel);
+            if (num != fuelComposites.size() - 1) {
+                stringBuilder.append(" ");
+            }
             num++;
         }
 

@@ -67,6 +67,47 @@ public class ContainerImplantHolder extends DefaultContainer {
     public boolean canInteractWith(EntityPlayer player) {
         return true;
     }
+
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
+        ItemStack originalStack = null;
+        Slot slot = (Slot) inventorySlots.get(slotIndex);
+        int numSlots = inventorySlots.size();
+        if (slot != null && slot.getHasStack()) {
+            ItemStack stackInSlot = slot.getStack();
+            originalStack = stackInSlot.copy();
+
+
+            boolean isPlayerInventorySlot = slotIndex >= numSlots - 9 * 4;
+            boolean isHotBar = slotIndex >= numSlots - 9;
+            if (isPlayerInventorySlot && tryShiftItem(stackInSlot, numSlots)) {
+                // NOOP
+            } else if (isPlayerInventorySlot && !isHotBar) {
+                if (!shiftItemStack(stackInSlot, numSlots - 9, numSlots)) {
+                    return null;
+                }
+            } else if (isHotBar) {
+                if (!shiftItemStack(stackInSlot, numSlots - 9 * 4, numSlots - 9)) {
+                    return null;
+                }
+            } else if (!shiftItemStack(stackInSlot, numSlots - 9 * 4, numSlots)) {
+                return null;
+            }
+            slot.onSlotChange(stackInSlot, originalStack);
+            if (stackInSlot.stackSize <= 0) {
+                slot.putStack(null);
+            } else {
+                slot.onSlotChanged();
+            }
+            if (stackInSlot.stackSize == originalStack.stackSize) {
+                return null;
+            }
+            slot.onPickupFromSlot(player, stackInSlot);
+        }
+        return originalStack;
+    }
+
 }
 
 class ImplantSlot extends Slot {
@@ -85,4 +126,6 @@ class ImplantSlot extends Slot {
         if(type == null) return null;
         return ImplantType.getIcon(type);
     }
+
+
 }

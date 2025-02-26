@@ -2,6 +2,7 @@ package com.suslovila.cybersus.utils;
 
 
 import com.mojang.realmsclient.util.Pair;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
+import static com.suslovila.cybersus.utils.SusUtils.nextDouble;
 
 public class SusVec3 {
     //JUST COPIED FROM 1.18 VERSION BECAUSE I FIND VECTORS ON IT MORE COMFORTABLE
@@ -283,6 +286,23 @@ public class SusVec3 {
     }
 
 
+    public static SusVec3 readFrom(ByteBuf buf) {
+        double x = buf.readDouble();
+        double y = buf.readDouble();
+        double z = buf.readDouble();
+        return new SusVec3(
+                x,
+                y,
+                z
+        );
+    }
+
+    public void writeTo(ByteBuf buf) {
+        buf.writeDouble(x);
+        buf.writeDouble(y);
+        buf.writeDouble(z);
+    }
+
     public static SusVec3 getOrthogonalVec3(SusVec3 vec3) {
         SusVec3 orthogonal;
         List<Double> vec3Cords = vec3.getCordsAsList();
@@ -339,5 +359,9 @@ public class SusVec3 {
         list.set(index1, value1);
         list.set(index2, value2);
         return list;
+    }
+
+    public static SusVec3 randomVector() {
+        return new SusVec3(nextDouble(-1, 1), nextDouble(-1, 1), nextDouble(-1, 1)).normalize();
     }
 }
