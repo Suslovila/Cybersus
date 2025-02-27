@@ -7,7 +7,6 @@ import org.lwjgl.opengl.GL11;
 
 // taken from Vazki's Botania mod
 public class RenderHelper {
-	public static class Helper {
 
 		public static void rotateIfSneaking(EntityPlayer player) {
 			if(player.isSneaking())
@@ -22,9 +21,8 @@ public class RenderHelper {
 			GL11.glTranslated(0, player.getEyeHeight() - (player.isSneaking() ? 0.0625 : 0), 0);
 		}
 
-	}
 
-	public static enum RenderType {
+	public enum RenderType {
 		BODY,
 
 		HEAD;

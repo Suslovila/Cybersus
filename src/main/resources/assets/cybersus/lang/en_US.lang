@@ -1,7 +1,7 @@
 itemGroup.cybersus=Cybersus
-tc.aspect.Gravitas=Gravity, attraction, absorption
+tc.aspect.Gravitas=Gravity, Attraction, Absorption
 tc.aspect.Humilitas=Restraint, Captivity, Control
-tc.aspect.Dimensio=Space, dimension
+tc.aspect.Dimensio=Space, Dimension
 tc.aspect.Sanguino=Blood
 
 tc.research_category.cybersus=Magical Prosthetics
@@ -90,8 +90,48 @@ item.creative_aspect_holder.name=Creative Aspect Holder
 item.blank_eye.name=Blank eye
 item.illusion_generator.name=Illusion Generator
 
-#<BR>§Flashcard§r<BR>
 key.suppressed=SUPPRESSED
 cybersus.and=and
 cybersus.or=or
-#§L Banks§r
+
+cybersus.ability_type=Ability Type
+cybersus.ability_type_not_stated=Undefined
+cybersus.ability_type_hack=Target Capture
+cybersus.ability_type_instant=Instant Effect
+cybersus.ability_type_passive=Passive
+
+cybersus.ability.price_per_activation_key=Activation Cost
+cybersus.ability.price_per_tick_key=Cost per Time Unit
+cybersus.ability.price_for_triggering_key=Trigger Cost
+
+cybersus.item.illusion_generator.illusions.name=Illusory Copies
+ac.text.ILLUSION_GENERATOR.description=Speaking of space-time and mind distortion, one of the most obvious ideas that comes to mind is to deceive the victim’s brain by overloading it with excessive information, making them see what is not really there, or distorting their perception of reality.
+cybersus.item.illusion_generator.illusions.description=When used, the illusion generator will begin to distort the target's mind, and upon completion, the victim will temporarily see your illusory copies, confusing them and making it difficult to determine your exact location.
+
+ac.text.GRAVITY_INCREASER.description=The structure of this world has always fascinated you and made you ponder. The most fundamental—and, strangely enough, weakest—interaction is gravity. Not only is it uncontrollable, but it is also practically useless—noticeable effects require massive objects, like Earth and the Moon. But magic knows no limits, so you created an implant to generate a field of enhanced gravity for your own benefit.
+cybersus.item.gravity_increaser.massive_gravity_trap.name=Gravity Zone
+cybersus.item.gravity_increaser.massive_gravity_trap.description=When activated, after a delay, it creates a vast gravitational field in the direction of your gaze, pulling all creatures downward to the ground.
+cybersus.item.gravity_increaser.targeted_gravity_trap.name=Gravity Trap
+cybersus.item.gravity_increaser.targeted_gravity_trap.description=After locking onto a target, it creates a small area of intensified gravity beneath them.
+
+ac.text.SHADOW_SKIN.description=The oldest fear of humankind is the fear of the unknown. And the unknown is born where nothing can be seen. You have created an implant that shrouds and seals you, pressing you into the darkness.
+cybersus.item.shadow_skin.shadow_travel.name=Veil of Darkness
+cybersus.item.shadow_skin.shadow_travel.description=While in a dark place, you can sink into the shadows, becoming immune to direct attacks and losing the ability to interact with the outside world. However, you are vulnerable to fire, and any damage of this type will have fatal consequences. Moreover, if you find yourself in a bright enough area, you will be forcibly expelled from the darkness, which is something you definitely want to avoid.
+cybersus.item.shadow_skin.shadow_teleportation.name=Shadow Teleportation
+cybersus.item.shadow_skin.shadow_teleportation.description=While in a dark place, you can teleport to the location your gaze is directed at, provided the destination is also sufficiently dark.
+
+ac.text.SLEEP_MODULE.description=Potion-making is, of course, an interesting craft, but an imperfect one. A prime example is the sleeping potion. When ingested, not all of its contents actually take effect, leading to unnecessary waste of valuable resources. That is why, using modern technology, you have created an implant that allows you to enter sleep directly.
+cybersus.item.sleep_diver.sleep.name=Dream Immersion
+cybersus.item.sleep_diver.sleep.description=Sends you into the dream world, similar to a sleeping potion.
+
+ac.text.TORMENTOR.description=The spell you have studied is truly terrifying—the realm of torment is a dreadful place. However, applying this spell in practice is extremely difficult; it is very hard to land. That is why you have created an implant that allows you to send your target into the realm of torment. Using it requires 16 Iter, 16 Vinculum, 16 Spiritus, and (16 Ira or (16 Ignis and 16 Telum)).
+cybersus.item.tormentor.torment.name=Torment
+cybersus.item.tormentor.torment.description=Sends the target into the realm of torment.
+
+ac.text.MIND_EXPLODER.description=The ability to manipulate space-time can be used in many ways... But there is one cruel method of abuse—affecting the consciousness of your target.
+cybersus.item.exploser.mind_explode.name=Mind Explosion
+cybersus.item.exploser.mind_explode.description=Distorts space in the target's brain and mind, creating an explosion and dealing fatal psychic damage.
+
+ac.text.PHOENIX_HEART.description=Legends of a bird reborn in fire have been told for ages. You have studied this phenomenon and attempted to acquire the ability of this mysterious creature.
+cybersus.item.phoenix_heart.resurrection.name=Rise from the Ashes
+cybersus.item.phoenix_heart.resurrection.description=When activated, this ability will save you from death, after which it will go into cooldown.

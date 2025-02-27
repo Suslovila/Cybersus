@@ -13,9 +13,11 @@ import fox.spiteful.forbidden.DarkAspects;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.S06PacketUpdateHealth;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.FoodStats;
@@ -220,10 +222,13 @@ public class ImplantSinHeart extends ItemCybersusImplant {
         abilities.add(new AbilitySinHeartFormShift(DarkAspects.GLUTTONY) {
             @Override
             public void onPlayerHurtEventIfAttacker(LivingHurtEvent event, EntityPlayer player, int index, ItemStack implant) {
-                if (isActive(implant)) {
+                if (isActive(implant) && !player.worldObj.isRemote) {
                     FoodStats foodStats = player.getFoodStats();
                     foodStats.setFoodLevel(Math.min(20, foodStats.getFoodLevel() + 2 + itemRand.nextInt(2)));
                     player.heal(event.ammount);
+                    if(player instanceof EntityPlayerMP) {
+                        ((EntityPlayerMP)player).playerNetServerHandler.sendPacket(new S06PacketUpdateHealth(player.getHealth(), player.getFoodStats().getFoodLevel(), player.getFoodStats().getSaturationLevel()));
+                    }
                 }
             }
 

@@ -105,7 +105,6 @@ public class ClientProcessHandler {
 
             CybersusPlayerExtendedData.get(player).implantStorage.forEachImplant((index, stack, isDisabled) -> {
                 if (stack.getItem() instanceof ImplantShadowSkin) {
-                    Ability shadowTravel = ((ImplantShadowSkin) stack.getItem()).getAbilities(player, index, stack).get(0);
                     NBTTagCompound tagCompound = KhariumSusNBTHelper.getOrCreateTag(stack);
                     boolean hasCompletedPreparations = true;
                     if (tagCompound.hasKey(MODE_PREPARATION_TIMER)) {

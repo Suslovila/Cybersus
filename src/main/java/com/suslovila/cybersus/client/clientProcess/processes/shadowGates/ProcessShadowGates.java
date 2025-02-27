@@ -31,11 +31,16 @@ import static org.apache.commons.lang3.RandomUtils.nextInt;
 public class ProcessShadowGates extends ClientProcess implements ISerializableProcess {
     Random random = new Random();
     ConcurrentSet<ShadowTail> tails = new ConcurrentSet<>();
-
+    public Integer ownerId = null;
 
 
     public ProcessShadowGates(SusVec3 vec3, int duration) {
         super(vec3, duration);
+    }
+
+    public ProcessShadowGates(Entity entity, SusVec3 vec3, int duration) {
+        super(vec3, duration);
+        this.ownerId = entity.getEntityId();
     }
 
     public ProcessShadowGates() {
@@ -73,10 +78,19 @@ public class ProcessShadowGates extends ClientProcess implements ISerializablePr
     @Override
     public void render(RenderWorldLastEvent event) {
 
+        if(ownerId != null && Minecraft.getMinecraft().thePlayer != null && Minecraft.getMinecraft().thePlayer.worldObj != null) {
+            Entity entity = Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(ownerId);
+            if (entity != null) {
+                position = SusGraphicHelper.getRenderPos(entity, event.partialTicks);
+
+            }
+        }
+
         GL11.glPushMatrix();
+        SusGraphicHelper.translateFromPlayerTo(this.position, event.partialTicks);
         SusGraphicHelper.makeSystemOrthToVectorAndHandle(
                 new SusVec3(0.0, 1.0, 0.0),
-                1.5,
+                1.6,
                 ()-> {
                     GL11.glPushAttrib(GL11.GL_BLEND);
                     GL11.glEnable(GL11.GL_BLEND);
@@ -228,6 +242,23 @@ public class ProcessShadowGates extends ClientProcess implements ISerializablePr
                 }
             }
         }
+    }
+
+    @Override
+    public void writeTo(ByteBuf buf) {
+        super.writeTo(buf);
+        buf.writeBoolean(ownerId != null);
+        if(ownerId != null) {
+            buf.writeInt(ownerId);
+        }
+    }
+    @Override
+    public void readFrom(ByteBuf buf) {
+        super.readFrom(buf);
+        if(buf.readBoolean()) {
+            ownerId = buf.readInt();
+        }
+
     }
 
 }

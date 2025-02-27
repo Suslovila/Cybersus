@@ -76,6 +76,8 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
 
             @Override
             public void onEnableButtonClicked(EntityPlayer player, int index, ItemStack implant) {
+                int light = player.worldObj.getBlockLightValue((int) player.posX, (int) player.posY, (int) player.posZ);
+                if(light >= 14) return;
                 if (isPreparing(implant)) return;
                 super.onEnableButtonClicked(player, index, implant);
             }
@@ -98,7 +100,7 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
                             1.4f + player.worldObj.rand.nextFloat() * 0.2f
                     );
                 }
-                ProcessShadowGates processShadowGates = new ProcessShadowGates(SusVec3.getEntityPos(player).add(0.0, 1.0, 0.0), 30);
+                ProcessShadowGates processShadowGates = new ProcessShadowGates(player, SusVec3.getEntityPos(player).add(0.0, 1.0, 0.0), 30);
                 CustomWorldData.getCustomData(player.worldObj).addProcess(processShadowGates);
                 CustomWorldData.syncProcess(processShadowGates, player.worldObj.provider.dimensionId);
                 if (!isActive(implant)) {
@@ -216,7 +218,7 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
             public void sendToCooldown(EntityPlayer player, int index, ItemStack implant) {
                 super.sendToCooldown(player, index, implant);
                 player.removePotionEffect(Potion.invisibility.id);
-                KhariumSusNBTHelper.getOrCreateTag(implant).setInteger(MODE_PREPARATION_TIMER, 0);
+//                KhariumSusNBTHelper.getOrCreateTag(implant).setInteger(MODE_PREPARATION_TIMER, 0);
             }
 
             @Override
@@ -294,11 +296,11 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
 
                             KhariumSusNBTHelper.getOrCreateTag(implant).setTag(DESTINATION_POS, tagForPos);
 
-                            ProcessShadowGates sourceGates = new ProcessShadowGates(SusVec3.getEntityPos(player).add(0.0, 1.3, 0.0), 30);
+                            ProcessShadowGates sourceGates = new ProcessShadowGates(player, SusVec3.getEntityPos(player).add(0.0, 1, 0.0), 30);
 //                            CustomWorldData.getCustomData(player.worldObj).addProcess(sourceGates);
                             CustomWorldData.syncProcess(sourceGates);
 
-                            ProcessShadowGates destinationGates = new ProcessShadowGates(destinationVector.add(0.0, 1.3, 0.0), 30);
+                            ProcessShadowGates destinationGates = new ProcessShadowGates(destinationVector.add(0.0, 1.7, 0.0), 30);
 //                            CustomWorldData.getCustomData(player.worldObj).addProcess(destinationGates);
                             CustomWorldData.syncProcess(destinationGates);
 

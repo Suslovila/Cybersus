@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import org.lwjgl.opengl.GL11;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
@@ -31,6 +32,7 @@ import java.util.Objects;
 
 import static com.suslovila.cybersus.common.item.ItemSuppressed.SUPPRESSED_STACK_KEY;
 import static com.suslovila.cybersus.common.item.ItemSuppressed.TIME_SUPPRESSED_LEFT;
+import static com.suslovila.cybersus.utils.SusGraphicHelper.bindTexture;
 
 public class ImplantSuppressor extends ItemCybersusImplant {
     public static final String name = "suppressor";
@@ -41,7 +43,7 @@ public class ImplantSuppressor extends ItemCybersusImplant {
 
 
     public ImplantSuppressor() {
-        super(ImplantType.BRAIN);
+        super(ImplantType.HAND);
 
     }
 
@@ -134,6 +136,18 @@ public class ImplantSuppressor extends ItemCybersusImplant {
 
                 }
             }
+
+            public void renderAbility(RenderGameOverlayEvent.Post event, ItemStack implant, float scale, double radius) {
+                bindTexture(texture);
+                SusGraphicHelper.bindColor(CybersusAspect.HUMILITAS.getColor(), 1.0f, 1.0f);
+                GL11.glPushAttrib(GL11.GL_BLEND);
+                GL11.glEnable(GL11.GL_BLEND);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                SusGraphicHelper.drawFromCenter(radius * 0.58);
+
+                GL11.glPopAttrib();
+            }
+
         });
     }
 
