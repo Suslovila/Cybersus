@@ -1,6 +1,7 @@
 package com.suslovila.cybersus.utils;
 
 
+import com.emoniph.witchery.dimension.GenerateMaze;
 import com.mojang.realmsclient.util.Pair;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
@@ -260,8 +261,26 @@ public class SusVec3 {
         return new SusVec3(entity.posX, entity.posY, entity.posZ);
     }
 
+
+    public static SusVec3 getVectorFromHeadRotationHorizontal(Entity entity) {
+        SusVec3 south = new SusVec3(0.0, 0.0, 1.0);
+        SusVec3 west = new SusVec3(-1.0, 0.0, 0.0);
+
+        double angleYawRad = degreesToRad(entity.getRotationYawHead());
+        return south.scale(Math.cos(angleYawRad)).add(west.scale(Math.sin(angleYawRad)));
+
+    }
+
+
+    public static double degreesToRad(double angleDegrees) {
+        return angleDegrees / 180.0 * Math.PI;
+    }
     public static SusVec3 getLookVec(Entity entity) {
-        return new SusVec3(entity.getLookVec().xCoord, entity.getLookVec().zCoord, entity.getLookVec().zCoord).normalize();
+        Vec3 lookVec = entity.getLookVec();
+        if(lookVec == null) {
+            return new SusVec3(0.0, 0.0, 0.0);
+        }
+        return new SusVec3(lookVec.xCoord, lookVec.yCoord, lookVec.zCoord).normalize();
     }
 
     public static <T extends Number> SusVec3 fromCollection(Collection<T> collection) throws Exception {

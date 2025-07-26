@@ -10,8 +10,8 @@ public abstract class ClientProcess extends WorldProcess implements ISerializabl
     public int timeLeft;
     public int totalDuration;
 
-    public ClientProcess(SusVec3 vec3, int duration) {
-        position = vec3;
+    public ClientProcess(SusVec3 position, int duration) {
+        this.position = position;
 
         this.timeLeft = duration;
         this.totalDuration = duration;

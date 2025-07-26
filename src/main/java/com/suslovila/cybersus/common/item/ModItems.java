@@ -2,6 +2,7 @@ package com.suslovila.cybersus.common.item;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.common.item.implants.*;
+import com.suslovila.cybersus.common.item.implants.reactionIncreaser.ImplantReactionIncreaser;
 import com.suslovila.cybersus.common.item.implants.sinHeart.ImplantSinHeart;
 import com.suslovila.cybersus.common.item.implants.ImplantShadowSkin;
 import com.suslovila.cybersus.common.item.implants.witchery.ImplantSleepModule;
@@ -39,6 +40,7 @@ public class ModItems {
     public static ItemEyeBlank eyeBlank;
     public static ItemSuppressed itemSuppressed;
     public static ImplantSuppressor suppressor;
+    public static ImplantReactionIncreaser reactionIncreaser;
 
 
     public static void register() {
@@ -79,6 +81,8 @@ public class ModItems {
 
 //            itemSuppressed = new ItemSuppressed();
 //            suppressor = new ImplantSuppressor();
+
+            reactionIncreaser = new ImplantReactionIncreaser();
         }
     }
 }

@@ -46,7 +46,6 @@ public class SusWorldHelper {
                             hitx += 0.5;
                             break;
                     }
-                    entity.fallDistance = 0.0f;
                     entity.setPosition(hitx, hity, hitz);
                     break;
 
@@ -57,12 +56,16 @@ public class SusWorldHelper {
                             hitMOP.hitVec.zCoord
                     );
                     break;
+
             }
+            entity.fallDistance = 0.0f;
+
         }
     }
 
     public static void teleportEntity(Entity entity, SusVec3 pos) {
         if (entity instanceof EntityPlayerMP) {
+            entity.fallDistance = 0.0f;
             if (((EntityPlayerMP) entity).playerNetServerHandler.netManager.isChannelOpen()) {
                 ((EntityPlayerMP) entity).setPositionAndUpdate(pos.x, pos.y, pos.z);
                 return;
@@ -84,6 +87,22 @@ public class SusWorldHelper {
                 playerPosition.xCoord + playerLook.xCoord * reachDistance,
                 playerPosition.yCoord + playerLook.yCoord * reachDistance,
                 playerPosition.zCoord + playerLook.zCoord * reachDistance
+        );
+        return world.rayTraceBlocks(playerPosition, playerViewOffset, collisionFlag, !collisionFlag, false);
+    }
+
+    public static MovingObjectPosition raytraceBlocks(
+            World world,
+            EntityPlayer player,
+            SusVec3 displacementVector,
+            boolean collisionFlag,
+            double reachDistance
+    ) {
+        Vec3 playerPosition = Vec3.createVectorHelper(player.posX, player.posY + player.getEyeHeight(), player.posZ);
+        Vec3 playerViewOffset = Vec3.createVectorHelper(
+                playerPosition.xCoord + displacementVector.x * reachDistance,
+                playerPosition.yCoord + displacementVector.y * reachDistance,
+                playerPosition.zCoord + displacementVector.z * reachDistance
         );
         return world.rayTraceBlocks(playerPosition, playerViewOffset, collisionFlag, !collisionFlag, false);
     }
