@@ -127,3 +127,5 @@ cybersus.item.exploser.mind_explode.description=Искажает простра�
 ac.text.PHOENIX_HEART.description=Легенды о птице, возрождающейся в огне, ходили с давних времён. Вы изучили этот вопрос и попытались получить способность этой загадочной птицы.
 cybersus.item.phoenix_heart.resurrection.name=Восстание из пепла
 cybersus.item.phoenix_heart.resurrection.description=Будучи включённой, способность спасёт вас от смерти, после чего уйдет в перезарядку
+
+cybersus.translation.hack_notification=Вы чувствуете, как странный поток пронизывает ваше тело...

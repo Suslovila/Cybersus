@@ -57,6 +57,8 @@ public class CybersusResearchRegistry {
     public static final String blankEye = "BLANK_EYE";
     public static final String mindExploder = "MIND_EXPLODER";
     public static final String illusionGenerator = "ILLUSION_GENERATOR";
+    public static final String reactionIncreaser = "REACTION_INCREASER";
+    public static final String protonIngot = "PROTON_INGOT";
 
 
     public static void integrateCrucibleRecipe() {
@@ -299,6 +301,23 @@ public class CybersusResearchRegistry {
 
             ));
         }
+        if (ModItems.reactionIncreaser != null) {
+            AspectList aspects = new AspectList().add(Aspect.MOTION, 1024).add(Aspect.SENSES, 1024).add(Aspect.MECHANISM, 256);
+            runicMatrixRecipes.put(reactionIncreaser, ThaumcraftApi.addInfusionCraftingRecipe(
+                    reactionIncreaser,
+                    new ItemStack(ModItems.reactionIncreaser),
+                    30,
+                    aspects,
+                    new ItemStack(ModItems.protonIngot),
+                    new ItemStack[]{
+                            new ItemStack(ConfigItems.itemZombieBrain, 1),
+                            new ItemStack(Items.redstone, 1),
+                            new ItemStack(ConfigItems.itemResource, 1, 16),
+
+                    }
+
+            ));
+        }
     }
 
 
@@ -516,7 +535,27 @@ public class CybersusResearchRegistry {
         ).setPages(injectSimpleImplantResearchInfo(ModItems.illusionGenerator, new ResearchPage(runicMatrixRecipes.get(illusionGenerator)))).setConcealed()
                 .setParents(blankEye).registerResearchItem();
 
+        new ResearchImplantItem(
+                reactionIncreaser,
+                cybersusCategory,
+                new AspectList().add(Aspect.MOTION, 256).add(Aspect.TRAP, 2048).add(Aspect.MIND, 1024).add(Aspect.MAN, 1024),
+                10,
+                -10,
+                2,
+                new ItemStack(ModItems.reactionIncreaser)
+        ).setPages(injectSimpleImplantResearchInfo(ModItems.reactionIncreaser, new ResearchPage(runicMatrixRecipes.get(reactionIncreaser)))).setConcealed()
+                .setParents(blankEye).registerResearchItem();
 
+        new ResearchImplantItem(
+                protonIngot,
+                cybersusCategory,
+                new AspectList().add(Aspect.LIFE, 256).add(Aspect.MAGIC, 2048).add(Aspect.MECHANISM, 1024),
+                10,
+                10,
+                2,
+                new ItemStack(ModItems.protonIngot)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(blankEye))).setConcealed()
+                .setParents(aspectHoldersKey).registerResearchItem();
     }
 
 

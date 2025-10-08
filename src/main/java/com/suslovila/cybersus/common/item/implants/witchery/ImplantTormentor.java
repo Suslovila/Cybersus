@@ -102,7 +102,7 @@ public class ImplantTormentor extends ItemCybersusImplant {
                 fuelVariation.addSimpleVariant(new FuelEssentia(new AspectList().add(Aspect.FIRE, 16).add(Aspect.WEAPON, 16)));
 
                 fuelComposite.fuelVariations.add(fuelVariation);
-                return FuelComposite.EMPTY;
+                return fuelComposite;
             }
 
             @Override

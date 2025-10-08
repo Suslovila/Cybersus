@@ -41,6 +41,8 @@ public class ModItems {
     public static ItemSuppressed itemSuppressed;
     public static ImplantSuppressor suppressor;
     public static ImplantReactionIncreaser reactionIncreaser;
+    public static ImplantPortalPlacer portalPlacer;
+    public static ItemProtonIngot protonIngot;
 
 
     public static void register() {
@@ -83,6 +85,9 @@ public class ModItems {
 //            suppressor = new ImplantSuppressor();
 
             reactionIncreaser = new ImplantReactionIncreaser();
+            portalPlacer = new ImplantPortalPlacer();
+
+            protonIngot = new ItemProtonIngot();
         }
     }
 }

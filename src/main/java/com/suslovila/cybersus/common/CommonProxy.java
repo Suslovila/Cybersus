@@ -8,6 +8,7 @@ import com.suslovila.cybersus.common.event.*;
 import com.suslovila.cybersus.common.item.ModItems;
 import com.suslovila.cybersus.common.processes.ProcessGravityTrap;
 import com.suslovila.cybersus.client.clientProcess.processes.illusion.ProcessIllusion;
+import com.suslovila.cybersus.common.processes.ProcessPortal;
 import com.suslovila.cybersus.common.processes.ProcessSoulBreak;
 import com.suslovila.cybersus.common.sync.CybersusPacketHandler;
 import com.suslovila.cybersus.research.CybersusAspect;
@@ -47,6 +48,8 @@ public class CommonProxy {
 
         ProcessRegistry.registerProcess(ProcessSoulBreak.class, "soul_break");
         ProcessRegistry.registerProcess(ProcessGravityTrap.class, "gravity_trap");
+        ProcessRegistry.registerProcess(ProcessPortal.class, "portal");
+
         ProcessRegistry.registerProcess(ProcessShadowGates.class, "shadow_gates");
         ProcessRegistry.registerProcess(ProcessIllusion.class, "illusion");
         ProcessRegistry.registerProcess(ProcessPlayerAccelerationEffect.class, "player_acceleration_effect");
