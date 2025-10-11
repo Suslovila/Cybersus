@@ -17,10 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -101,7 +98,8 @@ public abstract class AbilityHack extends Ability {
             if (!canHackEntity(player, hitEntity, index, implant) || !player.canEntityBeSeen(hitEntity)) {
                 return;
             }
-            if (player instanceof EntityPlayerMP &&
+            if (
+//                    player instanceof EntityPlayerMP &&
                     !MinecraftForge.EVENT_BUS.post(new PlayerTriesToStartHackingEvent((EntityPlayerMP) player, hitEntity, index, implant, this))) {
                 if (getFuelConsumeOnActivation(player, index, implant).tryTakeFuelFromPlayer(player)) {
                     tag.setInteger(HACK_TIME_LEFT_NBT, getRequiredHackTime());
@@ -109,6 +107,9 @@ public abstract class AbilityHack extends Ability {
                     // sync memes
                     tag.setInteger(HACK_VICTIM_ID_NBT, hitEntity.getEntityId());
 
+                    if(hitEntity instanceof EntityPlayer) {
+                        ((EntityPlayer)hitEntity).addChatMessage(new ChatComponentText("§5§o" + StatCollector.translateToLocal("cybersus.translation.hack_notification")));
+                    }
                     notifyClient(player, index, implant);
                 }
             }

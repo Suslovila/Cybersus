@@ -4,10 +4,13 @@ import com.suslovila.cybersus.api.fuel.FuelComposite;
 import com.suslovila.cybersus.api.fuel.impl.fuel.essentia.FuelEssentia;
 import com.suslovila.cybersus.api.implants.ability.AbilityPassive;
 import com.suslovila.cybersus.client.RenderHelper;
+import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
@@ -173,5 +176,14 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
             hash += c;
         }
         return hash * 31;
+    }
+
+    @Override
+    public void sendToCooldown(EntityPlayer player, int index, ItemStack implant) {
+        super.sendToCooldown(player, index, implant);
+        player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * 10, 9));
+        player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 20 * 10, 9));
+        player.addPotionEffect(new PotionEffect(Potion.weakness.id, 20 * 10, 9));
+
     }
 }

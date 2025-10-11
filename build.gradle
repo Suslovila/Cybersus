@@ -153,7 +153,7 @@ task copyJar(type: Copy) {
 	// Используем результирующий jar-файл из задачи jar
 	from jar.archiveFile
 	// Обратите внимание на использование прямых слэшей или двойных обратных слэшей в пути
-	into 'C:/Users/Илья/AppData/Roaming/.minecraft/mods'
+	into 'C:/Users/suwua/AppData/Roaming/.minecraft/mods'
 }
 
 // Говорим gradle, чтобы после выполнения задачи build выполнялась задача copyJar

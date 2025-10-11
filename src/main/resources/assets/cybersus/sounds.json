@@ -36,6 +36,16 @@
       ]
    },
 
+   "sandevistan_blast": {
+      "category": "master",
+      "sounds": [
+         {
+            "name": "sandevistan_blast",
+            "stream": false
+         }
+      ]
+   },
+
    "hide_in_shadows": {
       "category": "master",
       "sounds": [

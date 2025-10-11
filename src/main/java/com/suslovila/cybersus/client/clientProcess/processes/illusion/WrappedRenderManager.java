@@ -58,6 +58,7 @@ public class WrappedRenderManager {
         }
         catch (Throwable throwable3)
         {
+            throwable3.printStackTrace();
             CrashReport crashreport = CrashReport.makeCrashReport(throwable3, "Rendering entity in world");
             CrashReportCategory crashreportcategory = crashreport.makeCategory("Entity being rendered");
             p_147939_1_.addEntityCrashInfo(crashreportcategory);

@@ -89,6 +89,7 @@ item.sin_heart.name=Sin Heart
 item.creative_aspect_holder.name=Creative Aspect Holder
 item.blank_eye.name=Blank eye
 item.illusion_generator.name=Illusion Generator
+item.reaction_increaser.name=Reaction Increaser
 
 key.suppressed=SUPPRESSED
 cybersus.and=and
@@ -135,3 +136,6 @@ cybersus.item.exploser.mind_explode.description=Distorts space in the target's b
 ac.text.PHOENIX_HEART.description=Legends of a bird reborn in fire have been told for ages. You have studied this phenomenon and attempted to acquire the ability of this mysterious creature.
 cybersus.item.phoenix_heart.resurrection.name=Rise from the Ashes
 cybersus.item.phoenix_heart.resurrection.description=When activated, this ability will save you from death, after which it will go into cooldown.
+
+
+cybersus.translation.hack_notification=You feel strange flow parsing your body....

@@ -149,7 +149,7 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
 //
                             player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100, 2));
                             player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 100, 4));
-//                            player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 0));
+                            player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 0));
                             player.addPotionEffect(new PotionEffect(Potion.invisibility.id, 100, 0));
 
                         }

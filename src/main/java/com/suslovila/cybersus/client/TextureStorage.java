@@ -22,6 +22,7 @@ public class TextureStorage {
 
     public static ResourceLocationPreLoad hackHotbar;
     public static ResourceLocationPreLoad hackHotbarActivated;
+    public static ResourceLocationPreLoad gungnirCircles;
 
 
     public static void init() {
@@ -41,5 +42,6 @@ public class TextureStorage {
         spinningCircle = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/misc/radial4.png");
         hackHotbar = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/hack_hotbar.png");
         hackHotbarActivated = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implants/hack_hotbar_activated.png");
+        gungnirCircles = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/misc/circle_fire_1.png");
     }
 }
