@@ -2,6 +2,7 @@ package com.suslovila.cybersus.client.gui;
 
 import com.mojang.realmsclient.util.Pair;
 import com.suslovila.cybersus.Cybersus;
+import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
 import com.suslovila.cybersus.client.ResourceLocationPreLoad;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.suslovila.cybersus.client.KeyHandler.getIndicesCycledFrom;
 import static com.suslovila.cybersus.utils.SusGraphicHelper.*;
 
 public class GuiImplants {
@@ -55,16 +57,54 @@ public class GuiImplants {
             if (!shouldRenderGui) return;
             CybersusPlayerExtendedData data = CybersusPlayerExtendedData.get(Minecraft.getMinecraft().thePlayer);
             if (data == null) return;
-            ItemStack stack = data.implantStorage.getStackInSlot(currentImplantSlotId);
+            ItemStack currentImplant = data.implantStorage.getStackInSlot(currentImplantSlotId);
 
             GL11.glPushAttrib(GL11.GL_LIGHTING);
             GL11.glPushAttrib(GL11.GL_CULL_FACE);
             GL11.glPushAttrib(GL11.GL_BLEND);
 
-            if (stack != null) {
+            if (currentImplant != null) {
 
-                drawImplantWithScale(event, stack, 1.5f);
+                drawImplantWithScale(event, currentImplant, 1.5f);
             }
+            ItemStack previousImplant = null;
+            ItemStack nextImplant = null;
+            int nextIndex = (GuiImplants.currentImplantSlotId) % ImplantType.getTotalSlotAmount();
+            List<Integer> indexes = getIndicesCycledFrom(nextIndex, ImplantType.getTotalSlotAmount());
+            for(int index : indexes) {
+                if (index == GuiImplants.currentImplantSlotId) continue;
+                ItemStack possibleStack = data.implantStorage.getStackInSlot(index);
+                if (possibleStack != null && nextImplant == null) {
+                    nextImplant = possibleStack;
+                }
+                if (possibleStack != null) {
+                    previousImplant = possibleStack;
+                }
+            }
+
+            if(previousImplant != null) {
+                float scale = 1.2f;
+                GL11.glPushMatrix();
+                GL11.glScalef(scale, scale, scale);
+                double x = 40;
+                double height = event.resolution.getScaledHeight_double();
+                double y = height - 100;
+                GL11.glTranslated(x / scale, y / scale, 0f);
+                drawStack(Minecraft.getMinecraft(), previousImplant, (int) (1 / scale), (int) (1 / scale), 0f);
+                GL11.glPopMatrix();
+            }
+            if(nextImplant != null) {
+                float scale = 1.2f;
+                GL11.glPushMatrix();
+                GL11.glScalef(scale, scale, scale);
+                double x = 100;
+                double height = event.resolution.getScaledHeight_double();
+                double y = height - 100;
+                GL11.glTranslated(x / scale, y / scale, 0f);
+                drawStack(Minecraft.getMinecraft(), nextImplant, (int) (1 / scale), (int) (1 / scale), 0f);
+                GL11.glPopMatrix();
+            }
+
             ArrayList<Pair<ItemStack, AbilityHack>> activeHackAbilities = new ArrayList<>();
             data.implantStorage.forEachImplant((index, implant) -> {
                 List<Ability> implantAbilities = ((ItemImplant) implant.getItem()).getAbilities(Minecraft.getMinecraft().thePlayer, index, implant);
@@ -85,9 +125,11 @@ public class GuiImplants {
 
             RenderHelper.disableStandardItemLighting();
 
+
         }
     }
 
+//    public void draw
 
     public void drawImplantWithScale(RenderGameOverlayEvent.Post event, ItemStack implant, float scale) {
 
@@ -176,6 +218,7 @@ public class GuiImplants {
         // drawing implant by itself
         GL11.glPushMatrix();
         GL11.glScalef(scale, scale, scale);
+
         GL11.glTranslated(x / scale, y / scale, 0f);
         drawStack(Minecraft.getMinecraft(), implant, (int) (1 / scale), (int) (1 / scale), 0f);
         GL11.glPopMatrix();
@@ -204,7 +247,7 @@ public class GuiImplants {
             GL11.glTranslated((xHackHotbarRenderer), (yHackHotbarRenderer), 0.0);
             GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
             GL11.glRotated(-90.0, 0.0, 0.0, 1.0);
-            SusGraphicHelper.drawGuideArrows();
+//            SusGraphicHelper.drawGuideArrows();
             GL11.glDisable(GL11.GL_CULL_FACE);
             double scaleHack = 1.25;
             GL11.glPushMatrix();
@@ -314,9 +357,9 @@ public class GuiImplants {
         Minecraft mc = Minecraft.getMinecraft();
         ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
         GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
-        SusGraphicHelper.drawGuideArrows();
+//        SusGraphicHelper.drawGuideArrows();
         GL11.glMatrixMode(GL11.GL_PROJECTION);
-        SusGraphicHelper.drawGuideArrows();
+//        SusGraphicHelper.drawGuideArrows();
         GL11.glLoadIdentity();
         GL11.glOrtho(
                 0.0,
@@ -332,7 +375,7 @@ public class GuiImplants {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        SusGraphicHelper.drawGuideArrows();
+//        SusGraphicHelper.drawGuideArrows();
     }
 
 

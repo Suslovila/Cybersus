@@ -11,14 +11,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.common.Thaumcraft;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static com.suslovila.cybersus.Cybersus.random;
 
 public class AbilitySinHeartFormShift extends AbilityPassive {
     Aspect aspect;
@@ -44,6 +48,16 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
         return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(aspect, 16)));
 //        return FuelComposite.EMPTY;
 
+    }
+
+    @Override
+    public void onAbilityStatusSwitched(EntityPlayer player, int index, ItemStack implant) {
+        super.onAbilityStatusSwitched(player, index, implant);
+        for (int a = 0; a < 60; a++) {
+            float he = Math.max(1.0F, player.height * (150 - 100) / 150.0F);
+            Thaumcraft.proxy.smokeSpiral(player.worldObj, player.posX, player.boundingBox.minY + (he / 2.0F), player.posZ, he, random.nextInt(360), MathHelper.floor_double(player.boundingBox.minY) - 1, aspect.getColor());
+
+        }
     }
 
     @Override
@@ -85,7 +99,7 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
 
         if (type == RenderHelper.RenderType.BODY) {
             GL11.glPushMatrix();
-            SusGraphicHelper.drawGuideArrows();
+//            SusGraphicHelper.drawGuideArrows();
 //            RenderHelper.Helper.translateToHeadLevel(player);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
