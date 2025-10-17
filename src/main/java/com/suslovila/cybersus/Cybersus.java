@@ -3,6 +3,7 @@ package com.suslovila.cybersus;
 
 import com.suslovila.cybersus.client.gui.CybersusGuiHandler;
 import com.suslovila.cybersus.common.CommonProxy;
+import com.suslovila.cybersus.common.CybersusWorldGenerator;
 import com.suslovila.cybersus.common.item.ModItems;
 import com.suslovila.cybersus.research.CybersusResearchRegistry;
 import com.suslovila.cybersus.utils.NbtKeyNameHelper;
@@ -14,6 +15,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -66,6 +68,8 @@ public class Cybersus {
         travellersGearLoaded = Loader.isModLoaded("TravellersGear");
 
         proxy.preInit(event);
+        GameRegistry.registerWorldGenerator(new CybersusWorldGenerator(), 0);
+
     }
 
 

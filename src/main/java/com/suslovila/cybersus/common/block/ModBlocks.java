@@ -8,10 +8,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
 
-    static BlockImplantInstaller implantInstaller;
-    static BlockRuneInstaller runeInstaller;
+    public static BlockImplantInstaller implantInstaller;
+    public static BlockRuneInstaller runeInstaller;
+    public static BlockGravitationDustOre gravitationDustOre;
 
     public static void register() {
+        gravitationDustOre = new BlockGravitationDustOre();
 //        implantInstaller = new BlockImplantInstaller("implant_installer");
 //        runeInstaller = new BlockRuneInstaller("rune_installer");
 //

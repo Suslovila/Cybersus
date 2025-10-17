@@ -43,6 +43,8 @@ public class ModItems {
     public static ImplantReactionIncreaser reactionIncreaser;
     public static ImplantPortalPlacer portalPlacer;
     public static ItemProtonIngot protonIngot;
+    public static ItemIcarusBlood icarusBlood;
+    public static ItemGravitationDust gravitationDust;
 
 
     public static void register() {
@@ -53,6 +55,7 @@ public class ModItems {
     }
 
     public static void registerImplants() {
+        gravitationDust = new ItemGravitationDust();
         if(Cybersus.thaumcraftLoaded) {
             portableMultiAspectContainer = new ItemPortableMultiAspectContainer();
             portablesingleAspectContainer = new ItemPortableSingleAspectContainer();
@@ -88,6 +91,7 @@ public class ModItems {
             portalPlacer = new ImplantPortalPlacer();
 
             protonIngot = new ItemProtonIngot();
+            icarusBlood = new ItemIcarusBlood();
         }
     }
 }
