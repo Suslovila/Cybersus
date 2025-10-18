@@ -98,11 +98,14 @@ public class CybersusWorldGenerator implements IWorldGenerator {
         if (world.provider.dimensionId == 1) {
             generateEnd(world, rand, chunkX * 16, chunkZ * 16);
         }
+        if (world.provider.dimensionId == 0) {
+            generateOverworld(world, rand, chunkX * 16, chunkZ * 16);
+        }
     }
 
     private void generateEnd(World world, Random rand, int baseX, int baseZ) {
         // Сколько жил на чанк / размер жилы / высоты
-        final int veinsPerChunk = 6;   // сколько попыток
+        final int veinsPerChunk = 1;   // сколько попыток
         final int veinSize      = 5;   // размер жилы
         final int minY          = 4;
         final int maxY          = 80;  // основная «шапка» острова Энда
@@ -116,5 +119,30 @@ public class CybersusWorldGenerator implements IWorldGenerator {
         }
     }
 
+    private void generateOverworld(World world, Random rand, int baseX, int baseZ) {
+        // Получаем биом по центру чанка
+        BiomeGenBase biome = world.getBiomeGenForCoords(baseX + 8, baseZ + 8);
+
+        // Проверяем, что это ЗАРАЖЁННЫЙ БИОМ из Thaumcraft
+        // Thaumcraft добавляет биомы с ID 39 и 40 (обычно: taint, taint deep)
+        // Лучше свериться в коде/конфиге мода, но 39 — стандартный "Taint".
+        if (biome != null && biome.biomeName.contains("Tainted Land")) {
+
+            int veinsPerChunk = 1; // сколько жил на чанк
+            int veinSize = 6;      // размер жилы
+            int minY = 8;
+            int maxY = 48;
+
+            for (int i = 0; i < veinsPerChunk; i++) {
+                int x = baseX + rand.nextInt(16);
+                int y = minY + rand.nextInt(maxY - minY);
+                int z = baseZ + rand.nextInt(16);
+
+                // Фазолит в камне (Blocks.stone)
+                new WorldGenMinable(ModBlocks.phasoliteOre, veinSize, Blocks.stone)
+                        .generate(world, rand, x, y, z);
+            }
+        }
+    }
 }
 

@@ -45,6 +45,7 @@ public class ModItems {
     public static ItemProtonIngot protonIngot;
     public static ItemIcarusBlood icarusBlood;
     public static ItemGravitationDust gravitationDust;
+    public static ItemPhasolite phasolite;
 
 
     public static void register() {
@@ -56,6 +57,7 @@ public class ModItems {
 
     public static void registerImplants() {
         gravitationDust = new ItemGravitationDust();
+        phasolite = new ItemPhasolite();
         if(Cybersus.thaumcraftLoaded) {
             portableMultiAspectContainer = new ItemPortableMultiAspectContainer();
             portablesingleAspectContainer = new ItemPortableSingleAspectContainer();
