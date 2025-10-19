@@ -3,6 +3,7 @@ package com.suslovila.cybersus.client;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
+import com.suslovila.cybersus.client.gui.CybersusGui;
 import com.suslovila.cybersus.client.gui.GuiImplants;
 import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.common.item.implants.reactionIncreaser.ImplantReactionIncreaser;
@@ -19,7 +20,6 @@ import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
@@ -28,16 +28,18 @@ import java.util.*;
 
 import static com.suslovila.cybersus.utils.SusVec3.getVectorFromHeadRotationHorizontal;
 
-public class KeyHandler {
+public class CybersusKeyHandler {
 
-    private static final KeyBinding nextImplantTrigger = new KeyBinding("next implant", Keyboard.KEY_V, Cybersus.MOD_ID + ".key.category");
-    private static final KeyBinding previousImplantTrigger = new KeyBinding("previous implant", Keyboard.KEY_C, Cybersus.MOD_ID + ".key.category");
-    private static final KeyBinding firstAbilityTrigger = new KeyBinding("use first ability", Keyboard.KEY_F, Cybersus.MOD_ID + ".key.category");
-    private static final KeyBinding secondAbilityTrigger = new KeyBinding("use second ability", Keyboard.KEY_G, Cybersus.MOD_ID + ".key.category");
-    private static final KeyBinding thirdAbilityTrigger = new KeyBinding("use third ability", Keyboard.KEY_P, Cybersus.MOD_ID + ".key.category");
-    private static final KeyBinding renderImplants = new KeyBinding("disable implant render", Keyboard.KEY_I, Cybersus.MOD_ID + ".key.category");
+    public static final KeyBinding nextImplantTrigger = new KeyBinding("next implant", Keyboard.KEY_V, Cybersus.MOD_ID + ".key.category");
+    public static final KeyBinding previousImplantTrigger = new KeyBinding("previous implant", Keyboard.KEY_C, Cybersus.MOD_ID + ".key.category");
+    public static final KeyBinding firstAbilityTrigger = new KeyBinding("use first ability", Keyboard.KEY_F, Cybersus.MOD_ID + ".key.category");
+    public static final KeyBinding secondAbilityTrigger = new KeyBinding("use second ability", Keyboard.KEY_G, Cybersus.MOD_ID + ".key.category");
+    public static final KeyBinding thirdAbilityTrigger = new KeyBinding("use third ability", Keyboard.KEY_P, Cybersus.MOD_ID + ".key.category");
+    public static final KeyBinding renderImplants = new KeyBinding("disable implant render", Keyboard.KEY_I, Cybersus.MOD_ID + ".key.category");
+    public static final KeyBinding implantSelectorGui = new KeyBinding("open implant selector", Keyboard.KEY_J, Cybersus.MOD_ID + ".key.category");
 
     private static final KeyBinding openImplantGui = new KeyBinding("open implant gui", Keyboard.KEY_J, Cybersus.MOD_ID + ".key.category");
+
 
 
     public static void register() {
@@ -48,9 +50,10 @@ public class KeyHandler {
         ClientRegistry.registerKeyBinding(thirdAbilityTrigger);
         ClientRegistry.registerKeyBinding(renderImplants);
         ClientRegistry.registerKeyBinding(openImplantGui);
+        ClientRegistry.registerKeyBinding(implantSelectorGui);
 
-        FMLCommonHandler.instance().bus().register(new KeyHandler());
-        MinecraftForge.EVENT_BUS.register(new KeyHandler());
+        FMLCommonHandler.instance().bus().register(new CybersusKeyHandler());
+        MinecraftForge.EVENT_BUS.register(new CybersusKeyHandler());
     }
 
     @SubscribeEvent
@@ -67,6 +70,19 @@ public class KeyHandler {
         }
         if (openImplantGui.isPressed()) {
             CybersusPacketHandler.INSTANCE.sendToServer(new PacketOpenImplantGui());
+        }
+        if (implantSelectorGui.isPressed()) {
+            EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+            if (player != null) {
+            player.openGui(
+                        Cybersus.MOD_ID,
+                        CybersusGui.IMPLANT_SELECTOR.ordinal(),
+                        player.worldObj,
+                        (int) player.posX,
+                        (int) player.posY,
+                        (int) player.posZ
+                );
+            }
         }
     }
 

@@ -1,11 +1,9 @@
 package com.suslovila.cybersus.client.gui;
 
 import com.mojang.realmsclient.util.Pair;
-import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
-import com.suslovila.cybersus.client.ResourceLocationPreLoad;
 import com.suslovila.cybersus.client.TextureStorage;
 import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
@@ -18,11 +16,8 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import org.lwjgl.opengl.GL11;
@@ -30,10 +25,9 @@ import org.lwjgl.opengl.GL12;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import static com.suslovila.cybersus.client.KeyHandler.getIndicesCycledFrom;
+import static com.suslovila.cybersus.client.CybersusKeyHandler.getIndicesCycledFrom;
 import static com.suslovila.cybersus.utils.SusGraphicHelper.*;
 
 public class GuiImplants {

@@ -6,7 +6,6 @@ import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
 import com.suslovila.cybersus.utils.TriConsumer;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -20,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-import static com.suslovila.cybersus.client.KeyHandler.getIndicesCycledFrom;
-import static com.suslovila.cybersus.client.KeyHandler.setNextImplant;
+import static com.suslovila.cybersus.client.CybersusKeyHandler.getIndicesCycledFrom;
+import static com.suslovila.cybersus.client.CybersusKeyHandler.setNextImplant;
 
 public class ImplantStorage implements IInventory {
     private final int implantAmount = ImplantType.getTotalSlotAmount();
