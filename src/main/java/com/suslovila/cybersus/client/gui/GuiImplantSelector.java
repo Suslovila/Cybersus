@@ -102,7 +102,7 @@ public class GuiImplantSelector
                 double rad = i * this.radDiff + this.radDiff / 2.0D;
                 double cos = Math.cos(rad);
                 double sin = Math.sin(rad);
-                drawLine(cos * 60.0D, sin * 60.0D, cos * 300.0D / 2.0D, sin * 300.0D / 2.0D);
+                drawLine(cos * 91.0D, sin * 91.0D, cos * 300.0D / 2.0D, sin * 300.0D / 2.0D);
             }
         }
         GL11.glPopMatrix();
@@ -181,7 +181,7 @@ public class GuiImplantSelector
 
     private void drawSelectedCenter(double cX, double cY, double rad) {
         double deg = Math.toDegrees(-rad);
-        float scale = this.height / 4.0F / 100.0F;
+        float scale = this.height / 2.7F / 100.0F;
 
         GL11.glPushMatrix();
 
@@ -190,6 +190,7 @@ public class GuiImplantSelector
         GL11.glRotated(deg, 0.0D, 0.0D, 1.0D);
 
         GL11.glEnable(GL_BLEND);
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
         GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         this.mc.getTextureManager().bindTexture(motherboard_arrow);
         GL11.glBegin(7);
@@ -216,6 +217,7 @@ public class GuiImplantSelector
         GL11.glScalef(scale, scale, 1.0F);
 
         GL11.glEnable(GL_BLEND);
+        SusGraphicHelper.setStandartColors();
         GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         this.mc.getTextureManager().bindTexture(cpu_texture);
         GL11.glBegin(7);
