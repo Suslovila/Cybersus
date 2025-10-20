@@ -94,7 +94,7 @@ public class CybersusGuiHandler implements IGuiHandler {
             }
 
             case IMPLANT_SELECTOR: {
-                    return new ImplantSelectorGui();
+                    return new GuiImplantSelector();
             }
 
 //            case BAUBLES_ENVY: {

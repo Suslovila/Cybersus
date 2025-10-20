@@ -34,10 +34,13 @@ import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 
 // the whole idea ws taken from Vampirism mod by teamlapen
 
-public class ImplantSelectorGui
+public class GuiImplantSelector
         extends GuiScreen {
-    private static final ResourceLocation backgroundTex = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implant_selector_background.png");
+    private static final ResourceLocation backgroundTex = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/misc/motherboard_circle.png");
     private static final ResourceLocation centerTex = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/gui/implant_selector_center.png");
+    private static final ResourceLocation cpu_texture = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/misc/motherboard_inner.png");
+    private static final ResourceLocation motherboard_arrow = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/misc/motherboard_arrow.png");
+
     protected ArrayList<Pair<Integer, ItemStack>> indexesToImplants;
     private int selectedElement = -1;
     private int elementCount;
@@ -52,7 +55,7 @@ public class ImplantSelectorGui
 
     private EntityPlayer player;
 
-    public ImplantSelectorGui() {
+    public GuiImplantSelector() {
         long backgroundColor = 2298478591L;
         this.allowUserInput = true;
         this.bgred = (float) (backgroundColor >> 16L & 0xFFL) / 255.0F;
@@ -164,9 +167,8 @@ public class ImplantSelectorGui
             GL11.glPopMatrix();
         }
 
-        if (this.selectedElement == -1) {
-            drawUnselectedCenter(cX, cY);
-        } else {
+        drawUnselectedCenter(cX, cY);
+        if (this.selectedElement != -1) {
             String name = StatCollector.translateToLocal(this.indexesToImplants.get(this.selectedElement).second().getDisplayName());
             int tx = cX - this.mc.fontRendererObj.getStringWidth(name) / 2;
             int ty = this.height / 7;
@@ -189,11 +191,11 @@ public class ImplantSelectorGui
 
         GL11.glEnable(GL_BLEND);
         GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        this.mc.getTextureManager().bindTexture(centerTex);
+        this.mc.getTextureManager().bindTexture(motherboard_arrow);
         GL11.glBegin(7);
-        GL11.glTexCoord2f(0.5F, 1.0F);
+        GL11.glTexCoord2f(1.0F, 1.0F);
         GL11.glVertex3d(50.0D, 50.0D, this.zLevel);
-        GL11.glTexCoord2f(0.5F, 0.0F);
+        GL11.glTexCoord2f(1.0F, 0.0F);
         GL11.glVertex3d(50.0D, -50.0D, this.zLevel);
         GL11.glTexCoord2f(0.0F, 0.0F);
         GL11.glVertex3d(-50.0D, -50.0D, this.zLevel);
@@ -206,7 +208,7 @@ public class ImplantSelectorGui
 
 
     private void drawUnselectedCenter(double cX, double cY) {
-        float scale = this.height / 4.0F / 100.0F;
+        float scale = this.height / 3.7F / 100.0F;
 
         GL11.glPushMatrix();
 
@@ -215,15 +217,15 @@ public class ImplantSelectorGui
 
         GL11.glEnable(GL_BLEND);
         GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        this.mc.getTextureManager().bindTexture(centerTex);
+        this.mc.getTextureManager().bindTexture(cpu_texture);
         GL11.glBegin(7);
         GL11.glTexCoord2f(1.0F, 1.0F);
         GL11.glVertex3d(50.0D, 50.0D, this.zLevel);
         GL11.glTexCoord2f(1.0F, 0.0F);
         GL11.glVertex3d(50.0D, -50.0D, this.zLevel);
-        GL11.glTexCoord2f(0.5F, 0.0F);
+        GL11.glTexCoord2f(0.0F, 0.0F);
         GL11.glVertex3d(-50.0D, -50.0D, this.zLevel);
-        GL11.glTexCoord2f(0.5F, 1.0F);
+        GL11.glTexCoord2f(0.0F, 1.0F);
         GL11.glVertex3d(-50.0D, 50.0D, this.zLevel);
         GL11.glEnd();
 

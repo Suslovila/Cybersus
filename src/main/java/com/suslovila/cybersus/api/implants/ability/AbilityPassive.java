@@ -83,7 +83,6 @@ public abstract class AbilityPassive extends Ability {
     public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
         if (isActive(implant)) {
             sendToCooldown(player, index, implant);
-//            notifyClient(player, index, implant);
         }
     }
 
