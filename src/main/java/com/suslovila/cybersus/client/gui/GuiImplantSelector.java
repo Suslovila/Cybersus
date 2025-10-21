@@ -159,7 +159,7 @@ public class GuiImplantSelector
             }
 
             GL11.glPushMatrix();
-            float scale = i == selectedElement ? 1.3f : 1.0f;
+            float scale = i == selectedElement ? 1.4f : 1.2f;
             GL11.glScalef(scale, scale, scale);
 
             GL11.glTranslated(x / scale, y / scale, 0f);
@@ -181,7 +181,7 @@ public class GuiImplantSelector
 
     private void drawSelectedCenter(double cX, double cY, double rad) {
         double deg = Math.toDegrees(-rad);
-        float scale = this.height / 2.7F / 100.0F;
+        float scale = this.height / 2.8F / 100.0F;
 
         GL11.glPushMatrix();
 
@@ -190,7 +190,7 @@ public class GuiImplantSelector
         GL11.glRotated(deg, 0.0D, 0.0D, 1.0D);
 
         GL11.glEnable(GL_BLEND);
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.6f);
         GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         this.mc.getTextureManager().bindTexture(motherboard_arrow);
         GL11.glBegin(7);
@@ -217,8 +217,8 @@ public class GuiImplantSelector
         GL11.glScalef(scale, scale, 1.0F);
 
         GL11.glEnable(GL_BLEND);
-        SusGraphicHelper.setStandartColors();
         GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.8f);
         this.mc.getTextureManager().bindTexture(cpu_texture);
         GL11.glBegin(7);
         GL11.glTexCoord2f(1.0F, 1.0F);

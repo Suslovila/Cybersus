@@ -55,7 +55,7 @@ public class AbilitySinHeartFormShift extends AbilityPassive {
         super.onAbilityStatusSwitched(player, index, implant);
         for (int a = 0; a < 60; a++) {
             float he = Math.max(1.0F, player.height * (150 - 100) / 150.0F);
-            Thaumcraft.proxy.smokeSpiral(player.worldObj, player.posX, player.boundingBox.minY + (he / 2.0F), player.posZ, he, random.nextInt(360), MathHelper.floor_double(player.boundingBox.minY) - 1, aspect.getColor());
+            Thaumcraft.proxy.smokeSpiral(player.worldObj, player.posX, 0.4 + player.boundingBox.minY + (he / 2.0F), player.posZ, he, random.nextInt(360), MathHelper.floor_double(player.boundingBox.minY) - 1, aspect.getColor());
 
         }
     }

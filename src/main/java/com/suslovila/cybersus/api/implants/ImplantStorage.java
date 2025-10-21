@@ -214,9 +214,9 @@ public class ImplantStorage implements IInventory {
         ItemStack currentImplant = getStackInSlot(slotId);
         if (currentImplant != null && player != null && player.get() != null) {
             Item itemType = (currentImplant.getItem());
-//            if (!this.blockEvents) {
-//                ((ItemImplant) itemType).onUnequipped(player.get(), slotId, currentImplant);
-//            }
+            if (!this.blockEvents && itemstack == null) {
+                ((ItemImplant) itemType).onUnequipped(player.get(), slotId, currentImplant);
+            }
         }
 
         int firstSlot = ImplantType.getFirstSlotIndexOf(possibleType);
