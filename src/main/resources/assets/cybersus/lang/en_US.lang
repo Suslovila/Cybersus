@@ -76,6 +76,18 @@ item.multi_aspect_holder.name=Multiple portable aspect container
 item.single_aspect_holder.name=Single portable aspect container
 item.phoenix_heart.name=Phoenix heart
 item.sin_heart.name=Heart of sin
+item.phasolite.name=Phasolite
+item.gravitation_dust.name=Gravitation Dust
+item.icarus_blood.name=Icarus Blood
+item.proton_ingot.name=Proton Ingot
+item.sin_heart.name=Sin Heart
+item.creative_aspect_holder.name=Creative Aspect Holder
+item.blank_eye.name=Blank eye
+item.illusion_generator.name=Illusion Generator
+item.reaction_increaser.name=Neuroaccelerator
+
+tile.gravitation_dust_ore.name=Gravitation Dust Deposit
+tile.phasolite_ore.name=Phasolite Deposit
 
 cybersus.not_infused_heart=Heart is not charged
 cybersus.sin_heart_infused.0=Filled with Envy
@@ -85,11 +97,7 @@ cybersus.sin_heart_infused.3=Filled with Laziness
 cybersus.sin_heart_infused.4=Overflowing Gluttony
 cybersus.sin_heart_infused.5=Burns with Rage
 cybersus.sin_heart_infused.6=Gushing with Greed
-item.sin_heart.name=Sin Heart
-item.creative_aspect_holder.name=Creative Aspect Holder
-item.blank_eye.name=Blank eye
-item.illusion_generator.name=Illusion Generator
-item.reaction_increaser.name=Reaction Increaser
+
 
 key.suppressed=SUPPRESSED
 cybersus.and=and

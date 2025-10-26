@@ -5,11 +5,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 
-public class ItemIcarusBlood extends Item {
-    public static final String name = "icarus_blood";
-    private static IIcon[] icons;
+public class ItemSynthDerm extends Item {
+    public static final String name = "synt_derm";
 
-    public ItemIcarusBlood() {
+    public ItemSynthDerm() {
         setUnlocalizedName(name);
         setTextureName(Cybersus.MOD_ID + ":" + name);
         setMaxStackSize(64);

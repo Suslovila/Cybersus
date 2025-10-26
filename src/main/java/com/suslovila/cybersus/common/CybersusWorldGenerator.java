@@ -126,7 +126,7 @@ public class CybersusWorldGenerator implements IWorldGenerator {
         // Проверяем, что это ЗАРАЖЁННЫЙ БИОМ из Thaumcraft
         // Thaumcraft добавляет биомы с ID 39 и 40 (обычно: taint, taint deep)
         // Лучше свериться в коде/конфиге мода, но 39 — стандартный "Taint".
-        if (biome != null && biome.biomeName.contains("Tainted Land")) {
+        if (biome != null && biome.biomeName.contains("Magical Forest")) {
 
             int veinsPerChunk = 1; // сколько жил на чанк
             int veinSize = 6;      // размер жилы

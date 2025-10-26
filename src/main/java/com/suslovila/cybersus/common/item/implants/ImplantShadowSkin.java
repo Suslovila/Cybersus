@@ -101,7 +101,7 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
                     );
                 }
                 ProcessShadowGates processShadowGates = new ProcessShadowGates(player, SusVec3.getEntityPos(player).add(0.0, 1.0, 0.0), 30);
-                CustomWorldData.getCustomData(player.worldObj).addProcess(processShadowGates);
+//                CustomWorldData.getCustomData(player.worldObj).addProcess(processShadowGates);
                 CustomWorldData.syncProcess(processShadowGates, player.worldObj.provider.dimensionId);
                 if (!isActive(implant)) {
                     player.removePotionEffect(Potion.invisibility.id);

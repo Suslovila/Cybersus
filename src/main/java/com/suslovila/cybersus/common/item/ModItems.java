@@ -46,6 +46,9 @@ public class ModItems {
     public static ItemIcarusBlood icarusBlood;
     public static ItemGravitationDust gravitationDust;
     public static ItemPhasolite phasolite;
+    public static ItemSynthGlass synthGlass;
+    public static ItemSynaptine synaptine;
+    public static ItemSynthDerm synthDerm;
 
 
     public static void register() {
@@ -90,10 +93,14 @@ public class ModItems {
 //            suppressor = new ImplantSuppressor();
 
             reactionIncreaser = new ImplantReactionIncreaser();
-            portalPlacer = new ImplantPortalPlacer();
+//            portalPlacer = new ImplantPortalPlacer();
 
             protonIngot = new ItemProtonIngot();
             icarusBlood = new ItemIcarusBlood();
+            synthGlass = new ItemSynthGlass();
+            synaptine = new ItemSynaptine();
+            synthDerm = new ItemSynthDerm();
+
         }
     }
 }

@@ -3,6 +3,7 @@ package com.suslovila.cybersus.common.event;
 import com.suslovila.cybersus.common.event.customEvents.OnPlayerHackEntityTick;
 import com.suslovila.cybersus.common.event.customEvents.PlayerFinalisedHackingEvent;
 import com.suslovila.cybersus.common.event.customEvents.PlayerTriesToStartHackingEvent;
+import com.suslovila.cybersus.common.item.ModItems;
 import com.suslovila.cybersus.common.sync.CybersusPacketHandler;
 import com.suslovila.cybersus.common.sync.implant.PacketOneExtendedPlayerSync;
 import com.suslovila.cybersus.extendedData.CustomWorldData;
@@ -13,10 +14,17 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.world.BlockEvent;
+import thaumcraft.common.config.ConfigBlocks;
+import thaumcraft.common.tiles.TileNode;
+
+import static com.suslovila.cybersus.Cybersus.random;
 //import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 
@@ -27,6 +35,22 @@ public class FMLEventListener {
 
     private FMLEventListener() {
     }
+
+
+        @SubscribeEvent
+        public void onHarvest(BlockEvent.HarvestDropsEvent event) {
+            if (event.world.isRemote) return; // только сервер
+
+            // Пример: трогаем ванильную печку
+            if (event.block == ConfigBlocks.blockAiry) {
+                int metadata = event.world.getBlockMetadata(event.x, event.y, event.z);
+                if (metadata == 0 && random.nextInt(7) == 1) {
+                            event.drops.add(new ItemStack(ModItems.synaptine, 1));
+                        }
+                    }
+    }
+
+
 
     @SubscribeEvent
     public void onEntityConstructing(EntityEvent.EntityConstructing event) {

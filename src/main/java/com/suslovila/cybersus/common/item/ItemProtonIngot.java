@@ -16,7 +16,6 @@ public class ItemProtonIngot extends Item {
         setHasSubtypes(true);
         setMaxDurability(0);
         setCreativeTab(Cybersus.tab);
-        this.setMaxStackSize(1);
 
         register();
 

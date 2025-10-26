@@ -67,6 +67,16 @@ item.single_aspect_holder.name=Одиночное портативное хра�
 item.phoenix_heart.name=Сердце Феникса
 item.sin_heart.name=Сердце греха
 item.illusion_generator.name=Генератор Иллюзий
+item.phasolite.name=Фазолит
+item.gravitation_dust.name=Гравитационная Пыль
+item.icarus_blood.name=Кровь Икара
+item.proton_ingot.name=Протонный слиток
+item.sin_heart.name=Сердце Греха
+item.creative_aspect_holder.name=Творческое хранилище эссенсии
+item.blank_eye.name=Пустая форма глаза
+item.reaction_increaser.name=Нейроускоритель
+tile.gravitation_dust_ore.name=Залежь гравитационной пыли
+tile.phasolite_ore.name=Залежь Фазолита
 
 cybersus.not_infused_heart=Сердце не заряжено
 cybersus.sin_heart_infused.0=Наполнено Завистью

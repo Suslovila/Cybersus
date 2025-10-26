@@ -72,6 +72,16 @@ item.multi_aspect_holder.name=多源质便携储罐
 item.single_aspect_holder.name=单源质便携储罐
 item.phoenix_heart.name=凤凰之心
 item.sin_heart.name=原罪之心
+item.phasolite.name=相位石
+item.gravitation_dust.name=引力尘埃
+item.icarus_blood.name=伊卡洛斯之血
+item.proton_ingot.name=质子锭
+item.creative_aspect_holder.name=创造源质便携储罐
+item.blank_eye.name=空白瞳仁
+item.illusion_generator.name=幻象之眼
+item.reaction_increaser.name=神经加速器
+tile.gravitation_dust_ore.name=引力尘埃矿脉
+tile.phasolite_ore.name=相位石矿脉
 
 cybersus.not_infused_heart=未灌入源质
 cybersus.sin_heart_infused.0=心怀嫉妒
@@ -81,9 +91,6 @@ cybersus.sin_heart_infused.3=好逸恶劳
 cybersus.sin_heart_infused.4=垂涎欲滴
 cybersus.sin_heart_infused.5=怒火中烧
 cybersus.sin_heart_infused.6=贪得无厌
-item.creative_aspect_holder.name=创造源质便携储罐
-item.blank_eye.name=空白瞳仁
-item.illusion_generator.name=幻象之眼
 
 key.suppressed=SUPPRESSED
 cybersus.and=和
