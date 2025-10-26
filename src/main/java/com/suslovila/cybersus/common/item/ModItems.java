@@ -42,7 +42,7 @@ public class ModItems {
     public static ImplantSuppressor suppressor;
     public static ImplantReactionIncreaser reactionIncreaser;
     public static ImplantPortalPlacer portalPlacer;
-    public static ItemProtonIngot protonIngot;
+    public static ItemAlloyX87 alloyX87;
     public static ItemIcarusBlood icarusBlood;
     public static ItemGravitationDust gravitationDust;
     public static ItemPhasolite phasolite;
@@ -95,7 +95,7 @@ public class ModItems {
             reactionIncreaser = new ImplantReactionIncreaser();
 //            portalPlacer = new ImplantPortalPlacer();
 
-            protonIngot = new ItemProtonIngot();
+            alloyX87 = new ItemAlloyX87();
             icarusBlood = new ItemIcarusBlood();
             synthGlass = new ItemSynthGlass();
             synaptine = new ItemSynaptine();

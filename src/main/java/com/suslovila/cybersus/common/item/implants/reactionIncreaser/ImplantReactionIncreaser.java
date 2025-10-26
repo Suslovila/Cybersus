@@ -55,10 +55,5 @@ public class ImplantReactionIncreaser extends ItemCybersusImplant {
         return "reaction_increaser";
     }
 
-
-
-
-
-
 }
 

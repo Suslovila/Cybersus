@@ -70,7 +70,7 @@ item.illusion_generator.name=Генератор Иллюзий
 item.phasolite.name=Фазолит
 item.gravitation_dust.name=Гравитационная Пыль
 item.icarus_blood.name=Кровь Икара
-item.proton_ingot.name=Протонный слиток
+item.alloy_x87.name=Протонный слиток
 item.sin_heart.name=Сердце Греха
 item.creative_aspect_holder.name=Творческое хранилище эссенсии
 item.blank_eye.name=Пустая форма глаза
@@ -137,5 +137,12 @@ cybersus.item.exploser.mind_explode.description=Искажает простра�
 ac.text.PHOENIX_HEART.description=Легенды о птице, возрождающейся в огне, ходили с давних времён. Вы изучили этот вопрос и попытались получить способность этой загадочной птицы.
 cybersus.item.phoenix_heart.resurrection.name=Восстание из пепла
 cybersus.item.phoenix_heart.resurrection.description=Будучи включённой, способность спасёт вас от смерти, после чего уйдет в перезарядку
+
+ac.text.REACTION_INCREASER.description=Организм сам по себе довольно медленно реагирует на внешние раздражители, в сравнении, например, со скоростью протекания ядерных реакций. Вы захотели сократить этот разрыв, и разработали механизм, позволяющей вашей нервной системе быстрее реагировать на внешние раздражители
+cybersus.item.reaction_increaser.acceleration.name=Ускорение
+cybersus.item.reaction_increaser.acceleration.description=При активации вы совершите рывок в сторону, куда вы бы хотели двигаться. Если же вы стоите на месте, то рывок будет совершен в направлении вашего взгляда
+
+ac.text.ALLOY_X87.1=При исследовании новых материй привело вас к идее создания уникального материала для дальнейших разработок. Полученный при синтезе сплав обладает крайне высокой прочностью, неплохой хорошей проводимостью магии и совместим с электромагнитными импульсами, исходящими от живых существ
+ac.name.ALLOY_X87=Сплав X87
 
 cybersus.translation.hack_notification=Вы чувствуете, как странный поток пронизывает ваше тело...
