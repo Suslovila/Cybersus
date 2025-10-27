@@ -6,7 +6,7 @@ import com.suslovila.cybersus.common.block.container.ContainerRuneInstaller;
 import com.suslovila.cybersus.common.block.container.envyEye.ContainerBaublesEnvy;
 import com.suslovila.cybersus.common.block.runeInstaller.TileRuneInstaller;
 import com.suslovila.cybersus.common.item.ItemPortableMultiAspectContainer;
-import com.suslovila.cybersus.common.item.ModItems;
+import com.suslovila.cybersus.common.item.CybersusItems;
 import com.suslovila.cybersus.common.item.implants.ImplantEyeOfEnvy;
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
@@ -52,7 +52,7 @@ public class CybersusGuiHandler implements IGuiHandler {
                                         }
                                     }
                                 }
-                            }, wrappedPlayer, ModItems.eyeOfEnvy);
+                            }, wrappedPlayer, CybersusItems.eyeOfEnvy);
 
                         }
 
@@ -114,7 +114,7 @@ public class CybersusGuiHandler implements IGuiHandler {
                                         }
                                     }
                                 }
-                            }, wrappedPlayer, ModItems.eyeOfEnvy);
+                            }, wrappedPlayer, CybersusItems.eyeOfEnvy);
 
                         }
 

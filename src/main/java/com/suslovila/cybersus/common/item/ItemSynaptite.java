@@ -5,11 +5,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 
-public class ItemSynaptine extends Item {
-    public static final String name = "synaptine";
+public class ItemSynaptite extends Item {
+    public static final String name = "synaptite";
     private static IIcon[] icons;
 
-    public ItemSynaptine() {
+    public ItemSynaptite() {
         setUnlocalizedName(name);
         setTextureName(Cybersus.MOD_ID + ":" + name);
         setMaxStackSize(64);

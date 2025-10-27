@@ -9,7 +9,7 @@ import com.suslovila.cybersus.common.item.implants.witchery.ImplantSleepModule;
 import com.suslovila.cybersus.common.item.implants.witchery.ImplantTormentor;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class ModItems {
+public class CybersusItems {
 
 
     public static ImplantPhoenixHeart phoenixHeart;
@@ -47,8 +47,10 @@ public class ModItems {
     public static ItemGravitationDust gravitationDust;
     public static ItemPhasolite phasolite;
     public static ItemSynthGlass synthGlass;
-    public static ItemSynaptine synaptine;
+    public static ItemSynaptite synaptite;
     public static ItemSynthDerm synthDerm;
+    public static ItemSynthNerv synthNerv;
+    public static ItemMyomass myomass;
 
 
     public static void register() {
@@ -98,9 +100,10 @@ public class ModItems {
             alloyX87 = new ItemAlloyX87();
             icarusBlood = new ItemIcarusBlood();
             synthGlass = new ItemSynthGlass();
-            synaptine = new ItemSynaptine();
+            synaptite = new ItemSynaptite();
             synthDerm = new ItemSynthDerm();
-
+            synthNerv = new ItemSynthNerv();
+            myomass = new ItemMyomass();
         }
     }
 }

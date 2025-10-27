@@ -72,7 +72,7 @@ public class ImplantGravityIncreaser extends ItemCybersusImplant {
 
             @Override
             public FuelComposite getFuelConsumeOnActivation(EntityPlayer player, int index, ItemStack implant) {
-                return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(CybersusAspect.GRAVITAS, 64).add(CybersusAspect.DIMENSIO, 16)));
+                return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(CybersusAspect.GRAVITAS, 32)));
 //                return FuelComposite.EMPTY;
             }
 
@@ -131,7 +131,7 @@ public class ImplantGravityIncreaser extends ItemCybersusImplant {
 
             @Override
             public FuelComposite getFuelConsumeOnActivation(EntityPlayer player, int index, ItemStack implant) {
-                return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(CybersusAspect.GRAVITAS, 64).add(Aspect.TRAP, 16)));
+                return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(CybersusAspect.GRAVITAS, 32).add(Aspect.TRAP, 16)));
 //                return FuelComposite.EMPTY;
             }
 

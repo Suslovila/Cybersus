@@ -3,12 +3,11 @@ package com.suslovila.cybersus.common.item;
 import com.suslovila.cybersus.Cybersus;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
 
-public class ItemSynthDerm extends Item {
-    public static final String name = "synth_derm";
+public class ItemMyomass extends Item {
+    public static final String name = "myomass";
 
-    public ItemSynthDerm() {
+    public ItemMyomass() {
         setUnlocalizedName(name);
         setTextureName(Cybersus.MOD_ID + ":" + name);
         setMaxStackSize(64);

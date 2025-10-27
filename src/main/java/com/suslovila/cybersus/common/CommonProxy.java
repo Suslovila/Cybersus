@@ -5,7 +5,7 @@ import com.suslovila.cybersus.client.clientProcess.processes.ProcessPlayerAccele
 import com.suslovila.cybersus.client.clientProcess.processes.shadowGates.ProcessShadowGates;
 import com.suslovila.cybersus.common.block.ModBlocks;
 import com.suslovila.cybersus.common.event.*;
-import com.suslovila.cybersus.common.item.ModItems;
+import com.suslovila.cybersus.common.item.CybersusItems;
 import com.suslovila.cybersus.common.processes.ProcessGravityTrap;
 import com.suslovila.cybersus.client.clientProcess.processes.illusion.ProcessIllusion;
 import com.suslovila.cybersus.common.processes.ProcessPortal;
@@ -40,9 +40,9 @@ public class CommonProxy {
 
 
         ModBlocks.register();
-        ModItems.register();
+        CybersusItems.register();
 
-        MinecraftForge.EVENT_BUS.register(ModItems.portableMultiAspectContainer);
+        MinecraftForge.EVENT_BUS.register(CybersusItems.portableMultiAspectContainer);
 
         CybersusAspect.initAspects();
 

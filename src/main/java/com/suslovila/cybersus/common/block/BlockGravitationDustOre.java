@@ -2,11 +2,10 @@
 package com.suslovila.cybersus.common.block;
 
 import com.suslovila.cybersus.Cybersus;
-import com.suslovila.cybersus.common.item.ModItems;
+import com.suslovila.cybersus.common.item.CybersusItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.world.IBlockAccess;
 
@@ -34,20 +33,20 @@ public class BlockGravitationDustOre extends Block {
     @Override
     public Item getItemDropped(int meta, Random rand, int fortune) {
         // если хотите, чтобы падал сам блок — верните Item.getItemFromBlock(this)
-        return ModItems.gravitationDust != null ? ModItems.gravitationDust : null;
+        return CybersusItems.gravitationDust != null ? CybersusItems.gravitationDust : null;
     }
 
     // Базовое количество дропа
     @Override
     public int quantityDropped(Random rand) {
         // 1–2 штуки, если это «жемчуг/осколок». Для блока — верните 1.
-        return (ModItems.gravitationDust != null) ? (1 + rand.nextInt(4)) : 1;
+        return (CybersusItems.gravitationDust != null) ? (1 + rand.nextInt(4)) : 1;
     }
 
     // Учитываем Fortune
     @Override
     public int quantityDroppedWithBonus(int fortune, Random rand) {
-        if (ModItems.gravitationDust != null && fortune > 0) {
+        if (CybersusItems.gravitationDust != null && fortune > 0) {
             int bonus = rand.nextInt(fortune + 2) - 1;
             if (bonus < 0) bonus = 0;
             return quantityDropped(rand) * (bonus + 1);
@@ -58,7 +57,7 @@ public class BlockGravitationDustOre extends Block {
     // Опыт как у руд с «гемами» (если падает не сам блок)
     @Override
     public int getExpDrop(IBlockAccess world, int meta, int fortune) {
-        return (ModItems.gravitationDust != null && ModItems.gravitationDust != Item.getItemFromBlock(this))
+        return (CybersusItems.gravitationDust != null && CybersusItems.gravitationDust != Item.getItemFromBlock(this))
                 ? (1 + new Random().nextInt(4)) : 0;
     }
 

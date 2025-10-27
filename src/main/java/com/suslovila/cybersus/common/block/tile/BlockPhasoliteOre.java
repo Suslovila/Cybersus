@@ -2,7 +2,7 @@
 package com.suslovila.cybersus.common.block.tile;
 
 import com.suslovila.cybersus.Cybersus;
-import com.suslovila.cybersus.common.item.ModItems;
+import com.suslovila.cybersus.common.item.CybersusItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -32,7 +32,7 @@ public class BlockPhasoliteOre extends Block {
     @Override
     public Item getItemDropped(int meta, Random rand, int fortune) {
         // если хотите, чтобы падал сам блок — верните Item.getItemFromBlock(this)
-        return ModItems.phasolite != null ? ModItems.phasolite : null;
+        return CybersusItems.phasolite != null ? CybersusItems.phasolite : null;
     }
 
     // Базовое количество дропа
@@ -51,7 +51,7 @@ public class BlockPhasoliteOre extends Block {
     // Опыт как у руд с «гемами» (если падает не сам блок)
     @Override
     public int getExpDrop(IBlockAccess world, int meta, int fortune) {
-        return (ModItems.phasolite != null && ModItems.phasolite != Item.getItemFromBlock(this))
+        return (CybersusItems.phasolite != null && CybersusItems.phasolite != Item.getItemFromBlock(this))
                 ? 1 : 0;
     }
 
