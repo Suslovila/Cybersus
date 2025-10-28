@@ -44,6 +44,7 @@ ac.tag.CYBERSUS_BASIC_INFO=honey, please, no more implants <_>
 ac.text.CYBERSUS_BASIC_INFO.1= The question of increasing the capabilities of the body has always worried mankind, because by nature people do not have claws, sharp teeth or poison. Solving this problem pushed progress forward in the early periods of human development. To do this, people came up with digging sticks, horseradish staves, firearms and much more. But all these solutions do not correct the main drawback of a person as an organism - weak organs.
 ac.text.CYBERSUS_BASIC_INFO.2=Realizing this, you decided to start studying the issue of strengthening your own body by replacing your "components" with more powerful variants of artificial origin. As a magician, you will surely find a way to combine flesh with steel. Your eyes are burning, but you feel that it is too easy to implement and do all this. It seems that such "upgrades" can hacve side effects...
 ac.text.CYBERSUS_BASIC_INFO.3=Implants are installed through a special gui. Each implant has "abilities" that can be activated via the corresponding buttons. Abilities are mainly divided into Instant (instant action), Passive (after switching on, they start working on the background), and Distorting (used on creatures. Upon activation, the distortion process begins, after which the action takes place. If at the same time you lose sight of the target or it is blocked by blocks, you are given a certain time specified near the distortion window to return the target to the field of view). Any ability doesn't work for free- it needs fuel. It can be anything - liquid essence, blood from a bloody network, witch infusion, and even some kind of energy from your favorite fellow techies like RF. All details will be given in the description of the ability itself
+ac.text.CYBERSUS_BASIC_INFO.4=You also managed to discover previously unknown resources. Gravitation Dust can be found in zero-gravity zones, Synaptite occasionally forms during the collapse of magical gates, and Phasolite can be found in areas with a high degree of favorable magical activity.
 ac.text.SHADOW_SKIN.1= The most ancient human fear is the fear of the unknown. And it, in turn, is born where nothing can be seen. You have created an implant that envelops and seals you, pressing you into darkness. Being in dark place, you can go into the shadows, becoming invulnerable to direct attacks and losing the ability to interact with the outside world. However, you are vulnerable to flames and any damage of this type will lead to fatal consequences. Moreover, if you find yourself in a bright enough place, you will literally be squeezed out of the darkness, which you definitely do not want. To activate, the implant requires 64 tenebrae and 2 more tenebrae each tick in the enabled state
 ac.text.PORTABLE_ASPECT_HOLDERS.1=For the implants to work, as mentioned earlier, you need fuel, which somehow needs to be carried with you. In the case of blood in the blood network or with infusion, everything is clear - they are always with you. But with essence, problems begin. Therefore, you have created a portable container that is able to hold the essence under enormous pressure. 2 variants have been developed, the first holds only one aspect, but its limit is 1024 units, and the second holds 128 units of essence of the same type, but these types can be up to 8.
 ac.text.PORTABLE_ASPECT_HOLDERS.2=To use, press the RMB through the air, a menu will open in front of you. Select the aspect you want to work with, and enter the quantity in the field above. Now, if you just click on any essence storage, the container will try to take the specified amount of the specified aspect, if you sit down when you click, on the contrary, it will try to give this amount from its storage. The current number of aspects is written in the menu above each of them.
@@ -85,6 +86,12 @@ item.creative_aspect_holder.name=Creative Aspect Holder
 item.blank_eye.name=Blank eye
 item.illusion_generator.name=Illusion Generator
 item.reaction_increaser.name=Neuroaccelerator
+item.synth_derm.name=Synth-Derm
+item.synaptite.name=Synaptite
+item.synth_glass.name=Synth-Glass
+item.synth_nerv.name=Synth-Nerve
+item.myomass.name=Myomass
+
 
 tile.gravitation_dust_ore.name=Gravitation Dust Deposit
 tile.phasolite_ore.name=Phasolite Deposit
@@ -149,35 +156,33 @@ cybersus.item.phoenix_heart.resurrection.description=When activated, this abilit
 cybersus.translation.hack_notification=You feel strange flow parsing your body....
 
 
-ac.text.CYBERSUS_BASIC_INFO.4=You also managed to discover previously unknown resources. Gravitation Dust and Phasolite... are found in zones with a high degree of favorable magical activity
-item.alloy_x87.name=Proton Ingot
-item.synth_derm.name=Synth-Derm
-item.synaptite.name=Synaptite
-item.synth_glass.name=Synth-Glass
-item.synth_nerv.name=Synth-Nerve
-item.myomass.name=Myomass
 ac.name.REACTION_INCREASER=Neuro-Accelerator
 ac.tag.REACTION_INCREASER=Dodgeball Champion
-ac.text.REACTION_INCREASER.description=The human body by itself reacts rather slowly to external stimuli. This implant boosts synaptic conduction and shortens reaction time, letting your nervous system respond faster to threats.
+ac.text.REACTION_INCREASER.description=The human body by itself reacts rather slowly to external stimuli, especially compared to the speed of nuclear reactions. You decided to close this gap and developed a mechanism allowing your nervous system to respond faster to external irritants.
 cybersus.item.reaction_increaser.acceleration.name=Acceleration
-cybersus.item.reaction_increaser.acceleration.description=When activated, you dash toward your movement direction; if standing still, you dash toward where you are looking.
+cybersus.item.reaction_increaser.acceleration.description=When activated, you dash toward the direction you wish to move. If you are standing still, the dash is performed in the direction of your gaze.
+
 ac.name.ALLOY_X87=Alloy X87
-ac.tag.ALLOY_X87=Tech in Every Organ
-ac.text.ALLOY_X87.1=Research into new matter led you to a unique conductive alloy that responds to magnetic fields and resonates with electromagnetic impulses emitted by living beings.
+ac.tag.ALLOY_X87=Technology in Every Organ
+ac.text.ALLOY_X87.1=Research into new matter led you to the idea of creating a unique material for further development. The alloy obtained through synthesis possesses extremely high strength, good magical conductivity, and compatibility with electromagnetic impulses emitted by living beings.
+
 ac.name.SYNTH_GLASS=Synth-Glass
 ac.tag.SYNTH_GLASS=Augmented Reality
-ac.text.SYNTH_GLASS.1=While designing interactive interfaces, you created a transparent, durable substrate with stable light-scattering properties — perfect for eye implants and various displays.
-ac.name.SYNTH_DERM=Synth-Derm
-ac.tag.SYNTH_DERM=Finally no pimples!
-ac.text.SYNTH_DERM.1=Studies in cybernetics and bionics showed that skin compatibility is vital. By mixing a polymer base with a special fluidizer, you obtained a material with unique properties.
-ac.name.ICARUS_BLOOD=Icarus Blood
-ac.tag.ICARUS_BLOOD=The higher we climb, the harder we fall
-ac.text.ICARUS_BLOOD.1=Blood is an extremely important fluid for any living body... The more power it carries, the greater the chance to burn yourself on your own carelessness and overconfidence...
-ac.name.SYNTH_NERV=Synth-Nerve
-ac.tag.SYNTH_NERV=Involuntary muscle contractions
-ac.text.SYNTH_NERV.1=The main problem when creating implants is signal mismatch. By tuning polymer fibers to precise frequencies, you created a layer between machine signals and the human mind.
-ac.name.MYOMASS=Myomass
-ac.tag.MYOMASS=Feel the biceps!
-ac.text.MYOMASS.1=When creating an artificial organ replacement, you must account for movement efficiency and energy consumption. We developed synthetic muscles that will definitely come in handy.
+ac.text.SYNTH_GLASS.1=When developing various types of interactive interfaces, a material with sufficient strength, transparency, and compatibility with magical fields is required to correctly display information. For these purposes, you created Synth-Glass: in the future, it may be useful for eye implants and various types of displays.
 
+ac.name.SYNTH_DERM=Synth-Derm
+ac.tag.SYNTH_DERM=Finally No Pimples!
+ac.text.SYNTH_DERM.1=Studies in cybernetics and bionics cannot do without the invention of a replacement for human flesh. When creating such a material, it is necessary to ensure sufficient strength, elasticity, and compatibility with the host’s body. Using ordinary skin as a base, synaptite as a conductor of magical and neural impulses, slime for elasticity, and phasolite as a fluidizer, you obtained a material with unique properties.
+
+ac.name.ICARUS_BLOOD=Icarus Blood
+ac.tag.ICARUS_BLOOD=The Higher We Climb, The Harder We Fall
+ac.text.ICARUS_BLOOD.1=Blood is an extremely important fluid for any living organism… and sometimes even for those that are not alive. It delivers oxygen necessary for life to the organs, regulates the body’s purification, and performs many other functions. Considering its importance, the idea of replacing it with a more flexible and efficient synthetic analog comes naturally. The possibilities seem endless… But the higher we climb, the greater the chance of getting burned by our own carelessness and arrogance…
+
+ac.name.SYNTH_NERV=Synth-Nerve
+ac.tag.SYNTH_NERV=Involuntary Muscle Contractions
+ac.text.SYNTH_NERV.1=The main problem in creating implants is how to “make peace” between the living body and an artificial organ. It is known that our body itself generates electromagnetic impulses. Using the recently discovered synaptite, which turned out to be sensitive to these impulses, you managed to create an interface layer between the signals of the machine and the human mind.
+
+ac.name.MYOMASS=Myomass
+ac.tag.MYOMASS=Feel the Biceps!
+ac.text.MYOMASS.1=When creating an artificial organ replacement, it is necessary to consider that many of them must be able to generate mechanical movement. For this purpose, you developed synthetic muscles that will certainly come in handy.
 

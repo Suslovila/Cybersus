@@ -43,6 +43,7 @@ ac.tag.CYBERSUS_BASIC_INFO=哦不...别再是义体了 <_>
 ac.text.CYBERSUS_BASIC_INFO.1=如何拓展身体的极限？对这个问题的解答是贯穿人类发展史的重要主线。因为没有尖利的爪牙，我们研发出了刀剑枪；因为没有超凡的视力，我们研发出了望远镜；因为没有轻盈的翅膀，我们研发出了飞机······但这些都没能解决最关键、最本质的问题——人类终究还是血肉之躯。
 ac.text.CYBERSUS_BASIC_INFO.2=意识到这一点之后，你开始投入到身体改造的研究当中。在魔法理论的加持下，你很快找到了将钢铁与血肉融合的方法。但重大突破的兴奋并未冲昏你理智的头脑——这方法似乎太过容易，恐怕会有一些预料之外的副作用······
 ac.text.CYBERSUS_BASIC_INFO.3=义体替换通过特殊的GUI界面完成(默认按J打开)每种植入物都可以通过按下绑定的按键来激活相应的能力。能力可分为主动、被动和侵入三类。主动能力会在激活后执行一次，被动能力会在激活后持续生效，侵入能力的发动过程有点类似于“黑入”实体——激活能力的同时你必须保持与目标的视线接触，此时屏幕右侧会出现进度条。进度条走完时能力将应用于目标身上。在这个过程中，如果视线被方块阻断或者目标离开视野之外，游戏会显示剩余时间，若在剩余时间内没有恢复视线接触，则视为过程被打断，能力不会应用于目标身上并且进入冷却。所有能力的发动都需要“能源”——这个“能源”可以是神秘时代的源质，可以是巫术的魔力，可以是血魔法的生命源质，还可以是科技模组的RF/EU等。在每种植入物的介绍页面中会给出更加详细的描述。
+ac.text.CYBERSUS_BASIC_INFO.4=此外，你还发现了此前未知的资源。重力尘可在失重区域中找到，突触石有时在魔法之门坍塌时形成，而相位石则常见于高魔力活性区域。
 
 ac.text.PORTABLE_ASPECT_HOLDERS.1=我们之前提到过，想让植入物释放能力需要“能源”。所以能源携带是一个需要解决的问题。对于像LP或者巫术的魔力这样作为一种“属性”附着在你身上的自然不用考虑，但是像源质这种的就得想办法了。于是你制作出了两种能够容纳源质的便携式容器——一种只能容纳一种源质，但是可以容纳1024点；另一种可以容纳八种源质，但是每种只能容纳128点。
 ac.text.PORTABLE_ASPECT_HOLDERS.2=想要使用便携储罐，首先需要手持储罐对着空气右键，会打开一个菜单，选好你想提取/释放的源质种类，并在最顶上的输入框内输入一次操作的数量。然后，每次右击容纳源质的东西(比如源质罐子)，就能提取相应数量的相应源质。潜行右击就是放回相应数量的相应源质。
@@ -82,6 +83,12 @@ item.illusion_generator.name=幻象之眼
 item.reaction_increaser.name=神经加速器
 tile.gravitation_dust_ore.name=引力尘埃矿脉
 tile.phasolite_ore.name=相位石矿脉
+item.synth_derm.name=合成真皮
+item.synaptite.name=突触石
+item.synth_glass.name=合成玻璃
+item.synth_nerv.name=合成神经
+item.myomass.name=肌肉质
+
 
 cybersus.not_infused_heart=未灌入源质
 cybersus.sin_heart_infused.0=心怀嫉妒
@@ -139,34 +146,34 @@ cybersus.item.phoenix_heart.resurrection.name=凤凰涅槃
 cybersus.item.phoenix_heart.resurrection.description=当你死亡时进行复活，随后进入冷却。
 
 
-ac.text.CYBERSUS_BASIC_INFO.4=此外，你还发现了此前未知的资源。重力尘与相位石……常见于魔法活性很高的区域。
-item.alloy_x87.name=质子锭
-item.synth_derm.name=合成真皮
-item.synaptite.name=突触石
-item.synth_glass.name=合成玻璃
-item.synth_nerv.name=合成神经
-item.myomass.name=肌肉质
 ac.name.REACTION_INCREASER=神经加速器
 ac.tag.REACTION_INCREASER=躲避球冠军
-ac.text.REACTION_INCREASER.description=人体对外界刺激的反应本就偏慢；该植入体可增强突触传导、缩短反应时，使你的神经系统更快响应外界威胁。
-cybersus.item.reaction_increaser.acceleration.name=冲刺
-cybersus.item.reaction_increaser.acceleration.description=激活时，你会朝移动方向快速突进；若静止不动，则向当前视线方向突进。
+ac.text.REACTION_INCREASER.description=人体自身对外界刺激的反应相当迟缓，尤其是与核反应的速度相比。你决定缩小这种差距，开发出一种机制，使你的神经系统能够更快速地响应外部刺激。
+cybersus.item.reaction_increaser.acceleration.name=加速
+cybersus.item.reaction_increaser.acceleration.description=激活时，你会朝想要移动的方向突进。如果你静止不动，突进将沿着你视线的方向进行。
+
 ac.name.ALLOY_X87=X87 合金
-ac.tag.ALLOY_X87=技术融入每个器官
-ac.text.ALLOY_X87.1=对新物质的研究使你合成出一种独特的导电合金：它对磁场产生反应，并与生物体发出的电磁脉冲产生共振。
+ac.tag.ALLOY_X87=科技融入每个器官
+ac.text.ALLOY_X87.1=对新物质的研究启发了你创造一种独特材料的想法，用于后续的开发。通过合成获得的这种合金具有极高的强度、良好的魔力导电性，并能与生物体发出的电磁脉冲兼容。
+
 ac.name.SYNTH_GLASS=合成玻璃
 ac.tag.SYNTH_GLASS=增强现实
-ac.text.SYNTH_GLASS.1=在设计交互式界面时，你制得了透明且坚固、具有稳定散光特性的基材——非常适合用于眼部植入物与各类显示器。
+ac.text.SYNTH_GLASS.1=在开发各种交互式界面时，需要一种既坚固透明又能与魔法场兼容的材料，以正确显示信息。为此，你创造了合成玻璃：将来它可能在眼部植入物和各种显示设备中发挥作用。
+
 ac.name.SYNTH_DERM=合成真皮
 ac.tag.SYNTH_DERM=终于没有痘痘了！
-ac.text.SYNTH_DERM.1=赛博学与仿生学研究表明，皮肤相容性至关重要。将聚合物基底与特制流变剂混合后，你得到了一种性质独特的材料。
+ac.text.SYNTH_DERM.1=赛博学和仿生学的研究离不开替代人类肉体的发明。在制造这种材料时，必须保证足够的强度、弹性以及与宿主体的相容性。以普通皮肤为基础，使用突触石传导魔法与神经脉冲，以黏液提供弹性，并以相位石作为流化剂，你制得了一种具有独特性质的材料。
+
 ac.name.ICARUS_BLOOD=伊卡洛斯之血
 ac.tag.ICARUS_BLOOD=爬得越高，摔得越疼
-ac.text.ICARUS_BLOOD.1=血液对任何生命体都至关重要……承载的力量越多，越容易被自己的大意与自负灼伤……
+ac.text.ICARUS_BLOOD.1=血液对任何生命体都至关重要……有时甚至对非生命体也是如此。它向器官输送维持生命所需的氧气，调节身体净化，并执行许多其他功能。鉴于它的重要性，用更灵活高效的合成替代物取代血液的想法顺理成章。可能性似乎无穷无尽……但我们爬得越高，被自己的疏忽与傲慢灼伤的机会也就越大……
+
 ac.name.SYNTH_NERV=合成神经
 ac.tag.SYNTH_NERV=不自主肌肉收缩
-ac.text.SYNTH_NERV.1=植入体的主要难题在于信号不匹配。通过将聚合纤维精确调谐到特定频率，你打造出一层介质，连接机器信号与人类心智。
+ac.text.SYNTH_NERV.1=在制造植入体时的主要难题是如何让活体与人工器官“和睦共处”。众所周知，我们的身体本身会产生电磁脉冲。利用最近发现的突触石——一种对这些脉冲敏感的物质——你成功地在机器信号与人类意识之间创造出一个中介层。
+
 ac.name.MYOMASS=肌肉质
 ac.tag.MYOMASS=摸摸二头肌！
-ac.text.MYOMASS.1=在制造器官替代物时，必须兼顾运动效率与能耗。我们制得的合成肌肉一定会对你大有帮助。
-cybersus.translation.hack_notification=你感觉到一股奇怪的流动穿透了你的身体……
+ac.text.MYOMASS.1=在制造人工器官替代物时，必须考虑到许多器官需要具备产生机械运动的能力。为此，你研发了合成肌肉——它们一定会派上用场。
+
+
