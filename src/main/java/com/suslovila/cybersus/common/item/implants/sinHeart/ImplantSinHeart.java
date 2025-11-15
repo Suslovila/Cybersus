@@ -1,6 +1,5 @@
 package com.suslovila.cybersus.common.item.implants.sinHeart;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
@@ -20,6 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S06PacketUpdateHealth;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
@@ -363,10 +363,10 @@ public class ImplantSinHeart extends ItemCybersusImplant {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
         if(stack.getMetadata() == sinAspects.size()) {
-            list.add(ChatFormatting.DARK_RED + StatCollector.translateToLocal("cybersus.not_infused_heart"));
+            list.add(EnumChatFormatting.DARK_RED + StatCollector.translateToLocal("cybersus.not_infused_heart"));
             return;
         }
-        list.add(ChatFormatting.DARK_RED + StatCollector.translateToLocal("cybersus.sin_heart_infused." + stack.getMetadata()));
+        list.add(EnumChatFormatting.DARK_RED + StatCollector.translateToLocal("cybersus.sin_heart_infused." + stack.getMetadata()));
     }
 
 }

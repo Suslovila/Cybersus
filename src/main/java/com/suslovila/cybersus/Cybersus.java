@@ -43,10 +43,7 @@ public class Cybersus {
     public static final CreativeTabs tab = new CreativeTabs(NAME) {
         @Override
         public Item getTabIconItem() {
-            if (Cybersus.thaumcraftLoaded) {
                 return CybersusItems.heartBlank;
-            }
-            return Items.redstone;
         }
     };
 

@@ -1,6 +1,5 @@
 package com.suslovila.cybersus.client.gui;
 
-import com.mojang.realmsclient.util.Pair;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.implants.ImplantStorage;
 import com.suslovila.cybersus.client.CybersusKeyHandler;
@@ -9,6 +8,7 @@ import com.suslovila.cybersus.client.ResourceLocationPreLoad;
 import java.util.ArrayList;
 
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
+import com.suslovila.cybersus.utils.Pair;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;

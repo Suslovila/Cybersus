@@ -105,7 +105,7 @@ public class CybersusWorldGenerator implements IWorldGenerator {
 
     private void generateEnd(World world, Random rand, int baseX, int baseZ) {
         // Сколько жил на чанк / размер жилы / высоты
-        final int veinsPerChunk = 1;   // сколько попыток
+        final int veinsPerChunk = 3;   // сколько попыток
         final int veinSize      = 5;   // размер жилы
         final int minY          = 4;
         final int maxY          = 80;  // основная «шапка» острова Энда
@@ -128,8 +128,8 @@ public class CybersusWorldGenerator implements IWorldGenerator {
         // Лучше свериться в коде/конфиге мода, но 39 — стандартный "Taint".
         if (biome != null && biome.biomeName.contains("Magical Forest")) {
 
-            int veinsPerChunk = 1; // сколько жил на чанк
-            int veinSize = 6;      // размер жилы
+            int veinsPerChunk = 4; // сколько жил на чанк
+            int veinSize = 5;      // размер жилы
             int minY = 8;
             int maxY = 48;
 
@@ -138,7 +138,6 @@ public class CybersusWorldGenerator implements IWorldGenerator {
                 int y = minY + rand.nextInt(maxY - minY);
                 int z = baseZ + rand.nextInt(16);
 
-                // Фазолит в камне (Blocks.stone)
                 new WorldGenMinable(ModBlocks.phasoliteOre, veinSize, Blocks.stone)
                         .generate(world, rand, x, y, z);
             }

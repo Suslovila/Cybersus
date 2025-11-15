@@ -1,6 +1,5 @@
 package com.suslovila.cybersus.common.item;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.research.CybersusAspect;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
@@ -64,7 +63,7 @@ public class ItemSuppressed extends Item {
             ItemStack suppressedStack = ItemStack.loadItemStackFromNBT(tag.getCompoundTag(SUPPRESSED_STACK_KEY));
             EnumRarity rarity = getRarity(suppressedStack);
 
-            String suppresedString = ChatFormatting.DARK_RED.toString() + StatCollector.translateToLocal("key.suppressed") + ": ";
+            String suppresedString = EnumChatFormatting.DARK_RED.toString() + StatCollector.translateToLocal("key.suppressed") + ": ";
             return suppresedString + rarity.rarityColor.toString() +  suppressedStack.getItem().getItemStackDisplayName(suppressedStack);
         }
 

@@ -2,7 +2,6 @@ package com.suslovila.cybersus.utils;
 
 
 import com.emoniph.witchery.dimension.GenerateMaze;
-import com.mojang.realmsclient.util.Pair;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
