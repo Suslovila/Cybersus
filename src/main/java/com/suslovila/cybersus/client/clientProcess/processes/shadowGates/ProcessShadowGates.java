@@ -1,5 +1,6 @@
 package com.suslovila.cybersus.client.clientProcess.processes.shadowGates;
 
+import com.suslovila.cybersus.api.process.ClientProcess;
 import com.suslovila.cybersus.api.process.ISerializableProcess;
 import com.suslovila.cybersus.api.process.WorldProcess;
 import com.suslovila.cybersus.client.particles.FXShadowDrop;
@@ -27,27 +28,19 @@ import java.util.Random;
 import static com.suslovila.cybersus.utils.SusUtils.nextDouble;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
-public class ProcessShadowGates extends WorldProcess implements ISerializableProcess {
-    protected int timeLeft;
-    int playerId;
+public class ProcessShadowGates extends ClientProcess implements ISerializableProcess {
     Random random = new Random();
     ConcurrentSet<ShadowTail> tails = new ConcurrentSet<>();
+    public Integer ownerId = null;
 
-    public void writeTo(ByteBuf buf) {
-        buf.writeInt(timeLeft);
-        buf.writeInt(playerId);
 
+    public ProcessShadowGates(SusVec3 vec3, int duration) {
+        super(vec3, duration);
     }
 
-    @Override
-    public void readFrom(ByteBuf buf) {
-        timeLeft = buf.readInt();
-        playerId = buf.readInt();
-    }
-
-    public ProcessShadowGates(int playerId, int timeLeft) {
-        this.playerId = playerId;
-        this.timeLeft = timeLeft;
+    public ProcessShadowGates(Entity entity, SusVec3 vec3, int duration) {
+        super(vec3, duration);
+        this.ownerId = entity.getEntityId();
     }
 
     public ProcessShadowGates() {
@@ -55,23 +48,17 @@ public class ProcessShadowGates extends WorldProcess implements ISerializablePro
 
     @Override
     public void tickClient(TickEvent.ClientTickEvent event) {
-        if(!Minecraft.getMinecraft().isGamePaused()) {
-            if (!isExpired(event)) timeLeft -= 1;
-        }
+        super.tickClient(event);
         World world = Minecraft.getMinecraft().theWorld;
         if (world == null) return;
-
-        Entity entity = Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(playerId);
-        if (!(entity instanceof EntityPlayer)) return;
-        EntityPlayer player = (EntityPlayer) entity;
 
 
         for(int i = 0; i < 10; i++) {
             FXShadowDrop particle = new FXShadowDrop(
                     world,
-                    player.posX + SusUtils.nextDouble(-1.3, 1.3),
-                    player.posY - 1 + SusUtils.nextDouble(0, 0.1),
-                    player.posZ + SusUtils.nextDouble(-1.3, 1.3),
+                    position.x + SusUtils.nextDouble(-1.3, 1.3),
+                    position.y - 1 + SusUtils.nextDouble(0, 0.1),
+                    position.z + SusUtils.nextDouble(-1.3, 1.3),
                     0.0,
                     SusUtils.nextDouble(0.03, 0.09),
                     0.0,
@@ -81,26 +68,29 @@ public class ProcessShadowGates extends WorldProcess implements ISerializablePro
             );
             ParticleEngine.instance.addEffect(world, particle);
         }
-        spawnShadowParticles(player, 11, 10, 3, 0.3, 1.4, 0.5, 1.254D, -0.7, 0.7, 0, 0.8, -0.7, 0.7);
-
-    }
-
-    @Override
-    public boolean isExpired(TickEvent.ClientTickEvent event) {
-        return timeLeft <= 0;
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        if(player != null && player.worldObj != null) {
+            spawnShadowParticles(player.worldObj, 11, 10, 3, 0.3, 1.4, 0.5, 1.254D, -0.7, 0.7, 0, 0.8, -0.7, 0.7);
+        }
     }
 
 
     @Override
     public void render(RenderWorldLastEvent event) {
-        Entity entity = Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(playerId);
-        if (!(entity instanceof EntityPlayer)) return;
-        EntityPlayer player = (EntityPlayer) entity;
+
+        if(ownerId != null && Minecraft.getMinecraft().thePlayer != null && Minecraft.getMinecraft().thePlayer.worldObj != null) {
+            Entity entity = Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(ownerId);
+            if (entity != null) {
+                position = SusGraphicHelper.getRenderPos(entity, event.partialTicks);
+
+            }
+        }
 
         GL11.glPushMatrix();
+        SusGraphicHelper.translateFromPlayerTo(this.position, event.partialTicks);
         SusGraphicHelper.makeSystemOrthToVectorAndHandle(
                 new SusVec3(0.0, 1.0, 0.0),
-                1.5,
+                1.6,
                 ()-> {
                     GL11.glPushAttrib(GL11.GL_BLEND);
                     GL11.glEnable(GL11.GL_BLEND);
@@ -183,21 +173,21 @@ public class ProcessShadowGates extends WorldProcess implements ISerializablePro
         }
     }
 
-    protected void spawnShadowParticles(EntityPlayer player, int maxShadowsAmount, int speed, int wholeIterationAmount, double minRadius, double maxRadius, double minParticleSize, double maxParticleSize, double minXOffset, double maxXOffset, double minYOffset, double maxYOffset, double minZOffset, double maxZOffset) {
+    protected void spawnShadowParticles(World world, int maxShadowsAmount, int speed, int wholeIterationAmount, double minRadius, double maxRadius, double minParticleSize, double maxParticleSize, double minXOffset, double maxXOffset, double minYOffset, double maxYOffset, double minZOffset, double maxZOffset) {
         for (int hl = 0; hl < wholeIterationAmount; hl++) {
             if (tails.size() < maxShadowsAmount) {
                 double radius = nextDouble(minRadius, maxRadius);
                 int timer = 0;
-                SusVec3 lookVector = SusVec3.getLookVec(player);
+                SusVec3 lookVector = SusVec3.randomVector();
                 SusVec3 lookVectorNormal = new SusVec3(lookVector.x + nextDouble(-2, 2), 0, lookVector.z + nextDouble(-2, 2));
                 SusVec3 m = new SusVec3(lookVectorNormal.z, 0, -lookVectorNormal.x);
                 m = m.normalize();
                 SusVec3 k = new SusVec3(0, -1, 0);
                 tails.add(new ShadowTail(
                         new SusVec3(
-                                player.posX + nextDouble(minXOffset, maxXOffset),
-                                player.posY - 0.3 + nextDouble(minYOffset, maxYOffset),
-                                player.posZ + nextDouble(minZOffset, maxZOffset)
+                                position.x + nextDouble(minXOffset, maxXOffset),
+                                position.y - 0.3 + nextDouble(minYOffset, maxYOffset),
+                                position.z + nextDouble(minZOffset, maxZOffset)
                         ),
                         radius,
                         m,
@@ -233,7 +223,7 @@ public class ProcessShadowGates extends WorldProcess implements ISerializablePro
                 SusVec3 endPosition = shadowTail.homePos.add(a);
 
                 FXShadowDrop particle = new FXShadowDrop(
-                        player.worldObj,
+                        world,
                         endPosition.x,
                         endPosition.y,
                         endPosition.z,
@@ -244,7 +234,7 @@ public class ProcessShadowGates extends WorldProcess implements ISerializablePro
                         (float) particleSize,
                         true
                 );
-                ParticleEngine.instance.addEffect(player.worldObj, particle);
+                ParticleEngine.instance.addEffect(world, particle);
 
                 if (random.nextInt(300) == 37) {
                     iterator.remove();
@@ -252,6 +242,23 @@ public class ProcessShadowGates extends WorldProcess implements ISerializablePro
                 }
             }
         }
+    }
+
+    @Override
+    public void writeTo(ByteBuf buf) {
+        super.writeTo(buf);
+        buf.writeBoolean(ownerId != null);
+        if(ownerId != null) {
+            buf.writeInt(ownerId);
+        }
+    }
+    @Override
+    public void readFrom(ByteBuf buf) {
+        super.readFrom(buf);
+        if(buf.readBoolean()) {
+            ownerId = buf.readInt();
+        }
+
     }
 
 }

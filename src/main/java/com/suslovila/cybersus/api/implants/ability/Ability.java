@@ -4,6 +4,7 @@ import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
 import com.suslovila.cybersus.client.RenderHelper;
 import com.suslovila.cybersus.common.event.customEvents.PlayerActivatedAbilityEvent;
+import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.common.sync.CybersusPacketHandler;
 import com.suslovila.cybersus.common.sync.implant.PacketImplantSync;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
@@ -16,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -55,7 +57,7 @@ public abstract class Ability {
 
 
     public final void tryToActivateAbility(EntityPlayer player, int index, ItemStack implant) {
-        if (!MinecraftForge.EVENT_BUS.post(new PlayerActivatedAbilityEvent(player, index, implant, this))) {
+        if (!MinecraftForge.EVENT_BUS.post(new PlayerActivatedAbilityEvent(player, index, implant, this)) && canActivate(player, index, implant)) {
             onEnableButtonClicked(player, index, implant);
         }
     }
@@ -72,6 +74,8 @@ public abstract class Ability {
 
     /**
      * returns fuelKit player must have to activate ability
+     * <p>
+     * note that arguments can be null (for example, if fired from thaumonomicon)
      *
      * @param implant
      * @return required fuel. MUST NOT RETURN NULL. Instead, return FuelEmpty.INSTANCE
@@ -90,6 +94,17 @@ public abstract class Ability {
      */
     public abstract boolean isActive(ItemStack implant);
 
+    /**
+     * additional checks if ability can be used. Fuel checks should not be included here
+     *
+     * @param player
+     * @param index
+     * @param implant
+     * @return
+     */
+    public boolean canActivate(EntityPlayer player, int index, ItemStack implant) {
+        return true;
+    }
     /**
      * @param implant
      * @return actual cooldown left value
@@ -211,7 +226,47 @@ public abstract class Ability {
         SusGraphicHelper.drawFromCenter(radius * 0.58);
     }
 
+
     public boolean doesTheAbilityHaveNegativeImpact(Entity entity) {
         return false;
+    }
+
+    public String getThaumonomiconText(ItemImplant implantType) {
+        StringBuilder builder = new StringBuilder();
+
+        addAbilityNameInfo(implantType, builder);
+        addAbilityTypeInfo(implantType, builder);
+        addAbilityDescription(implantType, builder);
+        addRequiredFuelForActivation(implantType, builder);
+
+        return builder.toString();
+    }
+
+    protected void addAbilityNameInfo(ItemImplant implantType, StringBuilder builder) {
+        builder.append("\u00A7o\u00A7l" + StatCollector.translateToLocal("cybersus." + implantType.getUnlocalizedName() + "." + this.name + ".name") + "\u00A7r");
+
+    }
+    protected void addAbilityTypeInfo(ItemImplant implantType, StringBuilder builder) {
+        builder.append("<BR>\u00A7n" + StatCollector.translateToLocal("cybersus.ability_type") + ":" + "\u00A7r" + " " + getAbilityTypeName());
+
+    }
+    protected void addAbilityDescription(ItemImplant implantType, StringBuilder builder) {
+        builder.append("<BR>" + StatCollector.translateToLocal("cybersus." + implantType.getUnlocalizedName() + "." + this.name + ".description"));
+
+    }
+    protected void addRequiredFuelForActivation(ItemImplant implantType, StringBuilder builder) {
+        builder.append("<BR>\u00A7n" + StatCollector.translateToLocal("cybersus.ability.price_per_activation_key") + ":" + "\u00A7r" + " ");
+        builder.append(this.getFuelConsumeOnActivation(null, -1, null));
+
+
+    }
+    protected void addRequiredFuelForTriggering(ItemImplant implantType, StringBuilder builder, FuelComposite fuelComposite) {
+        builder.append("<BR>\u00A7n" + StatCollector.translateToLocal("cybersus.ability.price_for_triggering_key") + ":" + "\u00A7r" + " ");
+        builder.append(fuelComposite.toString());
+
+    }
+
+    public String getAbilityTypeName() {
+        return StatCollector.translateToLocal("cybersus.ability_type_not_stated");
     }
 }

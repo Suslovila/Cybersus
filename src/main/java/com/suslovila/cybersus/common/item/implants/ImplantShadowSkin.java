@@ -5,17 +5,22 @@ import com.suslovila.cybersus.api.fuel.FuelComposite;
 import com.suslovila.cybersus.api.fuel.impl.fuel.essentia.FuelEssentia;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
+import com.suslovila.cybersus.api.implants.ability.AbilityInstant;
 import com.suslovila.cybersus.api.implants.ability.AbilityPassive;
 import com.suslovila.cybersus.client.clientProcess.processes.shadowGates.ProcessShadowGates;
 import com.suslovila.cybersus.common.item.implants.ItemCybersusImplant;
+import com.suslovila.cybersus.common.processes.ProcessGravityTrap;
 import com.suslovila.cybersus.extendedData.CustomWorldData;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
+import com.suslovila.cybersus.utils.SusVec3;
+import com.suslovila.cybersus.utils.SusWorldHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -31,8 +36,12 @@ import java.util.List;
 public class ImplantShadowSkin extends ItemCybersusImplant {
     public static final ArrayList<Ability> abilities = new ArrayList<>();
 
-    public static final String SHADOW_MOD_TAG = "shadow_mod_active";
-    public static final String PREPARATION_TIMER = "preparation_timer";
+//    public static final String SHADOW_MOD_TAG = "shadow_mod_active";
+//    public static final String PREPARATION_TIMER = "preparation_timer";
+
+    public static final String MODE_PREPARATION_TIMER = "mode_preparation_timer";
+    public static final String TELEPORT_PREPARATION_TIMER = "teleport_preparation_timer";
+
 
     public ImplantShadowSkin() {
         super(ImplantType.SKIN);
@@ -44,7 +53,8 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
     }
 
     static {
-        abilities.add(new AbilityPassive("shadow_travel") {
+        abilities.add(new AbilityPassive("shadow_travel", true, true) {
+
             @Override
             public FuelComposite getFuelConsumePerCheck(EntityPlayer player, int index, ItemStack implant) {
                 return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(Aspect.DARKNESS, 2)));
@@ -66,13 +76,15 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
 
             @Override
             public void onEnableButtonClicked(EntityPlayer player, int index, ItemStack implant) {
+                int light = player.worldObj.getBlockLightValue((int) player.posX, (int) player.posY, (int) player.posZ);
+                if(light >= 14) return;
                 if (isPreparing(implant)) return;
                 super.onEnableButtonClicked(player, index, implant);
             }
 
             @Override
             public void onAbilityStatusSwitched(EntityPlayer player, int index, ItemStack implant) {
-                KhariumSusNBTHelper.getOrCreateTag(implant).setInteger(PREPARATION_TIMER, 30);
+                KhariumSusNBTHelper.getOrCreateTag(implant).setInteger(MODE_PREPARATION_TIMER, 30);
                 if (!isActive(implant)) {
                     player.worldObj.playSoundAtEntity(
                             player,
@@ -88,9 +100,13 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
                             1.4f + player.worldObj.rand.nextFloat() * 0.2f
                     );
                 }
-                ProcessShadowGates processShadowGates = new ProcessShadowGates(player.getEntityId(), 30);
+                ProcessShadowGates processShadowGates = new ProcessShadowGates(player, SusVec3.getEntityPos(player).add(0.0, 1.0, 0.0), 30);
+//                CustomWorldData.getCustomData(player.worldObj).addProcess(processShadowGates);
                 CustomWorldData.syncProcess(processShadowGates, player.worldObj.provider.dimensionId);
-                if (!isActive(implant)) player.removePotionEffect(Potion.invisibility.id);
+                if (!isActive(implant)) {
+                    player.removePotionEffect(Potion.invisibility.id);
+                    sendToCooldown(player, index, implant);
+                }
 
                 notifyClient(player, index, implant);
             }
@@ -100,9 +116,9 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
                 super.onPlayerUpdateEvent(event, player, index, implant);
 
                 NBTTagCompound tagCompound = KhariumSusNBTHelper.getOrCreateTag(implant);
-                int currentTimer = KhariumSusNBTHelper.getOrCreateInteger(tagCompound, PREPARATION_TIMER, 0);
+                int currentTimer = KhariumSusNBTHelper.getOrCreateInteger(tagCompound, MODE_PREPARATION_TIMER, 0);
                 if (currentTimer > 0) {
-                    tagCompound.setInteger(PREPARATION_TIMER, currentTimer - 1);
+                    tagCompound.setInteger(MODE_PREPARATION_TIMER, currentTimer - 1);
                 }
 
                 if (!player.worldObj.isRemote) {
@@ -174,7 +190,7 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
 
             public boolean isPreparing(ItemStack implant) {
                 NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(implant);
-                return (KhariumSusNBTHelper.getOrCreateInteger(tag, PREPARATION_TIMER, 0) > 0);
+                return (KhariumSusNBTHelper.getOrCreateInteger(tag, MODE_PREPARATION_TIMER, 0) > 0);
             }
 
             @Override
@@ -202,18 +218,142 @@ public class ImplantShadowSkin extends ItemCybersusImplant {
             public void sendToCooldown(EntityPlayer player, int index, ItemStack implant) {
                 super.sendToCooldown(player, index, implant);
                 player.removePotionEffect(Potion.invisibility.id);
-                KhariumSusNBTHelper.getOrCreateTag(implant).setInteger(PREPARATION_TIMER, 0);
+//                KhariumSusNBTHelper.getOrCreateTag(implant).setInteger(MODE_PREPARATION_TIMER, 0);
             }
 
             @Override
             public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
                 if (player != null && !player.worldObj.isRemote && isActive(implant)) {
-                    ProcessShadowGates processShadowGates = new ProcessShadowGates(player.getEntityId(), 30);
+                    ProcessShadowGates processShadowGates = new ProcessShadowGates(SusVec3.getEntityPos(player), 30);
                     CustomWorldData.syncProcess(processShadowGates, player.worldObj.provider.dimensionId);
                 }
                 super.onUnequipped(player, index, implant);
             }
 
+            @Override
+            public boolean canActivate(EntityPlayer player, int index, ItemStack implant) {
+                return !ImplantShadowSkin.abilities.get(1).isActive(implant);
+            }
+
+        });
+
+
+        abilities.add(new AbilityInstant("shadow_teleportation") {
+
+
+            public final String DESTINATION_POS = Cybersus.prefixAppender.doAndGet("destination_pos");
+            @Override
+            public int getCooldownTotal(EntityPlayer player, int index, ItemStack implant) {
+                return 20 * 5;
+            }
+
+
+            @Override
+            public FuelComposite getFuelConsumeOnActivation(EntityPlayer player, int index, ItemStack implant) {
+                return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(Aspect.DARKNESS, 32)));
+            }
+
+
+            public double getMaxReachDistance(EntityPlayer player, int index, ItemStack implant) {
+                return 50.0f;
+            }
+
+            @Override
+            public void onEnableButtonClicked(EntityPlayer player, int index, ItemStack implant) {
+                if (player.worldObj.isRemote) return;
+                if (isOnCooldown(implant)) return;
+
+                double maxDistance = getMaxReachDistance(player, index, implant);
+                MovingObjectPosition hitMOP = SusWorldHelper.raytraceBlocks(player.worldObj, player, false, maxDistance);
+                if (hitMOP != null) {
+                    int lightBefore = player.worldObj.getBlockLightValue((int) player.posX, (int) player.posY, (int) player.posZ);
+                    int lightAfter = player.worldObj.getBlockLightValue((int) hitMOP.blockX, (int) hitMOP.blockY + 1, (int) hitMOP.blockZ);
+                    if (lightBefore < 14 && lightAfter < 14) {
+                        FuelComposite requiredFuel = getFuelConsumeOnActivation(player, index, implant);
+                        if (requiredFuel.tryTakeFuelFromPlayer(player)) {
+//                        onActivated(player, index, implant);
+
+                            KhariumSusNBTHelper.getOrCreateTag(implant).setInteger(TELEPORT_PREPARATION_TIMER, 30);
+//                    if (!isActive(implant)) {
+//                        player.worldObj.playBroadcastSound(
+//                                player,
+//                                Cybersus.MOD_ID + ":appear_from_shadows",
+//                                1f,
+//                                1.4f + player.worldObj.rand.nextFloat() * 0.2f
+//                        );
+//                    } else {
+//                        player.worldObj.playSoundAtEntity(
+//                                player,
+//                                Cybersus.MOD_ID + ":hide_in_shadows",
+//                                1f,
+//                                1.4f + player.worldObj.rand.nextFloat() * 0.2f
+//                        );
+//                    }
+
+                            NBTTagCompound tagForPos = new NBTTagCompound();
+                            SusVec3 destinationVector = new SusVec3(hitMOP.blockX, hitMOP.blockY + 1, hitMOP.blockZ);
+                            destinationVector.writeTo(tagForPos);
+
+                            KhariumSusNBTHelper.getOrCreateTag(implant).setTag(DESTINATION_POS, tagForPos);
+
+                            ProcessShadowGates sourceGates = new ProcessShadowGates(player, SusVec3.getEntityPos(player).add(0.0, 1, 0.0), 30);
+//                            CustomWorldData.getCustomData(player.worldObj).addProcess(sourceGates);
+                            CustomWorldData.syncProcess(sourceGates);
+
+                            ProcessShadowGates destinationGates = new ProcessShadowGates(destinationVector.add(0.0, 1.7, 0.0), 30);
+//                            CustomWorldData.getCustomData(player.worldObj).addProcess(destinationGates);
+                            CustomWorldData.syncProcess(destinationGates);
+
+                            notifyClient(player, index, implant);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onPlayerUpdateEvent(LivingEvent.LivingUpdateEvent event, EntityPlayer player, int index, ItemStack implant) {
+                super.onPlayerUpdateEvent(event, player, index, implant);
+
+                NBTTagCompound tagCompound = KhariumSusNBTHelper.getOrCreateTag(implant);
+                int currentTimer = KhariumSusNBTHelper.getOrCreateInteger(tagCompound, TELEPORT_PREPARATION_TIMER, 0);
+                if (currentTimer > 0) {
+                    tagCompound.setInteger(TELEPORT_PREPARATION_TIMER, currentTimer - 1);
+                    if(currentTimer == 1) {
+                        SusVec3 targetPos = SusVec3.readFrom(tagCompound.getCompoundTag(DESTINATION_POS));
+                        SusWorldHelper.teleportEntity(player, targetPos);
+
+                        sendToCooldown(player, index, implant);
+                        notifyClient(player, index, implant);
+                    }
+                }
+            }
+
+            @Override
+            protected void onActivated(EntityPlayer player, int index, ItemStack implant) {
+
+            }
+
+            @Override
+            public boolean canActivate(EntityPlayer player, int index, ItemStack implant) {
+                return !ImplantShadowSkin.abilities.get(0).isActive(implant);
+            }
+
+            public boolean isPreparing(ItemStack implant) {
+                NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(implant);
+                return (KhariumSusNBTHelper.getOrCreateInteger(tag, TELEPORT_PREPARATION_TIMER, 0) > 0);
+            }
+
+
+            @Override
+            public void sendToCooldown(EntityPlayer player, int index, ItemStack implant) {
+                super.sendToCooldown(player, index, implant);
+                KhariumSusNBTHelper.getOrCreateTag(implant).setInteger(TELEPORT_PREPARATION_TIMER, 0);
+            }
+
+            @Override
+            public boolean isActive(ItemStack implant) {
+                return isPreparing(implant);
+            }
         });
     }
 

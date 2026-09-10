@@ -20,6 +20,8 @@ public class CybersusPacketHandler {
         INSTANCE.registerMessage(PacketOpenImplantGui.Handler.class, PacketOpenImplantGui.class, idx++, Side.SERVER);
 
         INSTANCE.registerMessage(PacketRuneInstallerButtonClicked.Handler.class, PacketRuneInstallerButtonClicked.class, idx++, Side.SERVER);
+        INSTANCE.registerMessage(PacketReactionIncreaserActivated.Handler.class, PacketReactionIncreaserActivated.class, idx++, Side.SERVER);
+
         INSTANCE.registerMessage(PacketSyncProcess.Handler.class, PacketSyncProcess.class, idx++, Side.CLIENT);
         INSTANCE.registerMessage(PacketSyncAllProcess.Handler.class, PacketSyncAllProcess.class, idx++, Side.CLIENT);
 

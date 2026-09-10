@@ -27,7 +27,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.suslovila.cybersus.common.item.implants.ImplantShadowSkin.PREPARATION_TIMER;
+import static com.suslovila.cybersus.common.item.implants.ImplantShadowSkin.MODE_PREPARATION_TIMER;
+import static com.suslovila.cybersus.common.item.implants.ImplantShadowSkin.TELEPORT_PREPARATION_TIMER;
 
 
 public class ClientProcessHandler {
@@ -104,12 +105,16 @@ public class ClientProcessHandler {
 
             CybersusPlayerExtendedData.get(player).implantStorage.forEachImplant((index, stack, isDisabled) -> {
                 if (stack.getItem() instanceof ImplantShadowSkin) {
-                    Ability shadowTravel = ((ImplantShadowSkin) stack.getItem()).getAbilities(player, index, stack).get(0);
                     NBTTagCompound tagCompound = KhariumSusNBTHelper.getOrCreateTag(stack);
                     boolean hasCompletedPreparations = true;
-                    if (tagCompound.hasKey(PREPARATION_TIMER)) {
-                        hasCompletedPreparations = tagCompound.getInteger(PREPARATION_TIMER) <= 0;
+                    if (tagCompound.hasKey(MODE_PREPARATION_TIMER)) {
+                        hasCompletedPreparations = tagCompound.getInteger(MODE_PREPARATION_TIMER) <= 0;
                     }
+
+                    if (tagCompound.hasKey(TELEPORT_PREPARATION_TIMER)) {
+                        hasCompletedPreparations = hasCompletedPreparations && tagCompound.getInteger(TELEPORT_PREPARATION_TIMER) <= 0;
+                    }
+
 
                     if (!hasCompletedPreparations) {
                         Minecraft.getMinecraft().thePlayer.movementInput = new MovementInput();

@@ -56,9 +56,9 @@ public class ImplantSoulBreaker extends ItemCybersusImplant {
             @Override
             public void onPlayerHurtEventIfAttacker(LivingHurtEvent event, EntityPlayer player, int index, ItemStack implant) {
                 if(player.worldObj.isRemote) return;
-                ProcessGravityTrap processSoulBreak = new ProcessGravityTrap(SusVec3.getEntityPos(event.entityLiving).add(new SusVec3(0.0, event.entityLiving.height / 2, 0.0)), 20 * 1000);
-                CustomWorldData.getCustomData(player.worldObj).addProcess(processSoulBreak);
-                CustomWorldData.syncProcess(processSoulBreak);
+//                ProcessGravityTrap processSoulBreak = new ProcessGravityTrap(SusVec3.getEntityPos(event.entityLiving).add(new SusVec3(0.0, event.entityLiving.height / 2, 0.0)), 20 * 1000);
+//                CustomWorldData.getCustomData(player.worldObj).addProcess(processSoulBreak);
+//                CustomWorldData.syncProcess(processSoulBreak);
 //                FXBrokenSoul fxBrokenSoul = new FXBrokenSoul(player.worldObj, player.posX, player.posY, player.posZ, 0.0, 0.0, 0.0, 1000, 0.2f, true);
 //                ParticleEngine.instance.addEffect(player.worldObj, fxBrokenSoul);
             }

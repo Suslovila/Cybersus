@@ -1,6 +1,5 @@
 package com.suslovila.cybersus.common.item.implants.sinHeart;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
@@ -13,11 +12,14 @@ import fox.spiteful.forbidden.DarkAspects;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.S06PacketUpdateHealth;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
@@ -220,10 +222,13 @@ public class ImplantSinHeart extends ItemCybersusImplant {
         abilities.add(new AbilitySinHeartFormShift(DarkAspects.GLUTTONY) {
             @Override
             public void onPlayerHurtEventIfAttacker(LivingHurtEvent event, EntityPlayer player, int index, ItemStack implant) {
-                if (isActive(implant)) {
+                if (isActive(implant) && !player.worldObj.isRemote) {
                     FoodStats foodStats = player.getFoodStats();
                     foodStats.setFoodLevel(Math.min(20, foodStats.getFoodLevel() + 2 + itemRand.nextInt(2)));
                     player.heal(event.ammount);
+                    if(player instanceof EntityPlayerMP) {
+                        ((EntityPlayerMP)player).playerNetServerHandler.sendPacket(new S06PacketUpdateHealth(player.getHealth(), player.getFoodStats().getFoodLevel(), player.getFoodStats().getSaturationLevel()));
+                    }
                 }
             }
 
@@ -232,7 +237,7 @@ public class ImplantSinHeart extends ItemCybersusImplant {
                 super.onPlayerUpdateEvent(event, player, index, implant);
                 if (isActive(implant) && player.worldObj.getTotalWorldTime() % 20 == 0) {
                     FoodStats foodStats = player.getFoodStats();
-                    foodStats.setFoodLevel(Math.max(-100, foodStats.getFoodLevel() - 2));
+                    foodStats.setFoodLevel(Math.max(0, foodStats.getFoodLevel() - 2));
                 }
             }
         });
@@ -358,10 +363,10 @@ public class ImplantSinHeart extends ItemCybersusImplant {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
         if(stack.getMetadata() == sinAspects.size()) {
-            list.add(ChatFormatting.DARK_RED + StatCollector.translateToLocal("cybersus.not_infused_heart"));
+            list.add(EnumChatFormatting.DARK_RED + StatCollector.translateToLocal("cybersus.not_infused_heart"));
             return;
         }
-        list.add(ChatFormatting.DARK_RED + StatCollector.translateToLocal("cybersus.sin_heart_infused." + stack.getMetadata()));
+        list.add(EnumChatFormatting.DARK_RED + StatCollector.translateToLocal("cybersus.sin_heart_infused." + stack.getMetadata()));
     }
 
 }

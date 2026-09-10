@@ -1,30 +1,23 @@
 package com.suslovila.cybersus.client.gui;
 
-import baubles.client.gui.GuiPlayerExpanded;
-import com.suslovila.cybersus.Cybersus;
-import com.suslovila.cybersus.api.implants.ImplantStorage;
 import com.suslovila.cybersus.api.implants.ability.AbilityHack;
 import com.suslovila.cybersus.common.block.container.ContainerImplantHolder;
 import com.suslovila.cybersus.common.block.container.ContainerRuneInstaller;
 import com.suslovila.cybersus.common.block.container.envyEye.ContainerBaublesEnvy;
 import com.suslovila.cybersus.common.block.runeInstaller.TileRuneInstaller;
 import com.suslovila.cybersus.common.item.ItemPortableMultiAspectContainer;
-import com.suslovila.cybersus.common.item.ModItems;
+import com.suslovila.cybersus.common.item.CybersusItems;
 import com.suslovila.cybersus.common.item.implants.ImplantEyeOfEnvy;
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import com.suslovila.cybersus.utils.SusObjectWrapper;
 import cpw.mods.fml.common.network.IGuiHandler;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import java.util.UUID;
-
-import static com.suslovila.cybersus.common.item.ModItems.eyeOfEnvy;
 
 public class CybersusGuiHandler implements IGuiHandler {
     @Override
@@ -59,7 +52,7 @@ public class CybersusGuiHandler implements IGuiHandler {
                                         }
                                     }
                                 }
-                            }, wrappedPlayer, ModItems.eyeOfEnvy);
+                            }, wrappedPlayer, CybersusItems.eyeOfEnvy);
 
                         }
 
@@ -100,6 +93,10 @@ public class CybersusGuiHandler implements IGuiHandler {
                 } else return null;
             }
 
+            case IMPLANT_SELECTOR: {
+                    return new GuiImplantSelector();
+            }
+
 //            case BAUBLES_ENVY: {
 //                return new GuiPlayerExpanded(player);
 //            }
@@ -117,7 +114,7 @@ public class CybersusGuiHandler implements IGuiHandler {
                                         }
                                     }
                                 }
-                            }, wrappedPlayer, ModItems.eyeOfEnvy);
+                            }, wrappedPlayer, CybersusItems.eyeOfEnvy);
 
                         }
 

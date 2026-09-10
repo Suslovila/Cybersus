@@ -3,16 +3,19 @@ package com.suslovila.cybersus.common.processes;
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.process.CommonProcess;
 import com.suslovila.cybersus.client.ResourceLocationPreLoad;
+import com.suslovila.cybersus.client.TextureStorage;
 import com.suslovila.cybersus.client.particles.FXGravity;
 import com.suslovila.cybersus.research.CybersusAspect;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
 import com.suslovila.cybersus.utils.SusUtils;
 import com.suslovila.cybersus.utils.SusVec3;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
@@ -28,16 +31,18 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class ProcessGravityTrap extends CommonProcess {
     int angle = Cybersus.random.nextInt(360);
-    float captureRadius = 10.0f;
-    int appearTimeTicks = 3 * 20;
+    float captureRadius;
+    public int appearTimeTicks = 3 * 20;
 
-    public ProcessGravityTrap(SusVec3 vec3, int duration) {
+    public static final String captureRadiusKey = Cybersus.prefixAppender.doAndGet("captureRadius");
+
+    public ProcessGravityTrap(SusVec3 vec3, int duration, float captureRadius) {
         super(vec3, duration);
+        this.captureRadius = captureRadius;
     }
 
-    public static final ResourceLocationPreLoad textureInner = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/processes/gravity_trap_inner.png");
-    public static final ResourceLocationPreLoad textureOuter = new ResourceLocationPreLoad(Cybersus.MOD_ID, "textures/processes/gravity_trap_outer.png");
 
+    // we must have empty constructor for instantiation!!!!!!!!
     public ProcessGravityTrap() {
     }
 
@@ -58,7 +63,7 @@ public class ProcessGravityTrap extends CommonProcess {
 
         if (!isActivated()) return;
 
-        List<Entity> entities = event.world.getEntitiesWithinAABBExcludingEntity(null, AxisAlignedBB.getBoundingBox(x - captureRadius, y, z - captureRadius, x + captureRadius, y + captureRadius * 2, z + captureRadius));
+        List<Entity> entities = event.world.getEntitiesWithinAABBExcludingEntity(null, AxisAlignedBB.getBoundingBox(position.x - captureRadius, position.y, position.z - captureRadius, position.x + captureRadius, position.y + captureRadius * 4, position.z + captureRadius));
         for (Entity entity : entities) {
             if (entity instanceof EntityPlayer) {
                 entity.motionX = 0;
@@ -94,13 +99,13 @@ public class ProcessGravityTrap extends CommonProcess {
             for (int i = 0; i < 6; i++) {
                 FXGravity gravity = new FXGravity(
                         world,
-                        this.x + SusUtils.nextDouble(-captureRadius, captureRadius),
-                        this.y + SusUtils.nextDouble(0, captureRadius * 2),
-                        this.z + SusUtils.nextDouble(-captureRadius, captureRadius),
+                        this.position.x + SusUtils.nextDouble(-captureRadius, captureRadius),
+                        this.position.y + SusUtils.nextDouble(0, captureRadius * 4),
+                        this.position.z + SusUtils.nextDouble(-captureRadius, captureRadius),
                         0.0,
                         -2.5,
                         0.0,
-                        10,
+                        (int)captureRadius,
                         0.8f,
                         true
                 );
@@ -118,7 +123,7 @@ public class ProcessGravityTrap extends CommonProcess {
 //        SusVec3 lookVector = new SusVec3(x, y, z).subtract(SusGraphicHelper.getRenderPos(player, event.partialTicks).subtract(0.0, player.eyeHeight, 0.0));
         SusVec3 lookVector = new SusVec3(0.0, 1.0, 0.0);
         GL11.glPushMatrix();
-        SusGraphicHelper.translateFromPlayerTo(new SusVec3(x, y, z), event.partialTicks);
+        SusGraphicHelper.translateFromPlayerTo(this.position, event.partialTicks);
         SusGraphicHelper.makeSystemOrthToVectorAndHandle(lookVector, -0.1, () -> {
             glPushAttrib(GL_BLEND);
             glPushAttrib(GL_LIGHTING);
@@ -136,15 +141,15 @@ public class ProcessGravityTrap extends CommonProcess {
             glScaled(scale, scale, scale);
 
             GL11.glPushMatrix();
-            SusGraphicHelper.bindTexture(textureInner);
+            SusGraphicHelper.bindTexture(TextureStorage.textureInner);
             GL11.glRotated(angle, 0.0, 0.0, 1.0);
-            SusGraphicHelper.drawFromCenter(10.0f);
+            SusGraphicHelper.drawFromCenter(captureRadius);
             GL11.glPopMatrix();
 
             GL11.glPushMatrix();
-            SusGraphicHelper.bindTexture(textureOuter);
+            SusGraphicHelper.bindTexture(TextureStorage.textureOuter);
             GL11.glRotated(-angle + 30, 0.0, 0.0, 1.0);
-            SusGraphicHelper.drawFromCenter(10.0f);
+            SusGraphicHelper.drawFromCenter(captureRadius);
             GL11.glPopMatrix();
 
             glPopAttrib();
@@ -155,7 +160,7 @@ public class ProcessGravityTrap extends CommonProcess {
     }
 
     public boolean isPlayerInside(EntityPlayer player) {
-        return AxisAlignedBB.getBoundingBox(x - captureRadius, y, z - captureRadius, x + captureRadius, y + captureRadius * 2, z + captureRadius)
+        return AxisAlignedBB.getBoundingBox(this.position.x - captureRadius, position.y, position.z - captureRadius, position.x + captureRadius, position.y + captureRadius * 4, position.z + captureRadius)
                 .isVecInside(Vec3.createVectorHelper(player.posX, player.posY, player.posZ));
     }
 
@@ -166,6 +171,33 @@ public class ProcessGravityTrap extends CommonProcess {
     @Override
     public String getTypeId() {
         return "gravity_trap";
+    }
+
+
+    @Override
+    public void writeTo(ByteBuf buf) {
+        super.writeTo(buf);
+        buf.writeFloat(captureRadius);
+
+    }
+    @Override
+    public void readFrom(ByteBuf buf) {
+        super.readFrom(buf);
+        captureRadius = buf.readFloat();
+    }
+
+
+    @Override
+    public void writeTo(NBTTagCompound tagCompound) {
+        super.writeTo(tagCompound);
+        tagCompound.setFloat(captureRadiusKey, captureRadius);
+
+    }
+
+    @Override
+    public void readFrom(NBTTagCompound tagCompound) {
+        super.readFrom(tagCompound);
+        captureRadius = tagCompound.getFloat(captureRadiusKey);
     }
 
 

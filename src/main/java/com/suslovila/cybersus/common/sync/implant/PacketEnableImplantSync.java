@@ -16,8 +16,8 @@ import java.util.List;
 
 public class PacketEnableImplantSync
         implements IMessage {
-    private int slotId;
-    private int abilityId;
+    protected int slotId;
+    protected int abilityId;
 
 
     public PacketEnableImplantSync() {

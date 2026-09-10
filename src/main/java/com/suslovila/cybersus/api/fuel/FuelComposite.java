@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.suslovila.cybersus.utils.SusCollectionUtils;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 
 // collective class for fuels helping operating with several fuel instances/
 // all methods just wrap the same methods for each fuel
@@ -72,18 +73,28 @@ public class FuelComposite {
 
     @Override
     public String toString() {
+        if(this.fuels.isEmpty() && this.fuelVariations.isEmpty()) return "";
         StringBuilder stringBuilder = new StringBuilder();
         int num = 0;
         stringBuilder.append("(");
-        for (IFuel fuel : fuels) {
-            if (!fuel.isEmpty() && num > 0) stringBuilder.append("and ");
+        for (int i = 0; i < fuels.size(); i++) {
+            IFuel fuel = fuels.get(i);
+            if (!fuel.isEmpty() && num > 0) stringBuilder.append(StatCollector.translateToLocal("cybersus.and")).append(" ");
 
             stringBuilder.append(fuel.toString());
+
+            if(i != fuels.size() - 1) {
+                stringBuilder.append(" ");
+            }
+
             num++;
         }
 
+        if(!fuelVariations.isEmpty()) {
+            stringBuilder.append(" ");
+        }
         for (FuelVariation variation : fuelVariations) {
-            stringBuilder.append("and (");
+            stringBuilder.append(StatCollector.translateToLocal("cybersus.and")).append(" (");
 
             stringBuilder.append(variation.toString());
             num++;

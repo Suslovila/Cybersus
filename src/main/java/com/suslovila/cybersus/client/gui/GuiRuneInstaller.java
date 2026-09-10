@@ -6,7 +6,7 @@ import com.suslovila.cybersus.api.implants.upgrades.rune.RuneType;
 import com.suslovila.cybersus.api.implants.upgrades.rune.RuneUsingItem;
 import com.suslovila.cybersus.common.block.container.ContainerRuneInstaller;
 import com.suslovila.cybersus.common.block.runeInstaller.TileRuneInstaller;
-import com.suslovila.cybersus.common.item.ModItems;
+import com.suslovila.cybersus.common.item.CybersusItems;
 import com.suslovila.cybersus.common.sync.CybersusPacketHandler;
 import com.suslovila.cybersus.common.sync.PacketRuneInstallerButtonClicked;
 import com.suslovila.cybersus.utils.SusGraphicHelper;
@@ -83,7 +83,7 @@ import org.lwjgl.opengl.GL11;
         int startXPosition = (int) (center - (runeAmount / 2.0) * offset);
 
         for (int i = 0; i < runeAmount; i++) {
-            SusGraphicHelper.drawStack(itemRender, new ItemStack(ModItems.itemRune, 1, i), startXPosition + i * offset, 100, 200f);
+            SusGraphicHelper.drawStack(itemRender, new ItemStack(CybersusItems.itemRune, 1, i), startXPosition + i * offset, 100, 200f);
             RuneType runeType = RuneType.values()[i];
             if (stack != null) {
                 int currentAmount = RuneUsingItem.getRuneAmountOfType(stack, runeType);

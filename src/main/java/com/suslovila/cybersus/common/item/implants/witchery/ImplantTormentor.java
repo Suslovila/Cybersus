@@ -95,14 +95,7 @@ public class ImplantTormentor extends ItemCybersusImplant {
                         )
                 );
 
-                FuelVariation fuelVariation = new FuelVariation().addSimpleVariant(new FuelInfusion(Witchery.Recipes.infusionBeast, 10));
-                if (Cybersus.forbiddenMagicLoaded) {
-                    fuelVariation.addSimpleVariant(new FuelEssentia(new AspectList().add(DarkAspects.WRATH, 16)));
-                }
-                fuelVariation.addSimpleVariant(new FuelEssentia(new AspectList().add(Aspect.FIRE, 16).add(Aspect.WEAPON, 16)));
-
-                fuelComposite.fuelVariations.add(fuelVariation);
-                return FuelComposite.EMPTY;
+                return fuelComposite;
             }
 
             @Override

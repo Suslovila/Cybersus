@@ -2,9 +2,10 @@ package com.suslovila.cybersus.research;
 
 import com.emoniph.witchery.Witchery;
 import com.suslovila.cybersus.Cybersus;
-import com.suslovila.cybersus.common.item.ModItems;
+import com.suslovila.cybersus.api.implants.ability.Ability;
+import com.suslovila.cybersus.common.item.ItemImplant;
+import com.suslovila.cybersus.common.item.CybersusItems;
 import com.suslovila.cybersus.common.item.implants.sinHeart.ImplantSinHeart;
-import cpw.mods.fml.common.Mod;
 import fox.spiteful.forbidden.DarkAspects;
 import fox.spiteful.forbidden.items.ForbiddenItems;
 import net.minecraft.init.Blocks;
@@ -23,6 +24,7 @@ import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class CybersusResearchRegistry {
 
@@ -50,15 +52,23 @@ public class CybersusResearchRegistry {
     public static final String sleepModuleKey = "SLEEP_MODULE";
     public static final String tormentorKey = "TORMENTOR";
     public static final String berserkHeartKey = "BERSERK_HEART";
-    public static final String blankEye = "BLANK_EYE";
-    public static final String mindExploder = "MIND_EXPLODER";
-    public static final String illusionGenerator = "ILLUSION_GENERATOR";
+    public static final String blankEyeKey = "BLANK_EYE";
+    public static final String mindExploderKey = "MIND_EXPLODER";
+    public static final String illusionGeneratorKey = "ILLUSION_GENERATOR";
+    public static final String reactionIncreaserKey = "REACTION_INCREASER";
+    public static final String alloyX87Key = "ALLOY_X87";
+    public static final String synthGlassKey = "SYNTH_GLASS";
+    public static final String synthDermKey = "SYNTH_DERM";
+    public static final String synthNervKey = "SYNTH_NERV";
+    public static final String myomassKey = "MYOMASS";
+    public static final String icarusBloodKey = "ICARUS_BLOOD";
 
 
     public static void integrateCrucibleRecipe() {
         if (Cybersus.forbiddenMagicLoaded) {
             for (int i = 0; i < ImplantSinHeart.sinAspects.size(); i++) {
-                addCrucibleRecipe(ModItems.implantSinHeart, 1, i, sinHeartKey, new ItemStack(ModItems.implantSinHeart, 1, ImplantSinHeart.sinAspects.size()), (new AspectList()).add(DarkAspects.NETHER, 512).add(ImplantSinHeart.sinAspects.get(i), 2048));
+                CrucibleRecipe recipe = ThaumcraftApi.addCrucibleRecipe(sinHeartKey, new ItemStack(CybersusItems.implantSinHeart, 1, i), new ItemStack(CybersusItems.implantSinHeart, 1, ImplantSinHeart.sinAspects.size()), (new AspectList()).add(DarkAspects.NETHER, 128).add(ImplantSinHeart.sinAspects.get(i), 256));
+                crucibleRecipes.put(sinHeartKey + i, recipe);
             }
         }
     }
@@ -71,43 +81,46 @@ public class CybersusResearchRegistry {
     public static void integrateInfusion() {
         runicMatrixRecipes.put(blankHeartKey, ThaumcraftApi.addInfusionCraftingRecipe(
                 blankHeartKey,
-                new ItemStack(ModItems.heartBlank),
+                new ItemStack(CybersusItems.heartBlank),
                 9,
                 new AspectList().add(Aspect.LIFE, 64).add(Aspect.ENERGY, 64).add(Aspect.MECHANISM, 256).add(Aspect.MAGIC, 92).add(Aspect.MAN, 16),
                 new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
-                new ItemStack[]{new ItemStack(ConfigItems.itemResource, 1, 2), new ItemStack(ConfigItems.itemResource, 1, 2), new ItemStack(ConfigItems.itemResource, 1, 2),
+                new ItemStack[]{
                         new ItemStack(ConfigItems.itemResource, 1, 15),
-                        new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigItems.itemResource, 1, 16)}
+                        new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigItems.itemResource, 1, 16),
+                        new ItemStack(CybersusItems.synthDerm, 1), new ItemStack(CybersusItems.synthDerm, 1), new ItemStack(CybersusItems.synthDerm, 1),
+                        new ItemStack(CybersusItems.icarusBlood, 1),
+                        new ItemStack(CybersusItems.myomass, 1), new ItemStack(CybersusItems.myomass, 1), new ItemStack(CybersusItems.myomass, 1)
+                }
         ));
-
 
         runicMatrixRecipes.put(shadowSkinKey, ThaumcraftApi.addInfusionCraftingRecipe(
                 shadowSkinKey,
-                new ItemStack(ModItems.shadowSkin),
+                new ItemStack(CybersusItems.shadowSkin),
                 7,
                 new AspectList().add(Aspect.DARKNESS, 256).add(Aspect.EXCHANGE, 64).add(Aspect.MECHANISM, 24).add(Aspect.MAGIC, 72).add(Aspect.MAN, 16).add(Aspect.VOID, 128),
-                new ItemStack(Items.leather),
+                new ItemStack(CybersusItems.synthDerm),
                 new ItemStack[]{new ItemStack(ConfigItems.itemResource, 1, 17), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigItems.itemResource, 1, 17),
                         new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigItems.itemResource, 1, 17), new ItemStack(ConfigItems.itemResource, 1, 16)}
         ));
 
         runicMatrixRecipes.put(gravityIncreaserKey, ThaumcraftApi.addInfusionCraftingRecipe(
                 gravityIncreaserKey,
-                new ItemStack(ModItems.gravityIcreaser),
+                new ItemStack(CybersusItems.gravityIcreaser),
                 8,
-                new AspectList().add(CybersusAspect.GRAVITAS, 512).add(Aspect.MAGIC, 32).add(Aspect.MECHANISM, 12).add(Aspect.TRAP, 324).add(Aspect.ENERGY, 128).add(Aspect.EARTH, 92).add(Aspect.ORDER, 256),
-                new ItemStack(ModItems.heartBlank),
-                new ItemStack[]{new ItemStack(ConfigItems.itemResource, 1, 3), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigItems.itemResource, 1, 17),
+                new AspectList().add(CybersusAspect.GRAVITAS, 512).add(Aspect.MAGIC, 32).add(Aspect.MECHANISM, 12).add(Aspect.TRAP, 64).add(Aspect.ENERGY, 128).add(Aspect.EARTH, 128).add(Aspect.ORDER, 64),
+                new ItemStack(CybersusItems.alloyX87),
+                new ItemStack[]{new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(CybersusItems.gravitationDust, 1),  new ItemStack(CybersusItems.gravitationDust, 1),
                         new ItemStack(ConfigItems.itemFocusPortableHole),
-                        new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigItems.itemResource, 1, 17), new ItemStack(ConfigItems.itemResource, 1, 16)}
+                        new ItemStack(ConfigItems.itemResource, 1, 16),  new ItemStack(CybersusItems.gravitationDust, 1),  new ItemStack(CybersusItems.gravitationDust, 1)}
         ));
 
 
         runicMatrixRecipes.put(multiAspectHolderKey, ThaumcraftApi.addInfusionCraftingRecipe(
                 aspectHoldersKey,
-                new ItemStack(ModItems.portableMultiAspectContainer),
+                new ItemStack(CybersusItems.portableMultiAspectContainer),
                 6,
-                new AspectList().add(CybersusAspect.GRAVITAS, 64).add(CybersusAspect.HUMILITAS, 256).add(Aspect.MECHANISM, 64).add(Aspect.VOID, 512).add(Aspect.ENERGY, 128).add(Aspect.ORDER, 192).add(Aspect.WATER, 256),
+                new AspectList().add(CybersusAspect.GRAVITAS, 64).add(CybersusAspect.HUMILITAS, 64).add(Aspect.MECHANISM, 64).add(Aspect.VOID, 256).add(Aspect.ENERGY, 128).add(Aspect.ORDER, 64).add(Aspect.WATER, 128),
                 new ItemStack(ConfigBlocks.blockJar),
                 new ItemStack[]{
                         new ItemStack(Items.gold_ingot), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigBlocks.blockMetalDevice, 1, 3),
@@ -119,9 +132,9 @@ public class CybersusResearchRegistry {
 
         runicMatrixRecipes.put(singleAspectHolderKey, ThaumcraftApi.addInfusionCraftingRecipe(
                 aspectHoldersKey,
-                new ItemStack(ModItems.portablesingleAspectContainer),
+                new ItemStack(CybersusItems.portablesingleAspectContainer),
                 6,
-                new AspectList().add(CybersusAspect.GRAVITAS, 64).add(CybersusAspect.HUMILITAS, 256).add(Aspect.MECHANISM, 64).add(Aspect.VOID, 512).add(Aspect.ENERGY, 128).add(Aspect.ORDER, 192).add(Aspect.WATER, 256),
+                new AspectList().add(CybersusAspect.GRAVITAS, 64).add(CybersusAspect.HUMILITAS, 64).add(Aspect.MECHANISM, 64).add(Aspect.VOID, 256).add(Aspect.ENERGY, 128).add(Aspect.ORDER, 64).add(Aspect.WATER, 128),
                 new ItemStack(ConfigBlocks.blockJar),
                 new ItemStack[]{
                         new ItemStack(Items.iron_ingot), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(ConfigBlocks.blockMetalDevice, 1, 3),
@@ -133,24 +146,36 @@ public class CybersusResearchRegistry {
 
         runicMatrixRecipes.put(motherboardBlankKey, ThaumcraftApi.addInfusionCraftingRecipe(
                 motherboardBlankKey,
-                new ItemStack(ModItems.motherboardBlank),
+                new ItemStack(CybersusItems.motherboardBlank),
                 6,
                 new AspectList().add(Aspect.MECHANISM, 128).add(Aspect.MIND, 256).add(Aspect.ENERGY, 128).add(Aspect.ORDER, 64).add(Aspect.EXCHANGE, 16),
+                new ItemStack(CybersusItems.alloyX87, 1),
+                new ItemStack[]{
+                        new ItemStack(Items.gold_ingot), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(Items.redstone), new ItemStack(CybersusItems.synaptite),
+                        new ItemStack(Items.gold_ingot), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(Items.redstone), new ItemStack(CybersusItems.synaptite),
+                        new ItemStack(Items.gold_ingot), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(Items.redstone), new ItemStack(CybersusItems.synaptite),
+                        new ItemStack(Items.gold_ingot), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(Items.redstone), new ItemStack(CybersusItems.synaptite),
+                }
+        ));
+
+        runicMatrixRecipes.put(alloyX87Key, ThaumcraftApi.addInfusionCraftingRecipe(
+                alloyX87Key,
+                new ItemStack(CybersusItems.alloyX87),
+                8,
+                new AspectList().add(Aspect.LIFE, 64).add(Aspect.MAGIC, 128).add(Aspect.MECHANISM, 128).add(CybersusAspect.HUMILITAS, 8).add(Aspect.METAL, 256),
                 new ItemStack(ConfigItems.itemResource, 1, 16),
                 new ItemStack[]{
-                        new ItemStack(Items.gold_ingot), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(Items.redstone),
-                        new ItemStack(Items.gold_ingot), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(Items.redstone),
-                        new ItemStack(Items.gold_ingot), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(Items.redstone),
-                        new ItemStack(Items.gold_ingot), new ItemStack(ConfigItems.itemResource, 1, 16), new ItemStack(Items.redstone),
+                        new ItemStack(CybersusItems.synaptite), new ItemStack(Items.iron_ingot), new ItemStack(Items.redstone),
+                        new ItemStack(CybersusItems.synaptite), new ItemStack(Items.iron_ingot), new ItemStack(Items.redstone),
                 }
         ));
 
         runicMatrixRecipes.put(phoenixHeartKey, ThaumcraftApi.addInfusionCraftingRecipe(
                 phoenixHeartKey,
-                new ItemStack(ModItems.phoenixHeart),
+                new ItemStack(CybersusItems.phoenixHeart),
                 6,
-                new AspectList().add(Aspect.FIRE, 512).add(Aspect.MAGIC, 128).add(Aspect.LIFE, 1024).add(Aspect.EXCHANGE, 256).add(Aspect.MECHANISM, 64),
-                new ItemStack(ModItems.heartBlank),
+                new AspectList().add(Aspect.FIRE, 128).add(Aspect.MAGIC, 128).add(Aspect.LIFE, 256).add(Aspect.EXCHANGE, 256).add(Aspect.MECHANISM, 64),
+                new ItemStack(CybersusItems.heartBlank),
                 new ItemStack[]{
                         new ItemStack(Items.blaze_powder), new ItemStack(Items.feather), new ItemStack(Items.redstone),
                         new ItemStack(Items.blaze_powder), new ItemStack(Items.feather), new ItemStack(Items.redstone),
@@ -160,10 +185,10 @@ public class CybersusResearchRegistry {
         if (Cybersus.forbiddenMagicLoaded) {
             runicMatrixRecipes.put(sinHeartKey, ThaumcraftApi.addInfusionCraftingRecipe(
                     sinHeartKey,
-                    new ItemStack(ModItems.implantSinHeart, 1, ImplantSinHeart.sinAspects.size()),
+                    new ItemStack(CybersusItems.implantSinHeart, 1, ImplantSinHeart.sinAspects.size()),
                     25,
-                    new AspectList().add(DarkAspects.NETHER, 2048).add(Aspect.MAGIC, 1024).add(Aspect.EXCHANGE, 256).add(Aspect.SOUL, 512),
-                    new ItemStack(ModItems.heartBlank),
+                    new AspectList().add(DarkAspects.NETHER, 256).add(Aspect.MAGIC, 256).add(Aspect.EXCHANGE, 256).add(Aspect.SOUL, 256),
+                    new ItemStack(CybersusItems.heartBlank),
                     new ItemStack[]{
                             new ItemStack(ConfigItems.itemCompassStone), new ItemStack(ForbiddenItems.deadlyShards, 1, 0), new ItemStack(ForbiddenItems.deadlyShards, 1, 1),
                             new ItemStack(ForbiddenItems.deadlyShards, 1, 2), new ItemStack(ForbiddenItems.deadlyShards, 1, 3), new ItemStack(ForbiddenItems.deadlyShards, 1, 4),
@@ -175,7 +200,7 @@ public class CybersusResearchRegistry {
         }
 
         if (Cybersus.witcheryLoaded) {
-            if (ModItems.sleepModule != null) {
+            if (CybersusItems.sleepModule != null) {
                 AspectList aspects = new AspectList().add(Aspect.MAGIC, 64).add(CybersusAspect.DIMENSIO, 64).add(Aspect.SOUL, 36).add(Aspect.TRAVEL, 32).add(Aspect.TRAP, 16);
                 if (Cybersus.forbiddenMagicLoaded) {
                     aspects.add(DarkAspects.SLOTH, 64);
@@ -184,10 +209,10 @@ public class CybersusResearchRegistry {
                 }
                 runicMatrixRecipes.put(sleepModuleKey, ThaumcraftApi.addInfusionCraftingRecipe(
                         sleepModuleKey,
-                        new ItemStack(ModItems.sleepModule, 1, 0),
+                        new ItemStack(CybersusItems.sleepModule, 1, 0),
                         5,
                         aspects,
-                        new ItemStack(ModItems.motherboardBlank),
+                        new ItemStack(CybersusItems.motherboardBlank),
                         new ItemStack[]{
                                 Witchery.Items.GENERIC.itemBrewOfSleeping.createStack(), Witchery.Items.GENERIC.itemMellifluousHunger.createStack(), new ItemStack(ConfigItems.itemShard, 1, 6),
                                 new ItemStack(ConfigItems.itemResource, 1, 15), new ItemStack(ConfigItems.itemResource, 1, 16)
@@ -195,7 +220,7 @@ public class CybersusResearchRegistry {
                         }
                 ));
             }
-            if (ModItems.tormentor != null) {
+            if (CybersusItems.tormentor != null) {
                 AspectList aspects = new AspectList().add(Aspect.MAGIC, 64).add(CybersusAspect.DIMENSIO, 32).add(Aspect.SOUL, 16).add(Aspect.TRAVEL, 8).add(Aspect.TRAP, 196);
                 if (Cybersus.forbiddenMagicLoaded) {
                     aspects.add(DarkAspects.WRATH, 128);
@@ -204,10 +229,10 @@ public class CybersusResearchRegistry {
                 }
                 runicMatrixRecipes.put(tormentorKey, ThaumcraftApi.addInfusionCraftingRecipe(
                         tormentorKey,
-                        new ItemStack(ModItems.tormentor),
+                        new ItemStack(CybersusItems.tormentor),
                         23,
                         aspects,
-                        new ItemStack(ModItems.motherboardBlank),
+                        new ItemStack(CybersusItems.motherboardBlank),
                         new ItemStack[]{
                                 Witchery.Items.GENERIC.itemBrewSoulTorment.createStack(), Witchery.Items.GENERIC.itemCondensedFear.createStack(), new ItemStack(ConfigItems.itemShard, 1, 6),
                                 new ItemStack(ConfigItems.itemResource, 1, 15), new ItemStack(ConfigItems.itemResource, 1, 16)
@@ -217,8 +242,8 @@ public class CybersusResearchRegistry {
                 ));
             }
         }
-        if (ModItems.berserkHeart != null) {
-            AspectList aspects = new AspectList().add(Aspect.MAGIC, 64).add(Aspect.HEAL, 2048).add(Aspect.ARMOR, 2048).add(Aspect.ENERGY, 2048);
+        if (CybersusItems.berserkHeart != null) {
+            AspectList aspects = new AspectList().add(Aspect.MAGIC, 64).add(Aspect.HEAL, 512).add(Aspect.ARMOR, 512).add(Aspect.ENERGY, 512);
             if (Cybersus.forbiddenMagicLoaded) {
                 aspects.add(DarkAspects.WRATH, 1024);
             } else {
@@ -226,10 +251,10 @@ public class CybersusResearchRegistry {
             }
             runicMatrixRecipes.put(berserkHeartKey, ThaumcraftApi.addInfusionCraftingRecipe(
                     berserkHeartKey,
-                    new ItemStack(ModItems.berserkHeart),
+                    new ItemStack(CybersusItems.berserkHeart),
                     20,
                     aspects,
-                    new ItemStack(ModItems.heartBlank),
+                    new ItemStack(CybersusItems.heartBlank),
                     new ItemStack[]{
                             new ItemStack(ConfigItems.itemSwordCrimson), new ItemStack(Items.iron_ingot), new ItemStack(Items.redstone),
                             new ItemStack(ConfigItems.itemResource, 1, 15), new ItemStack(Items.blaze_powder),
@@ -241,14 +266,14 @@ public class CybersusResearchRegistry {
 
             ));
         }
-        if (ModItems.exploder != null) {
-            AspectList aspects = new AspectList().add(Aspect.MAGIC, 256).add(Aspect.ENTROPY, 2048).add(Aspect.MIND, 2048);
-            runicMatrixRecipes.put(mindExploder, ThaumcraftApi.addInfusionCraftingRecipe(
-                    mindExploder,
-                    new ItemStack(ModItems.exploder),
+        if (CybersusItems.exploder != null) {
+            AspectList aspects = new AspectList().add(Aspect.MAGIC, 256).add(Aspect.ENTROPY, 512).add(Aspect.MIND, 512);
+            runicMatrixRecipes.put(mindExploderKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                    mindExploderKey,
+                    new ItemStack(CybersusItems.exploder),
                     16,
                     aspects,
-                    new ItemStack(ModItems.motherboardBlank),
+                    new ItemStack(CybersusItems.motherboardBlank),
                     new ItemStack[]{
                             new ItemStack(Blocks.tnt), new ItemStack(Items.iron_ingot), new ItemStack(Items.redstone),
                             new ItemStack(Items.blaze_powder),
@@ -259,33 +284,33 @@ public class CybersusResearchRegistry {
             ));
         }
 
-        if (ModItems.eyeBlank != null) {
-            AspectList aspects = new AspectList().add(Aspect.MAGIC, 256).add(Aspect.SENSES, 2048).add(Aspect.MECHANISM, 1024).add(Aspect.CRYSTAL, 1024);
-            runicMatrixRecipes.put(blankEye, ThaumcraftApi.addInfusionCraftingRecipe(
-                    blankEye,
-                    new ItemStack(ModItems.eyeBlank),
+        if (CybersusItems.eyeBlank != null) {
+            AspectList aspects = new AspectList().add(Aspect.MAGIC, 128).add(Aspect.SENSES, 512).add(Aspect.MECHANISM, 256).add(Aspect.CRYSTAL, 256);
+            runicMatrixRecipes.put(blankEyeKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                    blankEyeKey,
+                    new ItemStack(CybersusItems.eyeBlank),
                     16,
                     aspects,
                     new ItemStack(Items.spider_eye),
                     new ItemStack[]{
-                            new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 2),
+                            new ItemStack(CybersusItems.synthGlass, 1),
                             new ItemStack(Items.redstone, 1),
-                            new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 2),
+                            new ItemStack(CybersusItems.synthGlass, 1),
                             new ItemStack(ConfigItems.itemResource, 1, 16),
-                            new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 2),
+                            new ItemStack(CybersusItems.synthGlass, 1),
                             new ItemStack(Items.glowstone_dust, 1),
                     }
 
             ));
         }
-        if (ModItems.illusionGenerator != null) {
-            AspectList aspects = new AspectList().add(Aspect.TRAP, 2048).add(Aspect.MIND, 2048).add(Aspect.MECHANISM, 1024).add(Aspect.MAN, 1024);
-            runicMatrixRecipes.put(illusionGenerator, ThaumcraftApi.addInfusionCraftingRecipe(
-                    illusionGenerator,
-                    new ItemStack(ModItems.illusionGenerator),
+        if (CybersusItems.illusionGenerator != null) {
+            AspectList aspects = new AspectList().add(Aspect.TRAP, 512).add(Aspect.MIND, 512).add(Aspect.MECHANISM, 512).add(Aspect.MAN, 512);
+            runicMatrixRecipes.put(illusionGeneratorKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                    illusionGeneratorKey,
+                    new ItemStack(CybersusItems.illusionGenerator),
                     26,
                     aspects,
-                    new ItemStack(ModItems.eyeBlank),
+                    new ItemStack(CybersusItems.eyeBlank),
                     new ItemStack[]{
                             new ItemStack(ConfigItems.itemZombieBrain, 1),
                             new ItemStack(Items.redstone, 1),
@@ -295,7 +320,147 @@ public class CybersusResearchRegistry {
 
             ));
         }
+        if (CybersusItems.reactionIncreaser != null) {
+            AspectList aspects = new AspectList().add(Aspect.MOTION, 512).add(Aspect.SENSES, 512).add(Aspect.MECHANISM, 128);
+            runicMatrixRecipes.put(reactionIncreaserKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                    reactionIncreaserKey,
+                    new ItemStack(CybersusItems.reactionIncreaser),
+                    30,
+                    aspects,
+                    new ItemStack(CybersusItems.alloyX87),
+                    new ItemStack[]{
+                            new ItemStack(CybersusItems.motherboardBlank, 1),
+                            new ItemStack(CybersusItems.synthNerv, 1),
+                            new ItemStack(CybersusItems.synthNerv, 1),
+                            new ItemStack(CybersusItems.synthNerv, 1),
+                            new ItemStack(CybersusItems.synthNerv, 1),
+                    }
+
+            ));
+        }
+
+        if (CybersusItems.synthGlass != null) {
+            AspectList aspects = new AspectList().add(Aspect.CRYSTAL, 128).add(Aspect.SENSES, 128).add(Aspect.MECHANISM, 128);
+            runicMatrixRecipes.put(synthGlassKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                    synthGlassKey,
+                    new ItemStack(CybersusItems.synthGlass),
+                    4,
+                    aspects,
+                    new ItemStack(Blocks.glass_pane),
+                    new ItemStack[]{
+                            new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 2),
+                            new ItemStack(CybersusItems.synaptite),
+                            new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 2),
+                            new ItemStack(Items.redstone, 1),
+                            new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 2),
+                            new ItemStack(Items.glowstone_dust, 1),
+                    }
+            ));
+        }
+
+        if (CybersusItems.synthDerm != null) {
+            AspectList aspects = new AspectList().add(Aspect.LIFE, 128).add(Aspect.ARMOR, 128).add(Aspect.MECHANISM, 128).add(Aspect.FLESH, 32).add(Aspect.MAGIC, 32).add(CybersusAspect.HUMILITAS, 8);
+            runicMatrixRecipes.put(synthDermKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                    synthDermKey,
+                    new ItemStack(CybersusItems.synthDerm),
+                    5,
+                    aspects,
+                    new ItemStack(Items.leather),
+                    new ItemStack[]{
+                            new ItemStack(CybersusItems.phasolite, 1),
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(CybersusItems.synaptite, 1),
+                    }
+
+            ));
+        }
+
+        if (CybersusItems.synthNerv != null) {
+            AspectList aspects = new AspectList().add(Aspect.SENSES, 256).add(Aspect.MECHANISM, 128).add(CybersusAspect.HUMILITAS, 8);
+            runicMatrixRecipes.put(synthNervKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                    synthNervKey,
+                    new ItemStack(CybersusItems.synthNerv),
+                    7,
+                    aspects,
+                    new ItemStack(Items.rotten_flesh),
+                    new ItemStack[]{
+                            new ItemStack(CybersusItems.phasolite, 1),
+                            new ItemStack(CybersusItems.synaptite, 1),
+                            new ItemStack(CybersusItems.synaptite, 1),
+                            new ItemStack(CybersusItems.synaptite, 1),
+                            new ItemStack(CybersusItems.phasolite, 1),
+                            new ItemStack(CybersusItems.synaptite, 1),
+                            new ItemStack(CybersusItems.synaptite, 1),
+                            new ItemStack(CybersusItems.synaptite, 1),
+                            new ItemStack(CybersusItems.phasolite, 1),
+                            new ItemStack(CybersusItems.synaptite, 1),
+                            new ItemStack(CybersusItems.synaptite, 1),
+                            new ItemStack(CybersusItems.synaptite, 1),
+                    }
+
+            ));
+        }
+
+        if (CybersusItems.myomass != null) {
+            AspectList aspects = new AspectList().add(Aspect.LIFE, 64).add(Aspect.ENERGY, 256).add(Aspect.MECHANISM, 128).add(Aspect.MOTION, 128);
+            runicMatrixRecipes.put(myomassKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                    myomassKey,
+                    new ItemStack(CybersusItems.myomass),
+                    4,
+                    aspects,
+                    new ItemStack(Items.rotten_flesh),
+                    new ItemStack[]{
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(Items.string, 1),
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(Items.string, 1),
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(Items.string, 1),
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(Items.string, 1),
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(Items.string, 1),
+
+                    }
+
+            ));
+        }
+
+        if (CybersusItems.icarusBlood != null) {
+            AspectList aspects = new AspectList().add(CybersusAspect.SANGUINO, 256).add(Aspect.MECHANISM, 256).add(CybersusAspect.HUMILITAS, 64);
+            runicMatrixRecipes.put(icarusBloodKey, ThaumcraftApi.addInfusionCraftingRecipe(
+                    icarusBloodKey,
+                    new ItemStack(CybersusItems.icarusBlood),
+                    4,
+                    aspects,
+                    new ItemStack(Items.slime_ball),
+                    new ItemStack[]{
+                            new ItemStack(CybersusItems.phasolite, 1),
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(CybersusItems.phasolite, 1),
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(CybersusItems.phasolite, 1),
+                            new ItemStack(Items.slime_ball, 1),
+                            new ItemStack(Items.slime_ball, 1),
+
+                    }
+
+            ));
+        }
+
     }
+
+
+
+
+
+
+
+
+
+
 
 
     public static void integrateResearch() {
@@ -305,7 +470,7 @@ public class CybersusResearchRegistry {
                 new ResourceLocation(Cybersus.MOD_ID, "textures/misc/cybersus_background.png")
         );
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 basicInfo,
                 cybersusCategory,
                 new AspectList().add(Aspect.MECHANISM, 8).add(Aspect.MAGIC, 4).add(Aspect.ENERGY, 6).add(Aspect.MAN, 4).add(Aspect.ORDER, 4),
@@ -313,45 +478,46 @@ public class CybersusResearchRegistry {
                 0,
                 0,
                 new ResourceLocation(Cybersus.MOD_ID, "textures/misc/mod_logo.png")
-        ).setPages(new ResearchPage("1"), new ResearchPage("2"), new ResearchPage("3"))
+        ).setPages(new ResearchPage("1"), new ResearchPage("2"), new ResearchPage("3"), new ResearchPage("4"))
                 .registerResearchItem();
 
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 blankHeartKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MECHANISM, 8).add(Aspect.MAGIC, 4).add(Aspect.ENERGY, 6),
+                3,
+                5,
                 2,
-                4,
-                2,
-                new ItemStack(ModItems.heartBlank)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(blankHeartKey))).setParents(basicInfo, "PRIMPEARL").setParents(aspectHoldersKey).setConcealed()
+                new ItemStack(CybersusItems.heartBlank)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(blankHeartKey))).setParents(basicInfo, "PRIMPEARL").setParents(aspectHoldersKey).setParentsHidden(synthDermKey).setParentsHidden(myomassKey).setConcealed()
                 .registerResearchItem();
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 gravityIncreaserKey,
                 cybersusCategory,
                 new AspectList().add(CybersusAspect.GRAVITAS, 1).add(Aspect.MAGIC, 1).add(Aspect.MECHANISM, 1).add(Aspect.TRAP, 1).add(Aspect.ENERGY, 1).add(Aspect.EARTH, 1).add(Aspect.ORDER, 1),
-                2,
-                -3,
+                -5,
+                0,
                 3,
-                new ItemStack(ModItems.gravityIcreaser)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(gravityIncreaserKey))).setParents(aspectHoldersKey).setConcealed()
+                new ItemStack(CybersusItems.gravityIcreaser)
+        ).setPages(injectSimpleImplantResearchInfo(CybersusItems.gravityIcreaser, new ResearchPage(runicMatrixRecipes.get(gravityIncreaserKey)))).setParents(aspectHoldersKey).setConcealed()
                 .registerResearchItem();
-        new CybersusResearchItem(
+
+
+        new ResearchImplantItem(
                 shadowSkinKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.DARKNESS, 1).add(Aspect.EXCHANGE, 1).add(Aspect.MECHANISM, 1).add(Aspect.MAGIC, 1).add(Aspect.MAN, 1).add(Aspect.VOID, 1),
                 5,
                 -3,
                 3,
-                new ItemStack(ModItems.shadowSkin)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(shadowSkinKey))).setParents(aspectHoldersKey).setConcealed()
+                new ItemStack(CybersusItems.shadowSkin)
+        ).setPages(injectSimpleImplantResearchInfo(CybersusItems.shadowSkin, new ResearchPage(runicMatrixRecipes.get(shadowSkinKey)))).setParents(aspectHoldersKey).setParentsHidden(synthDermKey).setConcealed()
                 .registerResearchItem();
 
 
-
-//        new CybersusResearchItem(
+//        new ResearchImplantItem(
 //                singleAspectHolderKey,
 //                cybersusCategory,
 //                new AspectList(),
@@ -361,7 +527,7 @@ public class CybersusResearchRegistry {
 //                new ItemStack(ModItems.portableMultiAspectContainer)
 //        ).setParents(aspectHoldersKey).setVirtual().registerResearchItem();
 //
-//        new CybersusResearchItem(
+//        new ResearchImplantItem(
 //                multiAspectHolderKey,
 //                cybersusCategory,
 //                new AspectList(),
@@ -371,37 +537,37 @@ public class CybersusResearchRegistry {
 //                new ItemStack(ModItems.portableMultiAspectContainer)
 //        ).setParents(aspectHoldersKey).setVirtual().registerResearchItem();
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 aspectHoldersKey,
                 cybersusCategory,
                 new AspectList().add(CybersusAspect.HUMILITAS, 16).add(Aspect.VOID, 16).add(Aspect.MAGIC, 16).add(Aspect.WATER, 32),
-                2,
+                3,
                 0,
                 3,
-                new ItemStack(ModItems.portableMultiAspectContainer)
+                new ItemStack(CybersusItems.portableMultiAspectContainer)
         ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(singleAspectHolderKey)), new ResearchPage(runicMatrixRecipes.get(multiAspectHolderKey)), new ResearchPage("2")).setParents(basicInfo).setConcealed()
                 .registerResearchItem();
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 motherboardBlankKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MECHANISM, 1).add(Aspect.MIND, 1).add(Aspect.ENERGY, 1).add(Aspect.ORDER, 1).add(Aspect.EXCHANGE, 1),
                 -5,
                 5,
                 6,
-                new ItemStack(ModItems.motherboardBlank)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(motherboardBlankKey))).setParents(aspectHoldersKey).setConcealed()
+                new ItemStack(CybersusItems.motherboardBlank)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(motherboardBlankKey))).setParentsHidden(aspectHoldersKey).setParentsHidden(alloyX87Key).setConcealed()
                 .registerResearchItem();
 
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 phoenixHeartKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MECHANISM, 1).add(Aspect.FIRE, 1).add(Aspect.LIFE, 1).add(Aspect.EXCHANGE, 1).add(Aspect.MAGIC, 1),
-                4,
-                6,
+                5,
+                7,
                 0,
-                new ItemStack(ModItems.phoenixHeart)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(phoenixHeartKey))).setParents(blankHeartKey).setConcealed()
+                new ItemStack(CybersusItems.phoenixHeart)
+        ).setPages(injectSimpleImplantResearchInfo(CybersusItems.phoenixHeart, new ResearchPage(runicMatrixRecipes.get(phoenixHeartKey)))).setParents(blankHeartKey).setConcealed()
                 .registerResearchItem();
 
         if (Cybersus.forbiddenMagicLoaded) {
@@ -410,18 +576,20 @@ public class CybersusResearchRegistry {
                 sinHeartRecipes[i] = crucibleRecipes.get(sinHeartKey + i);
             }
 
-            new CybersusResearchItem(
+            new ResearchImplantItem(
                     sinHeartKey,
                     cybersusCategory,
                     new AspectList().add(DarkAspects.NETHER, 1).add(Aspect.MAGIC, 1).add(Aspect.EXCHANGE, 1).add(Aspect.SOUL, 1),
+                    6,
                     5,
-                    4,
                     0,
-                    new ItemStack(ModItems.implantSinHeart, 1, ImplantSinHeart.sinAspects.size())
+                    new ItemStack(CybersusItems.implantSinHeart, 1, ImplantSinHeart.sinAspects.size())
             ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(sinHeartKey)), new ResearchPage(sinHeartRecipes), new ResearchPage("2"), new ResearchPage("3"), new ResearchPage("4")).setConcealed()
                     .setParents(blankHeartKey).registerResearchItem();
 
         }
+
+
 //        InfusionRecipe[] infusionRecipesForSleepModule = new InfusionRecipe[Cybersus.forbiddenMagicLoaded ? 2 : 1];
 //        infusionRecipesForSleepModule[0] = runicMatrixRecipes.get(sleepModuleKey + "1");
 //        if(Cybersus.forbiddenMagicLoaded) {
@@ -430,15 +598,15 @@ public class CybersusResearchRegistry {
 
 
         if (Cybersus.witcheryLoaded) {
-            new CybersusResearchItem(
+            new ResearchImplantItem(
                     sleepModuleKey,
                     cybersusCategory,
                     new AspectList().add(Aspect.MAGIC, 1).add(CybersusAspect.DIMENSIO, 1).add(Aspect.SOUL, 1).add(Aspect.TRAVEL, 1).add(Aspect.TRAP, 1),
                     -7,
                     8,
                     2,
-                    new ItemStack(ModItems.sleepModule)
-            ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(sleepModuleKey))).setItemTriggers(Witchery.Items.GENERIC.itemBrewOfSleeping.createStack()).setHidden()
+                    new ItemStack(CybersusItems.sleepModule)
+            ).setPages(injectSimpleImplantResearchInfo(CybersusItems.sleepModule, new ResearchPage(runicMatrixRecipes.get(sleepModuleKey)))).setItemTriggers(Witchery.Items.GENERIC.itemBrewOfSleeping.createStack()).setHidden()
                     .setParents(motherboardBlankKey).registerResearchItem();
 //
 //        InfusionRecipe[] infusionRecipesForTormentor = new InfusionRecipe[Cybersus.forbiddenMagicLoaded ? 2 : 1];
@@ -447,69 +615,159 @@ public class CybersusResearchRegistry {
 //            infusionRecipesForTormentor[1] = runicMatrixRecipes.get(tormentorKey + "2");
 //        }
 
-            new CybersusResearchItem(
+            new ResearchImplantItem(
                     tormentorKey,
                     cybersusCategory,
                     new AspectList().add(Aspect.MAGIC, 1).add(CybersusAspect.DIMENSIO, 1).add(Aspect.SOUL, 1).add(Aspect.TRAVEL, 1).add(Aspect.TRAP, 1).add(Aspect.WEAPON, 1).add(Aspect.FIRE, 1),
                     -8,
                     6,
                     5,
-                    new ItemStack(ModItems.tormentor)
-            ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(tormentorKey))).setItemTriggers(Witchery.Items.GENERIC.itemBrewSoulTorment.createStack()).setHidden()
+                    new ItemStack(CybersusItems.tormentor)
+            ).setPages(injectSimpleImplantResearchInfo(CybersusItems.tormentor, new ResearchPage(runicMatrixRecipes.get(tormentorKey)))).setItemTriggers(Witchery.Items.GENERIC.itemBrewSoulTorment.createStack()).setHidden()
                     .setParents(motherboardBlankKey).registerResearchItem();
 
         }
 
 
-
-        new CybersusResearchItem(
+        new ResearchImplantItem(
                 berserkHeartKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MAGIC, 64).add(Aspect.HEAL, 2048).add(Aspect.ARMOR, 2048).add(Aspect.ENERGY, 2048),
-                1,
-                6,
                 2,
-                new ItemStack(ModItems.berserkHeart)
+                7,
+                2,
+                new ItemStack(CybersusItems.berserkHeart)
         ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(berserkHeartKey))).setConcealed()
                 .setParents(blankHeartKey).registerResearchItem();
 
 
-        new CybersusResearchItem(
-                mindExploder,
+        new ResearchImplantItem(
+                mindExploderKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MAGIC, 256).add(Aspect.SENSES, 2048).add(Aspect.MECHANISM, 1024).add(Aspect.CRYSTAL, 1024),
                 -8,
                 4,
                 2,
-                new ItemStack(ModItems.exploder)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(mindExploder))).setConcealed()
+                new ItemStack(CybersusItems.exploder)
+        ).setPages(injectSimpleImplantResearchInfo(CybersusItems.exploder, new ResearchPage(runicMatrixRecipes.get(mindExploderKey)))).setConcealed()
                 .setParents(motherboardBlankKey).registerResearchItem();
 
-        new CybersusResearchItem(
-                blankEye,
+        new ResearchImplantItem(
+                blankEyeKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MAGIC, 256).add(Aspect.ENTROPY, 2048).add(Aspect.MIND, 2048),
                 6,
                 1,
                 2,
-                new ItemStack(ModItems.eyeBlank)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(blankEye))).setConcealed()
-                .setParents(aspectHoldersKey).registerResearchItem();
+                new ItemStack(CybersusItems.eyeBlank)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(blankEyeKey))).setConcealed()
+                .setParents(aspectHoldersKey).setParentsHidden(synthGlassKey).registerResearchItem();
 
 
-        new CybersusResearchItem(
-                illusionGenerator,
+        new ResearchImplantItem(
+                illusionGeneratorKey,
                 cybersusCategory,
                 new AspectList().add(Aspect.MAGIC, 256).add(Aspect.TRAP, 2048).add(Aspect.MIND, 1024).add(Aspect.MAN, 1024),
                 9,
                 0,
                 2,
-                new ItemStack(ModItems.illusionGenerator)
-        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(illusionGenerator))).setConcealed()
-                .setParents(blankEye).registerResearchItem();
+                new ItemStack(CybersusItems.illusionGenerator)
+        ).setPages(injectSimpleImplantResearchInfo(CybersusItems.illusionGenerator, new ResearchPage(runicMatrixRecipes.get(illusionGeneratorKey)))).setConcealed()
+                .setParents(blankEyeKey).registerResearchItem();
 
+        new ResearchImplantItem(
+                reactionIncreaserKey,
+                cybersusCategory,
+                new AspectList().add(Aspect.MOTION, 256).add(Aspect.SENSES, 1024).add(Aspect.MECHANISM, 1024),
+                3,
+                -5,
+                2,
+                new ItemStack(CybersusItems.reactionIncreaser)
+        ).setPages(injectSimpleImplantResearchInfo(CybersusItems.reactionIncreaser, new ResearchPage(runicMatrixRecipes.get(reactionIncreaserKey)))).setConcealed()
+                .setParentsHidden(alloyX87Key).setParentsHidden(motherboardBlankKey).registerResearchItem();
 
+        new ResearchImplantItem(
+                alloyX87Key,
+                cybersusCategory,
+                new AspectList().add(Aspect.LIFE, 64).add(Aspect.MAGIC, 128).add(Aspect.MECHANISM, 128).add(CybersusAspect.HUMILITAS, 8).add(Aspect.METAL, 256),
+                2,
+                -2,
+                2,
+                new ItemStack(CybersusItems.alloyX87)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(alloyX87Key))).setConcealed()
+                .setParents(basicInfo).registerResearchItem();
+
+        new ResearchImplantItem(
+                synthGlassKey,
+                cybersusCategory,
+                new AspectList().add(Aspect.SENSES, 64).add(Aspect.MAGIC, 128).add(Aspect.MECHANISM, 128).add(Aspect.CRYSTAL, 16),
+                0,
+                -3,
+                2,
+                new ItemStack(CybersusItems.synthGlass)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(synthGlassKey))).setConcealed()
+                .setParents(basicInfo).registerResearchItem();
+
+        new ResearchImplantItem(
+                synthDermKey,
+                cybersusCategory,
+                new AspectList().add(Aspect.LIFE, 64).add(Aspect.ARMOR, 128).add(Aspect.MECHANISM, 128).add(Aspect.FLESH, 16),
+                -2,
+                -2,
+                2,
+                new ItemStack(CybersusItems.synthDerm)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(synthDermKey))).setConcealed()
+                .setParents(basicInfo).registerResearchItem();
+
+        new ResearchImplantItem(
+                synthNervKey,
+                cybersusCategory,
+                new AspectList().add(Aspect.SENSES, 256).add(Aspect.MECHANISM, 128),
+                -2,
+                2,
+                2,
+                new ItemStack(CybersusItems.synthNerv)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(synthNervKey))).setConcealed()
+                .setParents(basicInfo).registerResearchItem();
+
+        new ResearchImplantItem(
+                myomassKey,
+                cybersusCategory,
+                new AspectList().add(Aspect.LIFE, 64).add(Aspect.ENERGY, 128).add(Aspect.MECHANISM, 128).add(Aspect.MOTION, 128),
+                0,
+                3,
+                2,
+                new ItemStack(CybersusItems.myomass)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(myomassKey))).setConcealed()
+                .setParents(basicInfo).registerResearchItem();
+
+        new ResearchImplantItem(
+                icarusBloodKey,
+                cybersusCategory,
+                new AspectList().add(CybersusAspect.SANGUINO, 64).add(Aspect.MECHANISM, 128).add(CybersusAspect.HUMILITAS, 128),
+                2,
+                2,
+                2,
+                new ItemStack(CybersusItems.icarusBlood)
+        ).setPages(new ResearchPage("1"), new ResearchPage(runicMatrixRecipes.get(icarusBloodKey))).setConcealed()
+                .setParents(basicInfo).registerResearchItem();
     }
+
+
+    private static ResearchPage[] injectSimpleImplantResearchInfo(ItemImplant implant, ResearchPage craftResearchPage) {
+        List<Ability> abilities = implant.getAbilities(null, -1, null);
+
+        ResearchPage[] researchPages = new ResearchPage[2 + abilities.size()];
+        researchPages[0] = new ResearchPage("description");
+        researchPages[1] = craftResearchPage;
+
+        for (int i = 0; i < abilities.size(); i++) {
+            researchPages[i + 2] = new AbilityResearchPage(implant, abilities.get(i));
+        }
+
+        return researchPages;
+    }
+
 
 }
 

@@ -2,17 +2,31 @@ package com.suslovila.cybersus.api.implants.ability;
 
 import com.suslovila.cybersus.Cybersus;
 import com.suslovila.cybersus.api.fuel.FuelComposite;
+import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public abstract class AbilityPassive extends Ability {
     private final String IS_ABILITY_ENABLED_NBT = Cybersus.prefixAppender.doAndGet(this.name + ":isEnabled");
+    boolean sendToCooldownIfDisabled = false;
+    boolean sendToCooldownIfOutOfFuel = true;
+
 
     public AbilityPassive(String name) {
         super(name);
+    }
+
+    public AbilityPassive(String name,
+                          boolean sendToCooldownIfDisabled,
+                          boolean sendToCooldownIfOutOfFuel
+    ) {
+        super(name);
+        this.sendToCooldownIfDisabled = sendToCooldownIfDisabled;
+        this.sendToCooldownIfOutOfFuel = sendToCooldownIfOutOfFuel;
     }
 
     @Override
@@ -31,6 +45,10 @@ public abstract class AbilityPassive extends Ability {
             if (!fuelConsumeOnActivation.tryTakeFuelFromPlayer(player)) {
                 return;
             }
+        } else {
+            if (sendToCooldownIfDisabled) {
+                sendToCooldown(player, index, implant);
+            }
         }
         tag.setBoolean(IS_ABILITY_ENABLED_NBT, !isAlreadyActive);
         onAbilityStatusSwitched(player, index, implant);
@@ -41,22 +59,29 @@ public abstract class AbilityPassive extends Ability {
         return KhariumSusNBTHelper.getOrCreateBoolean(KhariumSusNBTHelper.getOrCreateTag(implant), IS_ABILITY_ENABLED_NBT, false);
     }
 
-    public void onAbilityStatusSwitched(EntityPlayer player, int index, ItemStack implant) {}
+    public void onAbilityStatusSwitched(EntityPlayer player, int index, ItemStack implant) {
+    }
 
     @Override
     public void onPlayerUpdateEvent(LivingEvent.LivingUpdateEvent event, EntityPlayer player, int index, ItemStack implant) {
         super.onPlayerUpdateEvent(event, player, index, implant);
-        if (player.worldObj.isRemote || player.ticksExisted % getFuelConsumePeriod(player, index, implant) != 0 || !isActive(implant)) return;
+        if (player.worldObj.isRemote || player.ticksExisted % getFuelConsumePeriod(player, index, implant) != 0 || !isActive(implant))
+            return;
         FuelComposite fuelConsumePerSecond = getFuelConsumePerCheck(player, index, implant);
         if (fuelConsumePerSecond != null && !fuelConsumePerSecond.tryTakeFuelFromPlayer(player)) {
-            sendToCooldown(player, index, implant);
+            if (sendToCooldownIfOutOfFuel) {
+                sendToCooldown(player, index, implant);
+            } else {
+                NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(implant);
+                tag.setBoolean(IS_ABILITY_ENABLED_NBT, false);
+            }
             notifyClient(player, index, implant);
         }
     }
 
     @Override
     public void onUnequipped(EntityPlayer player, int index, ItemStack implant) {
-        if(isActive(implant)) {
+        if (isActive(implant)) {
             sendToCooldown(player, index, implant);
         }
     }
@@ -78,10 +103,24 @@ public abstract class AbilityPassive extends Ability {
     public boolean hasFuel(EntityPlayer player, int index, ItemStack implant) {
         if (isActive(implant)) {
             return getFuelConsumePerCheck(player, index, implant).hasPlayerEnough(player);
-        }
-        else {
+        } else {
             return getFuelConsumeOnActivation(player, index, implant).hasPlayerEnough(player);
 
         }
     }
+
+    @Override
+    public String getAbilityTypeName() {
+        return StatCollector.translateToLocal("cybersus.ability_type_passive");
+    }
+
+    @Override
+    public String getThaumonomiconText(ItemImplant implantType) {
+        String baseInfo = super.getThaumonomiconText(implantType);
+        baseInfo += "<BR>\u00A7n" + StatCollector.translateToLocal("cybersus.ability.price_per_tick_key") + ":" + "\u00A7r" + " ";
+        baseInfo += getFuelConsumePerCheck(null, -1, null).toString();
+
+        return baseInfo;
+    }
+
 }

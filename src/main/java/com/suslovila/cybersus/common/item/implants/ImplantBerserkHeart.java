@@ -33,13 +33,15 @@ public class ImplantBerserkHeart extends ItemCybersusImplant {
     }
 
     static {
-        abilities.add(new AbilityPassive("berserk_mode") {
+        abilities.add(new AbilityPassive("berserk_mode", true, true) {
             @Override
             public FuelComposite getFuelConsumePerCheck(EntityPlayer player, int index, ItemStack implant) {
 
-                FuelVariation fuelVariation = new FuelVariation();
                 int maxRequiredAspectAmount = 16;
                 int currentRequiredAspectAmount = 1 + (int) (maxRequiredAspectAmount * ((player.getMaxHealth() - player.getHealth()) / player.getMaxHealth()));
+
+
+                FuelVariation fuelVariation = new FuelVariation();
                 if(Cybersus.forbiddenMagicLoaded) {
                     fuelVariation.addSimpleVariant(new FuelEssentia(new AspectList().add(DarkAspects.WRATH, currentRequiredAspectAmount)));
                 }

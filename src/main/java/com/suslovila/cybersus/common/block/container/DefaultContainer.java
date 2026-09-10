@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 public abstract class DefaultContainer extends Container {
 
     public static final int oneSlotStep = 18;
-    protected boolean shiftItemStack(ItemStack stackToShift, int start, int end) {
+    public boolean shiftItemStack(ItemStack stackToShift, int start, int end) {
         boolean changed = false;
         if (stackToShift.isStackable()) {
             for (int slotIndex = start; stackToShift.stackSize > 0 && slotIndex < end; slotIndex++) {
@@ -50,7 +50,7 @@ public abstract class DefaultContainer extends Container {
         return changed;
     }
 
-    private boolean tryShiftItem(ItemStack stackToShift, int numSlots) {
+    public boolean tryShiftItem(ItemStack stackToShift, int numSlots) {
         for (int machineIndex = 0; machineIndex < numSlots - 9 * 4; machineIndex++) {
             Slot slot = (Slot) inventorySlots.get(machineIndex);
             if (!slot.isItemValid(stackToShift)) {

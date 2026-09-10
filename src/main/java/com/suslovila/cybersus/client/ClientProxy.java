@@ -4,13 +4,10 @@ import com.suslovila.cybersus.client.clientProcess.ClientImplantEvents;
 import com.suslovila.cybersus.client.gui.GuiImplants;
 import com.suslovila.cybersus.common.CommonProxy;
 import com.suslovila.cybersus.common.block.ModBlocks;
-import com.suslovila.cybersus.common.event.ImplantEvents;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy {
@@ -31,6 +28,7 @@ public class ClientProxy extends CommonProxy {
         FMLCommonHandler.instance().bus().register(ClientImplantEvents.INSTANCE);
         MinecraftForge.EVENT_BUS.register(ClientImplantEvents.INSTANCE);
 
+        TextureStorage.init();
     }
 
     @Override
@@ -39,7 +37,8 @@ public class ClientProxy extends CommonProxy {
         ModBlocks.registerRender();
         setupItemRenderers();
 
-        KeyHandler.register();
+
+        CybersusKeyHandler.register();
 
     }
 

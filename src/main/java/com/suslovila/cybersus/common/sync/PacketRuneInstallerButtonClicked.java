@@ -2,7 +2,7 @@ package com.suslovila.cybersus.common.sync;
 
 import com.suslovila.cybersus.api.implants.upgrades.rune.RuneType;
 import com.suslovila.cybersus.api.implants.upgrades.rune.RuneUsingItem;
-import com.suslovila.cybersus.common.item.ModItems;
+import com.suslovila.cybersus.common.item.CybersusItems;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -79,7 +79,7 @@ public class PacketRuneInstallerButtonClicked implements IMessage {
                                     ItemStack stackLeft =
                                             InventoryUtils.extractStack(
                                                     ctx.getServerHandler().playerEntity.inventory,
-                                                    new ItemStack(ModItems.itemRune, 1, packet.runeType.ordinal()),
+                                                    new ItemStack(CybersusItems.itemRune, 1, packet.runeType.ordinal()),
                                                     0,
                                                     false,
                                                     false,
@@ -94,7 +94,7 @@ public class PacketRuneInstallerButtonClicked implements IMessage {
                                 if (runeTypeCurrentAmount > 0) {
                                     ItemStack stackLeft =
                                             InventoryUtils.placeItemStackIntoInventory(
-                                                    new ItemStack(ModItems.itemRune, 1, packet.runeType.ordinal()),
+                                                    new ItemStack(CybersusItems.itemRune, 1, packet.runeType.ordinal()),
                                                     ctx.getServerHandler().playerEntity.inventory,
                                                     0,
                                                     true

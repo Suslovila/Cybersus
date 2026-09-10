@@ -2,16 +2,20 @@ package com.suslovila.cybersus.common.block.container;
 
 import com.suslovila.cybersus.api.implants.ImplantStorage;
 import com.suslovila.cybersus.api.implants.ImplantType;
+import com.suslovila.cybersus.common.item.ItemImplant;
 import com.suslovila.cybersus.extendedData.CybersusPlayerExtendedData;
+import com.suslovila.cybersus.utils.StackHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class ContainerImplantHolder extends DefaultContainer {
+public class ContainerImplantHolder extends Container {
 
     private final EntityPlayer player;
+    public static final int oneSlotStep = 18;
 
     public ImplantStorage implantStorage;
     public ContainerImplantHolder(EntityPlayer player) {
@@ -67,6 +71,14 @@ public class ContainerImplantHolder extends DefaultContainer {
     public boolean canInteractWith(EntityPlayer player) {
         return true;
     }
+
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotTakenFrom) {
+
+        return null;
+    }
+
 }
 
 class ImplantSlot extends Slot {
@@ -85,4 +97,6 @@ class ImplantSlot extends Slot {
         if(type == null) return null;
         return ImplantType.getIcon(type);
     }
+
+
 }

@@ -6,16 +6,13 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 
 public abstract class ClientProcess extends WorldProcess implements ISerializableProcess {
-    protected double x;
-    protected double y;
-    protected double z;
-    protected int timeLeft;
-    protected int totalDuration;
+    public SusVec3 position;
+    public int timeLeft;
+    public int totalDuration;
 
-    public ClientProcess(SusVec3 vec3, int duration) {
-        this.x = vec3.x;
-        this.y = vec3.y;
-        this.z = vec3.z;
+    public ClientProcess(SusVec3 position, int duration) {
+        this.position = position;
+
         this.timeLeft = duration;
         this.totalDuration = duration;
     }
@@ -40,9 +37,7 @@ public abstract class ClientProcess extends WorldProcess implements ISerializabl
     }
     @Override
     public void writeTo(ByteBuf buf) {
-        buf.writeDouble(x);
-        buf.writeDouble(y);
-        buf.writeDouble(z);
+        position.writeTo(buf);
 
         buf.writeInt(timeLeft);
         buf.writeInt(totalDuration);
@@ -50,9 +45,7 @@ public abstract class ClientProcess extends WorldProcess implements ISerializabl
     }
     @Override
     public void readFrom(ByteBuf buf) {
-        x = buf.readDouble();
-        y = buf.readDouble();
-        z = buf.readDouble();
+        position = SusVec3.readFrom(buf);
 
         timeLeft = buf.readInt();
         totalDuration = buf.readInt();

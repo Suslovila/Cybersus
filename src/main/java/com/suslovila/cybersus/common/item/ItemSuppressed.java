@@ -1,6 +1,7 @@
 package com.suslovila.cybersus.common.item;
 
 import com.suslovila.cybersus.Cybersus;
+import com.suslovila.cybersus.research.CybersusAspect;
 import com.suslovila.cybersus.utils.KhariumSusNBTHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -8,12 +9,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.List;
@@ -25,7 +29,7 @@ public class ItemSuppressed extends Item {
     public ItemSuppressed() {
         setUnlocalizedName(getName());
         setTextureName(Cybersus.MOD_ID + ":" + getName());
-        setCreativeTab(Cybersus.tab);
+//        setCreativeTab(Cybersus.tab);
 
         register();
 
@@ -39,11 +43,11 @@ public class ItemSuppressed extends Item {
         return "item_suppressed";
     }
 
-    @Override
-    public boolean requiresMultipleRenderPasses() {
-        return true;
-    }
-
+//    @Override
+//    public boolean requiresMultipleRenderPasses() {
+//        return false;
+//    }
+//
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean isShiftPressed) {
         NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(stack);
@@ -57,37 +61,62 @@ public class ItemSuppressed extends Item {
         NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(stack);
         if (tag.hasKey(SUPPRESSED_STACK_KEY)) {
             ItemStack suppressedStack = ItemStack.loadItemStackFromNBT(tag.getCompoundTag(SUPPRESSED_STACK_KEY));
-            String suppresedString = StatCollector.translateToLocal("key.suppressed");
-            return suppresedString + ": " + suppressedStack.getItem().getItemStackDisplayName(suppressedStack);
+            EnumRarity rarity = getRarity(suppressedStack);
+
+            String suppresedString = EnumChatFormatting.DARK_RED.toString() + StatCollector.translateToLocal("key.suppressed") + ": ";
+            return suppresedString + rarity.rarityColor.toString() +  suppressedStack.getItem().getItemStackDisplayName(suppressedStack);
         }
 
         return super.getItemStackDisplayName(stack);
     }
 
-    public IIcon getIcon(ItemStack stack, int pass) {
-        NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(stack);
-        if (tag.hasKey(SUPPRESSED_STACK_KEY) && pass != 5) {
-            ItemStack suppressedStack = ItemStack.loadItemStackFromNBT(tag.getCompoundTag(SUPPRESSED_STACK_KEY));
-            return suppressedStack.getItem().getIcon(suppressedStack, pass);
-        }
-        return itemIcon;
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamageForRenderPass(int par1, int renderPass) {
 
+        GL11.glEnable(3042);
+        GL11.glBlendFunc(770, 771);
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+        return super.getIconFromDamageForRenderPass(par1, renderPass);
     }
+
+
+//
+//    public IIcon getIcon(ItemStack stack, int pass) {
+//        NBTTagCompound tag = KhariumSusNBTHelper.getOrCreateTag(stack);
+//        if (tag.hasKey(SUPPRESSED_STACK_KEY) && pass != 5) {
+//            ItemStack suppressedStack = ItemStack.loadItemStackFromNBT(tag.getCompoundTag(SUPPRESSED_STACK_KEY));
+//            return suppressedStack.getItem().getIcon(suppressedStack, pass);
+//        }
+//        return itemIcon;
+//
+//    }
+//
+//
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public int getColorFromItemStack(ItemStack stack, int renderPass) {
+//        if (renderPass != 5)
+//            return 0xFFFFFF;
+//
+//        Color color = new Color(66, 62, 62);
+//        return color.getRGB();
+//    }
+//
+//    @Override
+//    public int getRenderPasses(int metadata) {
+//        return 5;
+//    }
 
 
     @Override
     @SideOnly(Side.CLIENT)
     public int getColorFromItemStack(ItemStack stack, int renderPass) {
-        if (renderPass != 5)
-            return 0xFFFFFF;
+//        Color previousColor = new Color(CybersusAspect.HUMILITAS.getColor(), false);
+//        Color newColor = new Color(previousColor.getRed() / 255f, previousColor.getGreen() / 255f, previousColor.getBlue() / 255f, 0.7f);
+//        return newColor.getRGB();
 
-        Color color = new Color(66, 62, 62);
-        return color.getRGB();
-    }
-
-    @Override
-    public int getRenderPasses(int metadata) {
-        return 5;
+        return CybersusAspect.HUMILITAS.getColor();
     }
 
     @Override

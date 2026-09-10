@@ -1,0 +1,96 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.3">
+  <diagram name="Страница — 1" id="TLD-W_Oh1QTDgPYQjLKr">
+    <mxGraphModel dx="1651" dy="867" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="isSwci7yHJ6v27hOjMpW-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="NgL9zTfY4j_8i1bXmHwW-1" target="NgL9zTfY4j_8i1bXmHwW-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="isSwci7yHJ6v27hOjMpW-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="NgL9zTfY4j_8i1bXmHwW-1" target="NgL9zTfY4j_8i1bXmHwW-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="isSwci7yHJ6v27hOjMpW-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="NgL9zTfY4j_8i1bXmHwW-1" target="NgL9zTfY4j_8i1bXmHwW-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1128" y="1980" />
+              <mxPoint x="1909" y="1980" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="isSwci7yHJ6v27hOjMpW-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.001;exitY=0.113;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" parent="1" source="NgL9zTfY4j_8i1bXmHwW-1" target="dLrA-d1ytSBtA9WaoY3A-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1953" y="1337" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Ability&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ onPlayerHurtEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ getFuelConsumeOnActivation(ItemStack): FuelComposite&lt;br&gt;+ getKharuEmissionOnActivation(ItemStack): Int&lt;br&gt;+ getCooldownTotal(ItemStack): Int&lt;br&gt;+ onPlayerHealEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onPlayerAttackEntityEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onPlayerDeathEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ sendToCooldown(ItemStack): Void&lt;br&gt;+ onRenderPlayerEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onPlayerSetAttackTargetEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onEnableButtonClicked(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onPlayerBeingAttackedEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ isOnCooldown(ItemStack): Boolean&lt;br&gt;+ onRenderHandEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onRenderWorldLastEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ notifyClient(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ isActive(ItemStack): Boolean&lt;br&gt;+ getCooldown(ItemStack): ItemStack&lt;br&gt;+ onPlayerUpdateEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ tickCooldown(ItemStack): Void&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; name: String&lt;br&gt;&lt;br&gt;&lt;/p&gt;" tooltip="класс - способность. &#xa;Имеет копии функций, соответствующих ивентам форджа, создавая конкретного наследника этого класса, переопределяется логика при разных ивентах" id="NgL9zTfY4j_8i1bXmHwW-1">
+          <mxCell style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+            <mxGeometry x="890" y="1270" width="476" height="593" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="NgL9zTfY4j_8i1bXmHwW-2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AbilityHack&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hackEntity(ItemStack, EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ sendToCooldown(ItemStack): Void&lt;br&gt;+ isOnCooldown(ItemStack): Boolean&lt;br&gt;+ isHacking(ItemStack): Boolean&lt;br&gt;+ onPlayerUpdateEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onRenderWorldLastEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onEnableButtonClicked(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ isActive(ItemStack): Boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; hackTime: Int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="88" y="2119" width="476" height="257" as="geometry" />
+        </mxCell>
+        <mxCell id="NgL9zTfY4j_8i1bXmHwW-3" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AbilityInstant&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ onActivated(EntityPlayer, Int, ItemStack): Void&lt;br/&gt;+ onEnableButtonClicked(EntityPlayer, Int, ItemStack): Void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="1140" y="2159" width="469" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="NgL9zTfY4j_8i1bXmHwW-4" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AbilityPassive&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ isActive(ItemStack): ItemStack&lt;br&gt;+ onEnableButtonClicked(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ getFuelConsumePerSecond(ItemStack): FuelComposite&lt;br&gt;+ switchAbilityStatus(EntityPlayer, Int, ItemStack): Boolean&lt;br&gt;+ onPlayerUpdateEvent(EntityPlayer, Int, ItemStack): Void&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="600" y="2120" width="483" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="NgL9zTfY4j_8i1bXmHwW-5" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;AbilityTemporary&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ activateAbility(EntityPlayer, Int, ItemStack): Boolean&lt;br&gt;+ isActive(ItemStack): Boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; effectDuration: Int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="1671" y="2119" width="476" height="161" as="geometry" />
+        </mxCell>
+        <mxCell id="isSwci7yHJ6v27hOjMpW-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.004;exitY=0.95;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" parent="1" source="NgL9zTfY4j_8i1bXmHwW-13" target="NgL9zTfY4j_8i1bXmHwW-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;FuelComposite&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ forceTakeFrom(ItemStack): Void&lt;br&gt;+ tryTakeFuelFromPlayer(ItemStack): Boolean&lt;br&gt;+ takeFrom(ItemStack): FuelComposite&lt;br&gt;+ hasPlayerEnough(ItemStack): Boolean&lt;br&gt;+ getLack(ItemStack): FuelComposite&lt;br&gt;+ addTo(ItemStack): FuelComposite&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; empty: Boolean&lt;br&gt; fuels: List&amp;lt;IFuel&amp;gt;&lt;/p&gt;" tooltip="Топливный композит - содержит набор топлива, по сути является обёрткой вокруг List&lt;IFuel&gt;, предоставляющий удобное обращение к функциям интерфейса IFuel без &quot;fuels.foreach{...}&quot;" id="NgL9zTfY4j_8i1bXmHwW-13">
+          <mxCell style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+            <mxGeometry x="2180" y="1630" width="366" height="233" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;IFuel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ hasPlayerEnough(EntityPlayer): Boolean&lt;br&gt;+ addTo(EntityPlayer): IFuel&lt;br&gt;+ takeFrom(EntityPlayer): IFuel&lt;br&gt;+ forceTakeFrom(EntityPlayer): Void&lt;br&gt;+ getLack(EntityPlayer): IFuel&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ empty(): Boolean&lt;/p&gt;" tooltip="Топливо - интерфейс, который обрабатывает игрока на входе и даёт ответ - достаточно ли у него топлива. Объект, реализующий этот интерфейс, и есть топливо, и ему подаётся игрок, и объект отвечает, достаточно ли у игрока топлива. Возможно, стоит сделать синглтон FuelManager, который будет получать игрока и объект IFuel, но принципиально это вообще ничего не изменит" id="NgL9zTfY4j_8i1bXmHwW-14">
+          <mxCell style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+            <mxGeometry x="2600" y="1874" width="330" height="209" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="NgL9zTfY4j_8i1bXmHwW-16" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;enum&amp;nbsp;&lt;/i&gt;&lt;b&gt;ImplantType&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;#отвечает за часть тела, которую&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;#замещает имплант&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="1402" y="1150" width="269" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="isSwci7yHJ6v27hOjMpW-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.873;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" parent="1" source="NgL9zTfY4j_8i1bXmHwW-18" target="NgL9zTfY4j_8i1bXmHwW-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="isSwci7yHJ6v27hOjMpW-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.934;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" parent="1" source="NgL9zTfY4j_8i1bXmHwW-18" target="NgL9zTfY4j_8i1bXmHwW-16" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880" y="1067" />
+              <mxPoint x="880" y="1129" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ItemImplant : Item&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ onPlayerUpdateEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onPlayerDeathEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onPlayerAttackEntityEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onPlayerHurtEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onRenderPlayerEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onPlayerBeingAttackedEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onPlayerHealEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onPlayerSetAttackTargetEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onRenderWorldLastEvent(EntityPlayer, Int, ItemStack): Void&lt;br&gt;+ onRenderHandEvent(EntityPlayer, Int, ItemStack): Void&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; abilities: List&amp;lt;Ability&amp;gt;&lt;br&gt; implantType: ImplantType&lt;/p&gt;" tooltip="сам предмет-имплант, который будет вставляться в тело игрока.&#xa;&#xa;Является предметом. Все эти функции внутри - вызываются из ивентов Forge, чтобы далее вызвать все копии таких же функций в каждой абилке, дабы каждая из них могла применить какую-то логику для любого из ивентов. Сделано это для того, чтобы для каждой абилки не регистрировать её класс в шину событий фордж. &#xa;&#xa;" id="NgL9zTfY4j_8i1bXmHwW-18">
+          <mxCell style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+            <mxGeometry x="890" y="760" width="476" height="329" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="isSwci7yHJ6v27hOjMpW-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.472;entryY=0.019;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="NgL9zTfY4j_8i1bXmHwW-1" target="NgL9zTfY4j_8i1bXmHwW-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1128" y="1970" />
+              <mxPoint x="313" y="1970" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dLrA-d1ytSBtA9WaoY3A-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="dLrA-d1ytSBtA9WaoY3A-1" target="NgL9zTfY4j_8i1bXmHwW-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;FuelKit&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;&lt;br&gt;+ tryTakeFuelFromPlayer(EntityPlayer): Boolean&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; empty: Boolean&lt;br&gt; fuels: List&amp;lt;FuelComposite&amp;gt;&lt;/p&gt;" tooltip="Топливный композит - содержит набор топлива, по сути является обёрткой вокруг List&lt;IFuel&gt;, предоставляющий удобное обращение к функциям интерфейса IFuel без &quot;fuels.foreach{...}&quot;" id="dLrA-d1ytSBtA9WaoY3A-1">
+          <mxCell style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" vertex="1" parent="1">
+            <mxGeometry x="1770" y="1400" width="366" height="233" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

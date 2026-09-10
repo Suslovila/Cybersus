@@ -4,26 +4,28 @@ import com.suslovila.cybersus.api.fuel.FuelComposite;
 import com.suslovila.cybersus.api.fuel.impl.fuel.essentia.FuelEssentia;
 import com.suslovila.cybersus.api.implants.ImplantType;
 import com.suslovila.cybersus.api.implants.ability.Ability;
+import com.suslovila.cybersus.api.implants.ability.AbilityHack;
 import com.suslovila.cybersus.api.implants.ability.AbilityInstant;
-import com.suslovila.cybersus.api.implants.ability.AbilityPassive;
 import com.suslovila.cybersus.common.processes.ProcessGravityTrap;
 import com.suslovila.cybersus.extendedData.CustomWorldData;
 import com.suslovila.cybersus.research.CybersusAspect;
 import com.suslovila.cybersus.utils.SusVec3;
 import com.suslovila.cybersus.utils.SusWorldHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImplantGravityIcreaser extends ItemCybersusImplant {
+public class ImplantGravityIncreaser extends ItemCybersusImplant {
     public static final ArrayList<Ability> abilities = new ArrayList<>();
 
-    public ImplantGravityIcreaser() {
+    public ImplantGravityIncreaser() {
         super(ImplantType.HAND);
 
     }
@@ -39,7 +41,7 @@ public class ImplantGravityIcreaser extends ItemCybersusImplant {
     }
 
     static {
-        abilities.add(new AbilityInstant("gravity_trap") {
+        abilities.add(new AbilityInstant("massive_gravity_trap") {
 
 
             @Override
@@ -50,7 +52,7 @@ public class ImplantGravityIcreaser extends ItemCybersusImplant {
                 double maxDistance = getMaxReachDistance(player, index, implant);
                 MovingObjectPosition hitMOP = SusWorldHelper.raytraceBlocks(player.worldObj, player, false, maxDistance);
                 if (hitMOP != null) {
-                    ProcessGravityTrap processGravityTrap = new ProcessGravityTrap(new SusVec3(hitMOP.blockX, hitMOP.blockY + 1, hitMOP.blockZ), 20 * 10);
+                    ProcessGravityTrap processGravityTrap = new ProcessGravityTrap(new SusVec3(hitMOP.blockX, hitMOP.blockY + 1, hitMOP.blockZ), 20 * 10, 10.0f);
                     CustomWorldData.getCustomData(player.worldObj).addProcess(processGravityTrap);
                     CustomWorldData.syncProcess(processGravityTrap);
                     sendToCooldown(player, index, implant);
@@ -58,7 +60,7 @@ public class ImplantGravityIcreaser extends ItemCybersusImplant {
                 } else {
                     SusVec3 position = SusVec3.getEntityPos(player)
                             .add(facingVec.scale(maxDistance));
-                    ProcessGravityTrap processGravityTrap = new ProcessGravityTrap(position, 20 * 10);
+                    ProcessGravityTrap processGravityTrap = new ProcessGravityTrap(position, 20 * 10, 10.0f);
                     CustomWorldData.getCustomData(player.worldObj).addProcess(processGravityTrap);
                     CustomWorldData.syncProcess(processGravityTrap);
                     sendToCooldown(player, index, implant);
@@ -70,7 +72,7 @@ public class ImplantGravityIcreaser extends ItemCybersusImplant {
 
             @Override
             public FuelComposite getFuelConsumeOnActivation(EntityPlayer player, int index, ItemStack implant) {
-                return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(CybersusAspect.GRAVITAS, 64).add(CybersusAspect.DIMENSIO, 16)));
+                return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(CybersusAspect.GRAVITAS, 32)));
 //                return FuelComposite.EMPTY;
             }
 
@@ -92,6 +94,53 @@ public class ImplantGravityIcreaser extends ItemCybersusImplant {
             public double getMaxReachDistance(EntityPlayer player, int index, ItemStack implant) {
                 return 50.0f;
             }
+        });
+
+
+        abilities.add(new AbilityHack("targeted_gravity_trap") {
+
+
+            @Override
+            public int getRequiredHackTime() {
+                return 20 * 6;
+            }
+
+            @Override
+            public void hackEntity(EntityPlayer hacker, Entity victim, int slotIndex, ItemStack implant) {
+
+                ProcessGravityTrap processGravityTrap = new ProcessGravityTrap(new SusVec3(victim.posX, victim.posY, victim.posZ), 20 * 10, victim.width);
+                processGravityTrap.timeLeft -= processGravityTrap.appearTimeTicks;
+                CustomWorldData.getCustomData(hacker.worldObj).addProcess(processGravityTrap);
+                CustomWorldData.syncProcess(processGravityTrap);
+            }
+
+            @Override
+            public double getLockDistance(EntityPlayer player, int index, ItemStack implant) {
+                return 30;
+            }
+
+            @Override
+            public double getLoseDistance(EntityPlayer player, int index, ItemStack implant) {
+                return 40;
+            }
+
+            @Override
+            public int getTargetTimeLose(EntityPlayer player, int index, ItemStack implant) {
+                return 20 * 2;
+            }
+
+            @Override
+            public FuelComposite getFuelConsumeOnActivation(EntityPlayer player, int index, ItemStack implant) {
+                return FuelComposite.allRequired(new FuelEssentia(new AspectList().add(CybersusAspect.GRAVITAS, 32).add(Aspect.TRAP, 16)));
+//                return FuelComposite.EMPTY;
+            }
+
+            @Override
+            public int getCooldownTotal(EntityPlayer player, int index, ItemStack implant) {
+                return 15 * 20;
+            }
+
+
         });
     }
 }

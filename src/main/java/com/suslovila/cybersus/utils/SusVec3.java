@@ -1,7 +1,8 @@
 package com.suslovila.cybersus.utils;
 
 
-import com.mojang.realmsclient.util.Pair;
+import com.emoniph.witchery.dimension.GenerateMaze;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
+import static com.suslovila.cybersus.utils.SusUtils.nextDouble;
 
 public class SusVec3 {
     //JUST COPIED FROM 1.18 VERSION BECAUSE I FIND VECTORS ON IT MORE COMFORTABLE
@@ -257,8 +260,26 @@ public class SusVec3 {
         return new SusVec3(entity.posX, entity.posY, entity.posZ);
     }
 
+
+    public static SusVec3 getVectorFromHeadRotationHorizontal(Entity entity) {
+        SusVec3 south = new SusVec3(0.0, 0.0, 1.0);
+        SusVec3 west = new SusVec3(-1.0, 0.0, 0.0);
+
+        double angleYawRad = degreesToRad(entity.getRotationYawHead());
+        return south.scale(Math.cos(angleYawRad)).add(west.scale(Math.sin(angleYawRad)));
+
+    }
+
+
+    public static double degreesToRad(double angleDegrees) {
+        return angleDegrees / 180.0 * Math.PI;
+    }
     public static SusVec3 getLookVec(Entity entity) {
-        return new SusVec3(entity.getLookVec().xCoord, entity.getLookVec().zCoord, entity.getLookVec().zCoord).normalize();
+        Vec3 lookVec = entity.getLookVec();
+        if(lookVec == null) {
+            return new SusVec3(0.0, 0.0, 0.0);
+        }
+        return new SusVec3(lookVec.xCoord, lookVec.yCoord, lookVec.zCoord).normalize();
     }
 
     public static <T extends Number> SusVec3 fromCollection(Collection<T> collection) throws Exception {
@@ -282,6 +303,23 @@ public class SusVec3 {
         nbt.setDouble("z", z);
     }
 
+
+    public static SusVec3 readFrom(ByteBuf buf) {
+        double x = buf.readDouble();
+        double y = buf.readDouble();
+        double z = buf.readDouble();
+        return new SusVec3(
+                x,
+                y,
+                z
+        );
+    }
+
+    public void writeTo(ByteBuf buf) {
+        buf.writeDouble(x);
+        buf.writeDouble(y);
+        buf.writeDouble(z);
+    }
 
     public static SusVec3 getOrthogonalVec3(SusVec3 vec3) {
         SusVec3 orthogonal;
@@ -339,5 +377,9 @@ public class SusVec3 {
         list.set(index1, value1);
         list.set(index2, value2);
         return list;
+    }
+
+    public static SusVec3 randomVector() {
+        return new SusVec3(nextDouble(-1, 1), nextDouble(-1, 1), nextDouble(-1, 1)).normalize();
     }
 }

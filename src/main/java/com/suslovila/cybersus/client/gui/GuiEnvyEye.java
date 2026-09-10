@@ -149,7 +149,7 @@ public class GuiEnvyEye extends GuiContainer {
         }
 
         private static final ResourceLocation IMAGE_URL = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/assembly_table.png");
-        private static final ResourceLocation textureLeft = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/DraconicChestLeft.png");
-        private static final ResourceLocation textureRight = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/DraconicChestRight.png");
+        private static final ResourceLocation textureLeft = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/implant_gui_left.png");
+        private static final ResourceLocation textureRight = new ResourceLocation(Cybersus.MOD_ID, "textures/gui/implant_gui_right.png");
 
 }
